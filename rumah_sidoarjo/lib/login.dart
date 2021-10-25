@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:rumah_sidoarjo/lupapassword.dart';
 import 'package:rumah_sidoarjo/register.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:getwidget/getwidget.dart';
 
 class LoginPage extends StatefulWidget {
+  static String routeName = "/login";
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -103,7 +105,16 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       alignment: Alignment.centerRight,
       child: FlatButton(
-        onPressed: () => print('Forgot Password Button Pressed'),
+        onPressed: () => {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return LupaPassword();
+              },
+            ),
+          ),
+        },
         padding: EdgeInsets.only(left: 95, right: 0.0),
         child: Text(
           'Lupa Password?',
@@ -177,7 +188,16 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       width: double.infinity,
       child: RaisedButton(
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return Register();
+              },
+            ),
+          ),
+        },
         padding: EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(

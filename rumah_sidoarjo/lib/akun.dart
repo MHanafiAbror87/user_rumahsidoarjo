@@ -4,6 +4,7 @@ import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Akun extends StatefulWidget {
+  static String routeName = '/akun';
   @override
   _AkunState createState() => _AkunState();
 }

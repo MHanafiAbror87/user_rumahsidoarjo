@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:rumah_sidoarjo/login.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LupaPassword extends StatefulWidget {
+  static String routeName = "/lupapassword";
   @override
   _LupaPasswordState createState() => _LupaPasswordState();
 }
@@ -15,11 +17,7 @@ class _LupaPasswordState extends State<LupaPassword> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          leading: Icon(Icons.arrow_back_ios),
-          title: Text('Lupa Password'),
-          backgroundColor: darkGreen1,
-        ),
+        appBar: _appBar(),
         body: Container(
           child: ListView(
             children: [
@@ -39,6 +37,29 @@ class _LupaPasswordState extends State<LupaPassword> {
           ),
         ),
       ),
+    );
+  }
+
+  AppBar _appBar() {
+    return AppBar(
+      leading: FlatButton(
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: White,
+        ),
+        onPressed: () => {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return LoginPage();
+              },
+            ),
+          ),
+        },
+      ),
+      title: Text('Lupa Password'),
+      backgroundColor: darkGreen1,
     );
   }
 
@@ -122,36 +143,35 @@ class _LupaPasswordState extends State<LupaPassword> {
 
   Widget _buildKirimBtn(BuildContext context) {
     return TextButton(
-        onPressed: () => showDialog<String>(
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                title: const Text('Sukses'),
-                content: const Text('Silahkan cek email Anda'),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () => Navigator.pop(context, 'OK'),
-                    child: const Text('OK'),
-                  ),
-                ],
-              ),
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Sukses'),
+          content: const Text('Silahkan cek email Anda'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
             ),
-        child: Container(
-          height: 50,
-          padding: EdgeInsets.all(12.0),
-          width: double.infinity,
-          child: Text(
-            'Kirim',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20, color: White),
-          ),
-          decoration: BoxDecoration(
-              color: lightGreen, borderRadius: BorderRadius.circular(30.0)),
-        )
-        // const Text(
-        //   'Kirim',
-        //   style: TextStyle(fontSize: 20),
-        // ),
-
-        );
+          ],
+        ),
+      ),
+      child: Container(
+        height: 50,
+        padding: EdgeInsets.all(12.0),
+        width: double.infinity,
+        child: Text(
+          'Kirim',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 20, color: White),
+        ),
+        decoration: BoxDecoration(
+            color: lightGreen, borderRadius: BorderRadius.circular(30.0)),
+      ),
+      // const Text(
+      //   'Kirim',
+      //   style: TextStyle(fontSize: 20),
+      // ),
+    );
   }
 }

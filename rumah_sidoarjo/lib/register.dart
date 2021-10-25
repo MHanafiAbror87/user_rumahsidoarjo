@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rumah_sidoarjo/login.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Register extends StatefulWidget {
+  static String routeName = "/register";
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -15,11 +17,7 @@ class _RegisterState extends State<Register> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          leading: Icon(Icons.arrow_back_ios),
-          title: Text('Form Pendaftaran'),
-          backgroundColor: darkGreen1,
-        ),
+        appBar: appBar(),
         body: Container(
           child: ListView(
             children: [
@@ -35,9 +33,9 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 10),
                     _buildSKCheckbox(),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
-                    _buildDaftarBtn(),
+                    _buildDaftarBtn(context),
                   ],
                 ),
               )
@@ -45,6 +43,31 @@ class _RegisterState extends State<Register> {
           ),
         ),
       ),
+    );
+  }
+
+  AppBar appBar() {
+    return AppBar(
+      leading: FlatButton(
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: White,
+        ),
+        onPressed: () => {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return LoginPage();
+              },
+            ),
+          ),
+        },
+      ),
+      title: Center(
+        child: Text('Form Pendaftaran'),
+      ),
+      backgroundColor: darkGreen1,
     );
   }
 
@@ -92,16 +115,27 @@ class _RegisterState extends State<Register> {
                         fontSize: 17,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 5),
-                    ),
-                    Text(
-                      "Log In",
-                      style: TextStyle(
+                    TextButton(
+                      onPressed: () => {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginPage();
+                            },
+                          ),
+                        ),
+                      },
+                      // padding: EdgeInsets.only(left: 95, right: 0.0),
+                      child: Text(
+                        'Log In',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
                           color: White,
                           fontFamily: 'DMSans',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -260,7 +294,7 @@ class _RegisterState extends State<Register> {
 
   Widget _buildSKCheckbox() {
     return Container(
-      height: 20.0,
+      height: 40.0,
       child: Row(
         children: <Widget>[
           Theme(
@@ -299,15 +333,6 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
               ),
-              // Text(
-              //   'Syarat & Ketentuan',
-              //   style: TextStyle(
-              //     color: darkGreen,
-              //     fontFamily: 'DMSans',
-              //     fontSize: 12,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // )
             ],
           ),
         ],
@@ -315,20 +340,37 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Widget _buildDaftarBtn() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 20.0),
-      width: 390,
-      child: RaisedButton(
-        elevation: 4.0,
-        onPressed: () => print('Daftar Button Pressed'),
-        padding: EdgeInsets.all(15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+  Widget _buildDaftarBtn(BuildContext context) {
+    return TextButton(
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Sukses'),
+          content: const Text('Silahkan Log In'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginPage();
+                    },
+                  ),
+                ),
+              },
+              child: const Text('Log In'),
+            ),
+          ],
         ),
-        color: lightGreen,
+      ),
+      child: Container(
+        height: 50,
+        padding: EdgeInsets.all(12.0),
+        width: double.infinity,
         child: Text(
           'Daftar',
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: White,
             letterSpacing: 2,
@@ -336,6 +378,10 @@ class _RegisterState extends State<Register> {
             fontWeight: FontWeight.bold,
             fontFamily: 'DMSans',
           ),
+        ),
+        decoration: BoxDecoration(
+          color: lightGreen,
+          borderRadius: BorderRadius.circular(30.0),
         ),
       ),
     );

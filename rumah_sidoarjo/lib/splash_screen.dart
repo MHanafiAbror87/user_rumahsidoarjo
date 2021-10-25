@@ -5,6 +5,7 @@ import 'package:rumah_sidoarjo/login.dart';
 import 'custom_template.dart';
 
 class SplashScreen extends StatefulWidget {
+  static String routeName = "/splash";
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
