@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/login.dart';
+import 'package:rumah_sidoarjo/pages/syarat.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -301,8 +302,8 @@ class _RegisterState extends State<Register> {
             data: ThemeData(unselectedWidgetColor: lightGrey),
             child: Checkbox(
               value: _syarat,
-              checkColor: darkGreen,
-              activeColor: White,
+              checkColor: White,
+              activeColor: darkGreen,
               onChanged: (value) {
                 setState(() {
                   _syarat = true;
@@ -322,7 +323,16 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               TextButton(
-                onPressed: () => print('SK Button Pressed'),
+                onPressed: () => {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Syarat();
+                      },
+                    ),
+                  ),
+                },
                 // padding: EdgeInsets.only(left: 95, right: 0.0),
                 child: Text(
                   'Syarat & Ketentuan',

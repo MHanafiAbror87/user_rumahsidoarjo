@@ -54,13 +54,19 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Spacer(),
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: 0.0,
+            // Padding(
+            //   padding: EdgeInsets.only(
+            //     bottom: 0.0,
+            //   ),
+            // ),
+            SafeArea(
+              top: true,
+              bottom: true,
+              left: true,
+              right: true,
+              child: Image.asset(
+                'assets/images/bg_splash.png',
               ),
-            ),
-            Image.asset(
-              'assets/images/bg_splash.png',
             ),
           ],
         ),

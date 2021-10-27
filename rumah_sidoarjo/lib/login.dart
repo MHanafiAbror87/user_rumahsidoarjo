@@ -17,6 +17,61 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _rememberMe = (false);
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: White,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+              ),
+              Container(
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 40.0,
+                    vertical: 120.0,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      _icLogin(),
+                      SizedBox(height: 33.0),
+                      _buildUsername(),
+                      _buildPasswordTF(),
+                      Row(
+                        children: [
+                          _buildRememberMeCheckbox(),
+                          _buildLupaPasswordBtn(),
+                        ],
+                      ),
+                      _buildLoginBtn(),
+                      SizedBox(
+                        height: 50.0,
+                      ),
+                      _buildtextdaftar(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _buildDaftarBtn(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _icLogin() {
     return Column(
       children: <Widget>[
@@ -235,61 +290,6 @@ class _LoginPageState extends State<LoginPage> {
                   color: Color(0xffA6A6A6),
                   fontSize: 18.0,
                   fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: White,
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-              ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 120.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      _icLogin(),
-                      SizedBox(height: 33.0),
-                      _buildUsername(),
-                      _buildPasswordTF(),
-                      Row(
-                        children: [
-                          _buildRememberMeCheckbox(),
-                          _buildLupaPasswordBtn(),
-                        ],
-                      ),
-                      _buildLoginBtn(),
-                      SizedBox(
-                        height: 50.0,
-                      ),
-                      _buildtextdaftar(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      _buildDaftarBtn(),
-                    ],
-                  ),
                 ),
               ),
             ],
