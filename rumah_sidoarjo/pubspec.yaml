@@ -81,6 +81,7 @@ flutter:
     - assets/images/Tagihan.png
     - assets/images/camera.png
     - assets/images/Camera Icon.svg
+    - assets/images/TrophyMasks.png
     
     # - images/a_dot_ham.jpeg
   fonts:
