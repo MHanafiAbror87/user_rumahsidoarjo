@@ -11,7 +11,7 @@ Color darkOrange = Color(0XFFFF914D);
 Color lightGrey = Color(0XFFA6A6A6);
 Color darkGrey = Color(0XFF4D4C4C);
 Color White = Color(0XFFFFFFFF);
-Color redG = Color(0XFFDE0404);
+Color red = Color(0XFFDE0404);
 
 final kHintTextStyle = TextStyle(
   color: Color(0xffA6A6A6),

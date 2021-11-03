@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "rumah_sidoarjo",
+            "cwd": "rumah_sidoarjo",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "rumah_sidoarjo (profile mode)",
+            "cwd": "rumah_sidoarjo",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        }
+    ]
+}
