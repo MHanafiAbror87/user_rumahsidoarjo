@@ -22,7 +22,6 @@ class _AkunState extends State<Akun> {
           child: Center(
             child: Column(
               children: [
-                _space1(),
                 _akunimage(),
                 _buildInformasiAkun(),
                 _logoutbtn(),
@@ -55,8 +54,12 @@ class _AkunState extends State<Akun> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/no_imageakun.png"),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: CircleAvatar(
+                    backgroundImage:
+                        AssetImage("assets/images/no_imageakun.png"),
+                  ),
                 ),
               ],
             ),
@@ -88,7 +91,7 @@ class _AkunState extends State<Akun> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -96,7 +99,7 @@ class _AkunState extends State<Akun> {
                   children: [
                     namaAkun(),
                     Padding(
-                      padding: const EdgeInsets.only(left: 180, right: 0),
+                      padding: const EdgeInsets.only(left: 170, right: 0),
                       child: tbUbah(),
                     ),
                   ],
@@ -212,27 +215,30 @@ class _AkunState extends State<Akun> {
     );
   }
 
-  Column namaAkun() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Nama Akun',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontFamily: "DMSans",
-            fontSize: 16,
+  Padding namaAkun() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Nama Akun',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: "DMSans",
+              fontSize: 16,
+            ),
           ),
-        ),
-        Text(
-          'Muhammad Hanafi',
-          style: TextStyle(
-            fontFamily: "DMSans",
-            color: lightGrey,
-            fontSize: 16,
+          Text(
+            'Muhammad Hanafi',
+            style: TextStyle(
+              fontFamily: "DMSans",
+              color: lightGrey,
+              fontSize: 16,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -265,14 +271,6 @@ class _AkunState extends State<Akun> {
       height: 2,
       width: double.infinity,
       color: Color(0xffeeeeee),
-    );
-  }
-
-  Widget _space1() {
-    return Container(
-      height: 20,
-      width: double.infinity,
-      color: White,
     );
   }
 

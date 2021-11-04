@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_sidoarjo/akun.dart';
+import 'package:rumah_sidoarjo/beritainformasi.dart';
+import 'package:rumah_sidoarjo/lowongankerja.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
@@ -44,40 +47,106 @@ class _homeState extends State<Home> {
             _TrophyMasks(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Berita Terbaru',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.openSans(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)),
+              child: Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Berita Terbaru',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.openSans(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 197),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () => {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) {
+                            return Beritainformasi();
+                          }))
+                        },
+                        child: Text('Lihat Semua',
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.openSans(
+                                fontSize: 12, color: darkGreen)),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             _ListViewBerita(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Wisata Populer',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.openSans(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)),
+              child: Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Wisata Populer',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.openSans(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 194),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () => {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) {
+                            return Beritainformasi();
+                          }))
+                        },
+                        child: Text('Lihat Semua',
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.openSans(
+                                fontSize: 12, color: darkGreen)),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             _ListViewWisata(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text('UMKM (Usaha Mikro Mengengah Kecil)',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.openSans(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)),
+              child: Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('UMKM (Usaha Mikro Kecil Menengah)',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.openSans(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 47),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () => {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) {
+                            return Beritainformasi();
+                          }))
+                        },
+                        child: Text('Lihat Semua',
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.openSans(
+                                fontSize: 12, color: darkGreen)),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             _ListViewUMKM(),
@@ -85,6 +154,273 @@ class _homeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  Widget _menu() {
+    return Container(
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      height: 180,
+      color: White,
+      child: ListView(
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            FlatButton(
+              onPressed: () {},
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/panik_menu.png',
+                    width: 45,
+                    height: 45,
+                  ),
+                  Text(
+                    'PANIC MENU',
+                    style: GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
+                  )
+                ],
+              ),
+            ),
+            FlatButton(
+              onPressed: () {},
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/Pengaduan.png',
+                    width: 45,
+                    height: 45,
+                  ),
+                  Text(
+                    'PENGADUAN',
+                    style: GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
+                  )
+                ],
+              ),
+            ),
+            FlatButton(
+              onPressed: () {},
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/Kesehatan.png',
+                    width: 45,
+                    height: 45,
+                  ),
+                  Text(
+                    'KESEHATAN',
+                    style: GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
+                  )
+                ],
+              ),
+            ),
+          ]),
+          Padding(padding: EdgeInsets.only(top: 20)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FlatButton(
+                onPressed: () {},
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/Pendidikan.png',
+                      width: 45,
+                      height: 45,
+                    ),
+                    Text(
+                      'PENDIDIKAN',
+                      style:
+                          GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
+                    )
+                  ],
+                ),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/Pariwisata.png',
+                      width: 45,
+                      height: 45,
+                    ),
+                    Text(
+                      'PARIWISATA',
+                      style:
+                          GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
+                    )
+                  ],
+                ),
+              ),
+              FlatButton(
+                onPressed: _showDialog,
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/Lainnya.png',
+                      width: 45,
+                      height: 45,
+                    ),
+                    Text(
+                      'Lainnya',
+                      style:
+                          GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  void _showDialog() {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        context: this.context,
+        builder: (context) {
+          return Container(
+            child: ListView(
+              children: [
+                Padding(padding: EdgeInsets.only(top: 20)),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, bottom: 20),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Fitur Lainnya',
+                          style: GoogleFonts.poppins(fontSize: 12),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      FlatButton(
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/cctv.png',
+                              width: 45,
+                              height: 45,
+                            ),
+                            Text(
+                              'CCTV',
+                              style: GoogleFonts.bebasNeue(
+                                  fontSize: 12, color: darkGrey),
+                            )
+                          ],
+                        ),
+                      ),
+                      FlatButton(
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/layanan_publik.png',
+                              width: 45,
+                              height: 45,
+                            ),
+                            Text(
+                              'LAYANAN PUBLIK',
+                              style: GoogleFonts.bebasNeue(
+                                  fontSize: 12, color: darkGrey),
+                            )
+                          ],
+                        ),
+                      ),
+                      FlatButton(
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/Tagihan.png',
+                              width: 45,
+                              height: 45,
+                            ),
+                            Text(
+                              'TAGIHAN',
+                              style: GoogleFonts.bebasNeue(
+                                  fontSize: 12, color: darkGrey),
+                            )
+                          ],
+                        ),
+                      ),
+                    ]),
+                Padding(padding: EdgeInsets.only(top: 20)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    FlatButton(
+                      onPressed: () {},
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/media_massa.png',
+                            width: 45,
+                            height: 45,
+                          ),
+                          Text(
+                            'MEDIA MASSA',
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 12, color: darkGrey),
+                          )
+                        ],
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/umkm.png',
+                            width: 45,
+                            height: 45,
+                          ),
+                          Text(
+                            'UMKM',
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 12, color: darkGrey),
+                          )
+                        ],
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () => {
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                          builder: (context) {
+                            return Lowongankerja();
+                          },
+                        ))
+                      },
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/job.png',
+                            width: 45,
+                            height: 45,
+                          ),
+                          Text(
+                            'PEKERJAAN',
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 12, color: darkGrey),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
   }
 
   Container _ListViewUMKM() {
@@ -207,34 +543,46 @@ class _homeState extends State<Home> {
                   borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  child: Row(
-                    children: [
-                      gambar[index],
-                      Column(
-                        children: [
-                          Container(
-                              padding: EdgeInsets.only(left: 10),
-                              height: 30,
-                              width: 180,
-                              child: Text(berita[index],
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold))),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                              padding: EdgeInsets.only(left: 10),
-                              height: 30,
-                              width: 180,
-                              child: Text(berita[index],
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                  )))
-                        ],
-                      ),
-                    ],
+                child: GestureDetector(
+                  onTap: () => {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
+                      return Beritainformasi();
+                    }))
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Row(
+                          children: [
+                            gambar[index],
+                            Column(
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    height: 30,
+                                    width: 180,
+                                    child: Text(berita[index],
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold))),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    height: 30,
+                                    width: 180,
+                                    child: Text(berita[index],
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                        )))
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -319,7 +667,12 @@ class _homeState extends State<Home> {
       ),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () => {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
+                    return Akun();
+                  }))
+                },
             icon: Icon(
               Icons.account_circle,
               size: 30,
@@ -356,125 +709,14 @@ class _homeState extends State<Home> {
   }
 }
 
-Widget _menu() {
-  return Container(
-    padding: EdgeInsets.all(10),
-    width: double.infinity,
-    height: 180,
-    color: White,
-    child: ListView(
-      children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          FlatButton(
-            onPressed: () {},
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/panik_menu.png',
-                  width: 45,
-                  height: 45,
-                ),
-                Text(
-                  'PANIC MENU',
-                  style: GoogleFonts.bebasNeue(
-                      fontSize: 12, color: Colors.grey.shade400),
-                )
-              ],
-            ),
-          ),
-          FlatButton(
-            onPressed: () {},
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/Pengaduan.png',
-                  width: 45,
-                  height: 45,
-                ),
-                Text(
-                  'PENGADUAN',
-                  style: GoogleFonts.bebasNeue(
-                      fontSize: 12, color: Colors.grey.shade400),
-                )
-              ],
-            ),
-          ),
-          FlatButton(
-            onPressed: () {},
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/Kesehatan.png',
-                  width: 45,
-                  height: 45,
-                ),
-                Text(
-                  'KESEHATAN',
-                  style: GoogleFonts.bebasNeue(
-                      fontSize: 12, color: Colors.grey.shade400),
-                )
-              ],
-            ),
-          ),
-        ]),
-        Padding(padding: EdgeInsets.only(top: 20)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            FlatButton(
-              onPressed: () {},
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/Pendidikan.png',
-                    width: 45,
-                    height: 45,
-                  ),
-                  Text(
-                    'PENDIDIKAN',
-                    style: GoogleFonts.bebasNeue(
-                        fontSize: 12, color: Colors.grey.shade400),
-                  )
-                ],
-              ),
-            ),
-            FlatButton(
-              onPressed: () {},
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/Pariwisata.png',
-                    width: 45,
-                    height: 45,
-                  ),
-                  Text(
-                    'PARIWISATA',
-                    style: GoogleFonts.bebasNeue(
-                        fontSize: 12, color: Colors.grey.shade400),
-                  )
-                ],
-              ),
-            ),
-            FlatButton(
-              onPressed: () {},
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/Lainnya.png',
-                    width: 45,
-                    height: 45,
-                  ),
-                  Text(
-                    'Lainnya',
-                    style: GoogleFonts.bebasNeue(
-                        fontSize: 12, color: Colors.grey.shade400),
-                  )
-                ],
-              ),
-            ),
-          ],
-        )
-      ],
-    ),
-  );
-}
+
+
+
+
+// void _showDialog() {
+//   showModalBottomSheet(context: context, builder: (context) {
+
+//   });
+// }
+
+ 

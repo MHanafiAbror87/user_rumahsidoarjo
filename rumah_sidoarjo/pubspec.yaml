@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.1.0
   getwidget: ^2.0.4
+  slide_popup_dialog: ^0.0.2
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +83,7 @@ flutter:
     - assets/images/camera.png
     - assets/images/Camera Icon.svg
     - assets/images/TrophyMasks.png
+    - assets/images/umkm.png
     
     # - images/a_dot_ham.jpeg
   fonts:

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'custom_template.dart';
 

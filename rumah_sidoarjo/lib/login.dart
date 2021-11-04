@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/lupapassword.dart';
 import 'package:rumah_sidoarjo/register.dart';
 import 'custom_template.dart';
@@ -219,7 +220,12 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 4.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+            return Home();
+          }))
+        },
         padding: EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
