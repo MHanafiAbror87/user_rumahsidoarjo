@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
+import 'package:rumah_sidoarjo/detail_lowongankerja.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,33 +23,10 @@ class _LowongankerjaState extends State<Lowongankerja> {
           children: [
             _headerPage(),
             Padding(padding: EdgeInsets.only(top: 10)),
-            _listViewJob()
+            _listViewJob(),
           ],
         ),
       ),
-    );
-  }
-
-  AppBar appBar() {
-    return AppBar(
-      leading: FlatButton(
-        child: Icon(
-          Icons.arrow_back_ios,
-          color: White,
-        ),
-        onPressed: () => {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return Home();
-              },
-            ),
-          ),
-        },
-      ),
-      title: Text('Lowongan Pekerjaan'),
-      backgroundColor: darkGreen1,
     );
   }
 
@@ -93,15 +71,8 @@ class _LowongankerjaState extends State<Lowongankerja> {
       ),
     );
   }
-}
 
-class _listViewJob extends StatelessWidget {
-  const _listViewJob({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Expanded _listViewJob() {
     return Expanded(
       child: ListView.builder(
         itemCount: berita.length,
@@ -110,111 +81,94 @@ class _listViewJob extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
             child: Container(
               height: 100,
-              child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        gambar[0],
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Container(
-                                height: 20,
-                                width: 300,
-                                child: Text(
-                                  berita[index],
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
+              child: GestureDetector(
+                onTap: () => {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
+                    return Detail_lowongankerja();
+                  }))
+                },
+                child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          gambar[0],
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Container(
+                                  height: 20,
+                                  width: 300,
+                                  child: Text(
+                                    berita[index],
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Container(
-                                  height: 20,
-                                  width: 300,
-                                  child: Text(
-                                    job[0],
-                                    style: TextStyle(
-                                        fontSize: 12, fontFamily: "DMSans"),
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 10),
-                              child: Container(
-                                  height: 20,
-                                  width: 300,
-                                  child: Text(
-                                    alamat[0],
-                                    style: TextStyle(
-                                        color: darkGreen,
-                                        fontSize: 12,
-                                        fontFamily: "DMSans"),
-                                  )),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  )),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Container(
+                                    height: 20,
+                                    width: 300,
+                                    child: Text(
+                                      job[0],
+                                      style: TextStyle(
+                                          fontSize: 12, fontFamily: "DMSans"),
+                                    )),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 10),
+                                child: Container(
+                                    height: 20,
+                                    width: 300,
+                                    child: Text(
+                                      alamat[0],
+                                      style: TextStyle(
+                                          color: darkGreen,
+                                          fontSize: 12,
+                                          fontFamily: "DMSans"),
+                                    )),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    )),
+              ),
             ),
           );
         },
       ),
     );
   }
-}
 
-class _headerPage extends StatelessWidget {
-  const _headerPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 158,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [lightGreen, darkGreen1],
-              end: Alignment.centerRight,
-              begin: Alignment.centerLeft),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30))),
-      child: Column(
-        children: [
-          SizedBox(height: 30),
-          Text(
-            'Lowongan Pekerjaan',
-            style: TextStyle(
-                color: White,
-                fontSize: 30,
-                letterSpacing: 2,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'DMSans'),
-          ),
-          Center(
-            child: Container(
-              width: 330,
-              child: Text(
-                'Ayo cari lowongan pekerjaan yang tersedia di Kabupaten Sidoarjo',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: White,
-                    fontSize: 15,
-                    letterSpacing: 2,
-                    fontFamily: 'DMSans'),
-              ),
+  AppBar appBar() {
+    return AppBar(
+      leading: FlatButton(
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: White,
+        ),
+        onPressed: () => {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return Home();
+              },
             ),
           ),
-        ],
+        },
       ),
+      title: Text('Lowongan Pekerjaan'),
+      backgroundColor: darkGreen1,
     );
   }
 }

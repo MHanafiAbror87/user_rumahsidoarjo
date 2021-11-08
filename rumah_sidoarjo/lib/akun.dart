@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rumah_sidoarjo/home.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
@@ -16,7 +19,7 @@ class _AkunState extends State<Akun> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: lightGrey,
+        backgroundColor: White,
         appBar: _appBar(),
         body: Container(
           child: Center(
@@ -24,7 +27,7 @@ class _AkunState extends State<Akun> {
               children: [
                 _akunimage(),
                 _buildInformasiAkun(),
-                _logoutbtn(),
+                // _logoutbtn(),
                 _buildLogoutBtn(),
               ],
             ),
@@ -36,7 +39,17 @@ class _AkunState extends State<Akun> {
 
   AppBar _appBar() {
     return AppBar(
-      leading: Icon(Icons.arrow_back_ios),
+      leading: FlatButton(
+          onPressed: () => {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                  return Home();
+                }))
+              },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: White,
+          )),
       title: Text('Akun'),
       backgroundColor: darkGreen1,
     );
@@ -104,23 +117,23 @@ class _AkunState extends State<Akun> {
                     ),
                   ],
                 ),
-                SizedBox(height: 5),
+                SizedBox(height: 8),
                 _space(),
-                SizedBox(height: 5),
+                SizedBox(height: 10),
                 email(),
-                SizedBox(height: 5),
+                SizedBox(height: 8),
                 _space(),
-                SizedBox(height: 5),
+                SizedBox(height: 10),
                 tanggalLahir(),
-                SizedBox(height: 5),
+                SizedBox(height: 8),
                 _space(),
                 SizedBox(height: 10),
                 noTelp(),
-                SizedBox(height: 5),
+                SizedBox(height: 8),
                 _space(),
                 SizedBox(height: 10),
                 nik(),
-                SizedBox(height: 5),
+                SizedBox(height: 8),
                 _space(),
               ],
             ),
@@ -275,37 +288,50 @@ class _AkunState extends State<Akun> {
   }
 
   Widget _buildLogoutBtn() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
-      width: double.infinity,
-      child: RaisedButton(
-        elevation: 4.0,
-        onPressed: () => print('Login Button Pressed'),
-        padding: EdgeInsets.all(10.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        color: lightGreen,
-        child: Text(
-          'LOG OUT',
-          style: TextStyle(
-            color: White,
-            letterSpacing: 2,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'DMSans',
+    return Padding(
+      padding: const EdgeInsets.only(top: 50),
+      child: Container(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: RaisedButton(
+            elevation: 4.0,
+            onPressed: () => print('Login Button Pressed'),
+            padding: EdgeInsets.all(10.0),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 3, color: White),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            color: Colors.red.shade600,
+            child: Text(
+              'LOG OUT',
+              style: TextStyle(
+                color: White,
+                letterSpacing: 2,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'DMSans',
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _logoutbtn() {
-    return GFButton(
-      onPressed: () {},
-      text: "Logout",
-      shape: GFButtonShape.pills,
-      borderSide: BorderSide(width: 3, color: White),
-    );
-  }
+  // Widget _logoutbtn() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 10),
+  //     child: GFButton(
+  //       onPressed: () {},
+  //       text: "Logout",
+  //       textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+  //       fullWidthButton: true,
+  //       size: GFSize.LARGE,
+  //       color: Colors.red.shade600,
+  //       shape: GFButtonShape.pills,
+  //       borderSide: BorderSide(width: 3, color: White),
+  //     ),
+  //   );
+  // }
 }

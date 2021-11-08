@@ -84,6 +84,9 @@ flutter:
     - assets/images/Camera Icon.svg
     - assets/images/TrophyMasks.png
     - assets/images/umkm.png
+    - assets/images/vr.jpg
+    - assets/images/IU.jpg
+
     
     # - images/a_dot_ham.jpeg
   fonts:
