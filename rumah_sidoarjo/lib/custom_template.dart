@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +15,7 @@ Color White = Color(0XFFFFFFFF);
 Color red = Color(0XFFDE0404);
 
 final kHintTextStyle = TextStyle(
-  color: Color(0xffA6A6A6),
+  color: lightGrey,
   fontFamily: 'DMSans',
 );
 
@@ -34,4 +35,27 @@ final kBoxDecorationStyle = BoxDecoration(
       offset: Offset(0, 2),
     ),
   ],
+);
+
+final headerDecoration = BoxDecoration(
+  gradient: LinearGradient(
+      colors: [lightGreen, darkGreen1],
+      end: Alignment.centerRight,
+      begin: Alignment.centerLeft),
+  borderRadius: BorderRadius.only(
+    bottomLeft: Radius.circular(30),
+    bottomRight: Radius.circular(30),
+  ),
+);
+
+final headerTextStyle = GoogleFonts.dmSans(
+  color: White,
+  fontSize: 28,
+  letterSpacing: 2,
+  fontWeight: FontWeight.bold,
+);
+
+final headerSubTextStyle = GoogleFonts.dmSans(
+  color: White,
+  fontSize: 17,
 );

@@ -75,16 +75,7 @@ class _RegisterState extends State<Register> {
   Widget _headerPage() {
     return Container(
       height: 158,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [lightGreen, darkGreen1],
-            end: Alignment.centerRight,
-            begin: Alignment.centerLeft),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
-        ),
-      ),
+      decoration: headerDecoration,
       child: Stack(
         children: <Widget>[
           // SizedBox(height: 19),
@@ -94,12 +85,7 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 39),
                 Text(
                   'Daftar Akun Baru',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'DMSans',
-                  ),
+                  style: headerTextStyle,
                 ),
                 Row(
                   children: [
@@ -110,11 +96,7 @@ class _RegisterState extends State<Register> {
                     ),
                     Text(
                       'Sudah memiliki akun?',
-                      style: TextStyle(
-                        color: White,
-                        fontFamily: 'DMSans',
-                        fontSize: 17,
-                      ),
+                      style: headerSubTextStyle,
                     ),
                     TextButton(
                       onPressed: () => {
@@ -130,12 +112,7 @@ class _RegisterState extends State<Register> {
                       // padding: EdgeInsets.only(left: 95, right: 0.0),
                       child: Text(
                         'Log In',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: White,
-                          fontFamily: 'DMSans',
-                        ),
+                        style: headerSubTextStyle,
                       ),
                     ),
                   ],
@@ -153,22 +130,25 @@ class _RegisterState extends State<Register> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 20.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 45.0,
-          width: 390,
-          child: TextField(
-            style: TextStyle(
-              color: darkGrey,
-              letterSpacing: 2,
-              fontFamily: 'DMSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 15),
-              hintText: 'NIK',
-              hintStyle: kHintTextStyle,
+        Padding(
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            decoration: kBoxDecorationStyle,
+            height: 45.0,
+            width: double.infinity,
+            child: TextField(
+              style: TextStyle(
+                color: darkGrey,
+                letterSpacing: 2,
+                fontFamily: 'DMSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 15),
+                hintText: 'NIK',
+                hintStyle: kHintTextStyle,
+              ),
             ),
           ),
         ),
