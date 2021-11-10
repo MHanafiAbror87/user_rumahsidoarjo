@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
-import 'package:rumah_sidoarjo/detail_lowongankerja.dart';
+// import 'package:rumah_sidoarjo/detail_lowongankerja.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,12 +82,7 @@ class _LowongankerjaState extends State<Lowongankerja> {
             child: Container(
               height: 100,
               child: GestureDetector(
-                onTap: () => {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) {
-                    return Detail_lowongankerja();
-                  }))
-                },
+                onTap: () => {},
                 child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),

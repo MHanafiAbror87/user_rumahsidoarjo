@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/home.dart';
+import 'package:rumah_sidoarjo/login.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
@@ -296,7 +297,16 @@ class _AkunState extends State<Akun> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: RaisedButton(
             elevation: 4.0,
-            onPressed: () => print('Login Button Pressed'),
+            onPressed: () => {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return LoginPage();
+                  },
+                ),
+              ),
+            },
             padding: EdgeInsets.all(10.0),
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 3, color: White),

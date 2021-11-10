@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/akun.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
 import 'package:rumah_sidoarjo/lowongankerja.dart';
+import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
+import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
@@ -64,10 +66,14 @@ class _homeState extends State<Home> {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () => {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Beritainformasi();
-                          }))
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Beritainformasi();
+                              },
+                            ),
+                          ),
                         },
                         child: Text('Lihat Semua',
                             textAlign: TextAlign.right,
@@ -166,7 +172,16 @@ class _homeState extends State<Home> {
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             FlatButton(
-              onPressed: () {},
+              onPressed: () => {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PanikMenu();
+                    },
+                  ),
+                ),
+              },
               child: Column(
                 children: [
                   Image.asset(
@@ -182,7 +197,16 @@ class _homeState extends State<Home> {
               ),
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: () => {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Pengaduan();
+                    },
+                  ),
+                ),
+              },
               child: Column(
                 children: [
                   Image.asset(
@@ -394,11 +418,14 @@ class _homeState extends State<Home> {
                     ),
                     FlatButton(
                       onPressed: () => {
-                        Navigator.pushReplacement(context, MaterialPageRoute(
-                          builder: (context) {
-                            return Lowongankerja();
-                          },
-                        ))
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Lowongankerja();
+                            },
+                          ),
+                        ),
                       },
                       child: Column(
                         children: [

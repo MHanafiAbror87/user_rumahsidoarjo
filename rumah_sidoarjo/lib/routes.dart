@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
+import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
 import 'package:rumah_sidoarjo/pages/syarat.dart';
 import 'register.dart';
 import 'login.dart';
@@ -14,4 +16,6 @@ final Map<String, WidgetBuilder> routes = {
   LupaPassword.routeName: (context) => LupaPassword(),
   Akun.routeName: (context) => Akun(),
   Syarat.routeName: (context) => Syarat(),
+  PanikMenu.routeName: (context) => PanikMenu(),
+  Pengaduan.routeName: (context) => Pengaduan(),
 };

@@ -221,10 +221,14 @@ class _LoginPageState extends State<LoginPage> {
       child: RaisedButton(
         elevation: 4.0,
         onPressed: () => {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) {
-            return Home();
-          }))
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return Home();
+              },
+            ),
+          ),
         },
         padding: EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(

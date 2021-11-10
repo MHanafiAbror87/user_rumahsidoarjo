@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // kode warna hex
@@ -13,6 +14,7 @@ Color lightGrey = Color(0XFFA6A6A6);
 Color darkGrey = Color(0XFF4D4C4C);
 Color White = Color(0XFFFFFFFF);
 Color red = Color(0XFFDE0404);
+Color Black = Color(0XFF000000);
 
 final kHintTextStyle = TextStyle(
   color: lightGrey,
@@ -58,4 +60,17 @@ final headerTextStyle = GoogleFonts.dmSans(
 final headerSubTextStyle = GoogleFonts.dmSans(
   color: White,
   fontSize: 17,
+);
+
+//custom text panik menu dan pengaduan
+
+final judulTextStyle = GoogleFonts.poppins(
+  color: Black,
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+
+final subjudulTextStyle = GoogleFonts.dmSans(
+  color: lightGrey,
+  fontSize: 14,
 );

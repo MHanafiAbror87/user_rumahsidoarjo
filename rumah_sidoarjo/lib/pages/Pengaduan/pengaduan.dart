@@ -1,16 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 
-class PanikMenu extends StatefulWidget {
-  static String routeName = "/panik";
+class Pengaduan extends StatefulWidget {
+  static String routeName = "/pengaduan";
   @override
-  _PanikState createState() => _PanikState();
+  _PengaduanState createState() => _PengaduanState();
 }
 
-class _PanikState extends State<PanikMenu> {
+class _PengaduanState extends State<Pengaduan> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,23 +70,26 @@ class _PanikState extends State<PanikMenu> {
     return Expanded(
       child: Container(
         height: 158,
+        width: double.infinity,
         decoration: headerDecoration,
         child: Stack(
           children: <Widget>[
             Center(
               child: Column(
                 children: [
-                  SizedBox(height: 39),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                  ),
                   Text(
-                    'Panik Menu',
+                    'Pengaduan',
                     style: headerTextStyle,
                   ),
                   Container(
-                    width: 330,
+                    width: 350,
                     child: Center(
                       child: Text(
-                        'Jangan takut untuk lapor!',
-                        textAlign: TextAlign.center,
+                        'Ayo adukan kerusakan fasilitas publik di lingkungan Anda agar segera mendapatkan penanganan dari dinas terkait',
+                        textAlign: TextAlign.justify,
                         style: headerSubTextStyle,
                       ),
                     ),
