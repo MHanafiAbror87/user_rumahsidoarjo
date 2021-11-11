@@ -74,3 +74,6 @@ final subjudulTextStyle = GoogleFonts.dmSans(
   color: lightGrey,
   fontSize: 14,
 );
+
+final uploadText =
+    TextStyle(fontFamily: 'DMSans', fontSize: 16, color: darkGrey);
