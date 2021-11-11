@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PanikMenu extends StatefulWidget {
   static String routeName = "/panik";
@@ -16,28 +17,103 @@ class _PanikState extends State<PanikMenu> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.grey.shade300,
         appBar: appBar(),
-        body: Scaffold(
-          backgroundColor: White,
-          body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.light,
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
-              child: Stack(
-                children: <Widget>[
-                  SingleChildScrollView(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 40.0,
-                      vertical: 120.0,
-                    ),
-                  ),
-                  _headerPage(),
-                ],
+        body: Column(
+          children: [
+            _headerPage(),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: kategori.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 2),
+                        child: Container(
+                          height: 85,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        width: 300,
+                                        height: 55,
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                kategori[index],
+                                                style: textKategori,
+                                              ),
+                                              Text(
+                                                subKategori[index],
+                                                textAlign: TextAlign.center,
+                                                style: textSubKategori,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: IconButton(
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return Home();
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 25,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }))
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _headerPage() {
+    return Container(
+      height: 158,
+      decoration: headerDecoration,
+      child: Column(
+        children: [
+          SizedBox(height: 10),
+          Text(
+            'Panik Menu',
+            style: headerTextStyle,
+          ),
+          Center(
+            child: Container(
+              width: 330,
+              child: Text(
+                'Jangan Takut untuk Lapor!',
+                textAlign: TextAlign.justify,
+                style: headerSubTextStyle,
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -65,39 +141,16 @@ class _PanikState extends State<PanikMenu> {
       backgroundColor: darkGreen1,
     );
   }
-
-  Widget _headerPage() {
-    return Expanded(
-      child: Container(
-        height: 158,
-        width: double.infinity,
-        decoration: headerDecoration,
-        child: Stack(
-          children: <Widget>[
-            Center(
-              child: Column(
-                children: [
-                  SizedBox(height: 39),
-                  Text(
-                    'Panik Menu',
-                    style: headerTextStyle,
-                  ),
-                  Container(
-                    width: 330,
-                    child: Center(
-                      child: Text(
-                        'Jangan takut untuk lapor!',
-                        textAlign: TextAlign.center,
-                        style: headerSubTextStyle,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
+
+final List kategori = [
+  "Kriminal",
+  "Kecelakaan",
+  "Bencana Alam/Lingkungan",
+];
+
+final List subKategori = [
+  "Pencurian, Pembunuhan, Pemerkosaan, Dll",
+  "Kecelakaan saat berkendara di Jalan",
+  "Kebakaran, Banjir, Longsor, Pohon Tumbang, Dll",
+];

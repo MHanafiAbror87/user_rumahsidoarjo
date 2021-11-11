@@ -62,6 +62,11 @@ final headerSubTextStyle = GoogleFonts.dmSans(
   fontSize: 17,
 );
 
+final uploadText = GoogleFonts.dmSans(
+  fontSize: 16,
+  color: darkGrey,
+);
+
 //custom text panik menu dan pengaduan
 
 final judulTextStyle = GoogleFonts.poppins(
@@ -75,5 +80,11 @@ final subjudulTextStyle = GoogleFonts.dmSans(
   fontSize: 14,
 );
 
-final uploadText =
-    TextStyle(fontFamily: 'DMSans', fontSize: 16, color: darkGrey);
+final textKategori = GoogleFonts.poppins(
+  fontSize: 12,
+  fontWeight: FontWeight.bold,
+);
+
+final textSubKategori = GoogleFonts.dmSans(
+  fontSize: 12,
+);
