@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
+import 'package:rumah_sidoarjo/detail_lowongankerja.dart';
 // import 'package:rumah_sidoarjo/detail_lowongankerja.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'custom_template.dart';
@@ -81,62 +82,58 @@ class _LowongankerjaState extends State<Lowongankerja> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
             child: Container(
               height: 100,
-              child: GestureDetector(
-                onTap: () => {},
-                child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          gambar[0],
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Container(
+              child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        gambar[0],
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Container(
+                                height: 20,
+                                width: 300,
+                                child: Text(
+                                  berita[index],
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Container(
                                   height: 20,
                                   width: 300,
                                   child: Text(
-                                    berita[index],
+                                    job[0],
                                     style: TextStyle(
+                                        fontSize: 12, fontFamily: "DMSans"),
+                                  )),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 10),
+                              child: Container(
+                                  height: 20,
+                                  width: 300,
+                                  child: Text(
+                                    alamat[0],
+                                    style: TextStyle(
+                                        color: darkGreen,
                                         fontSize: 12,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Container(
-                                    height: 20,
-                                    width: 300,
-                                    child: Text(
-                                      job[0],
-                                      style: TextStyle(
-                                          fontSize: 12, fontFamily: "DMSans"),
-                                    )),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, top: 10),
-                                child: Container(
-                                    height: 20,
-                                    width: 300,
-                                    child: Text(
-                                      alamat[0],
-                                      style: TextStyle(
-                                          color: darkGreen,
-                                          fontSize: 12,
-                                          fontFamily: "DMSans"),
-                                    )),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
-              ),
+                                        fontFamily: "DMSans"),
+                                  )),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )),
             ),
           );
         },

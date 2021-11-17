@@ -4,6 +4,7 @@ import 'package:rumah_sidoarjo/beritainformasi.dart';
 import 'package:rumah_sidoarjo/lowongankerja.dart';
 import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
 import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
+import 'package:rumah_sidoarjo/pariwisata.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
@@ -260,7 +261,16 @@ class _homeState extends State<Home> {
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Pariwisata();
+                      },
+                    ),
+                  );
+                },
                 child: Column(
                   children: [
                     Image.asset(

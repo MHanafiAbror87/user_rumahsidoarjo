@@ -143,7 +143,7 @@ class _PengaduanState extends State<Pengaduan> {
           ),
         },
       ),
-      title: Text('Syarat & Ketentuan'),
+      title: Text('Pengaduan'),
       backgroundColor: darkGreen1,
     );
   }

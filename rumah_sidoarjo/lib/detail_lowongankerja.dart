@@ -220,10 +220,6 @@ class _Detail_lowongankerjaState extends State<Detail_lowongankerja> {
                       ),
                     ),
                   ),
-                  GoogleMap(
-                      mapType: MapType.normal,
-                      initialCameraPosition: CameraPosition(
-                          target: LatLng(-8.591204, 116.116208), zoom: 14.4746))
                 ],
               ),
             )
