@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../beritainformasi.dart';
 
 class PanikMenu extends StatefulWidget {
   static String routeName = "/panik";
@@ -22,83 +23,25 @@ class _PanikState extends State<PanikMenu> {
         body: Column(
           children: [
             _headerPage(),
+            SizedBox(
+              height: 20,
+            ),
             Expanded(
-                child: ListView.builder(
-                    itemCount: kategori.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 2),
-                        child: Container(
-                          height: 85,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        width: 300,
-                                        height: 55,
-                                        child: Center(
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                kategori[index],
-                                                style: textKategori,
-                                              ),
-                                              Text(
-                                                subKategori[index],
-                                                textAlign: TextAlign.center,
-                                                style: textSubKategori,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: IconButton(
-                                        onPressed: () {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return Home();
-                                              },
-                                            ),
-                                          );
-                                        },
-                                        icon: Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 25,
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }))
+              child: listKategori(),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Container _headerPage() {
+  Widget _headerPage() {
     return Container(
       height: 158,
       decoration: headerDecoration,
       child: Column(
         children: [
-          SizedBox(height: 10),
+          SizedBox(height: 30),
           Text(
             'Panik Menu',
             style: headerTextStyle,
@@ -108,7 +51,7 @@ class _PanikState extends State<PanikMenu> {
               width: 330,
               child: Text(
                 'Jangan Takut untuk Lapor!',
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: headerSubTextStyle,
               ),
             ),
@@ -137,8 +80,89 @@ class _PanikState extends State<PanikMenu> {
           ),
         },
       ),
-      title: Text('Syarat & Ketentuan'),
+      title: Text('Panik Menu'),
       backgroundColor: darkGreen1,
+    );
+  }
+}
+
+class listKategori extends StatelessWidget {
+  const listKategori({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: kategori.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+          child: Container(
+            height: 85,
+            child: GestureDetector(
+              onTap: () => {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Beritainformasi();
+                    },
+                  ),
+                ),
+              },
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 320,
+                              height: 55,
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      kategori[index],
+                                      style: textKategori,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      subKategori[index],
+                                      textAlign: TextAlign.center,
+                                      style: textSubKategori,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Image.asset(
+                            'assets/images/arrow_forward.png',
+                            width: 20,
+                            height: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

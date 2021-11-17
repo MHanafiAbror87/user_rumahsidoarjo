@@ -16,15 +16,13 @@ Color White = Color(0XFFFFFFFF);
 Color red = Color(0XFFDE0404);
 Color Black = Color(0XFF000000);
 
-final kHintTextStyle = TextStyle(
+final kHintTextStyle = GoogleFonts.dmSans(
   color: lightGrey,
-  fontFamily: 'DMSans',
 );
 
-final kLabelStyle = TextStyle(
+final kLabelStyle = GoogleFonts.dmSans(
   color: darkGrey,
   fontWeight: FontWeight.bold,
-  fontFamily: 'DMSans',
 );
 
 final kBoxDecorationStyle = BoxDecoration(
@@ -81,10 +79,11 @@ final subjudulTextStyle = GoogleFonts.dmSans(
 );
 
 final textKategori = GoogleFonts.poppins(
-  fontSize: 12,
+  fontSize: 14,
   fontWeight: FontWeight.bold,
 );
 
 final textSubKategori = GoogleFonts.dmSans(
   fontSize: 12,
+  color: Color(0xffc4c4c4),
 );
