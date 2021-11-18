@@ -29,6 +29,11 @@ class _PanikState extends State<PanikMenu> {
             Expanded(
               child: listKategori(),
             ),
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0, bottom: 40),
+              child:
+                  Align(alignment: Alignment.centerRight, child: _historyBtn()),
+            ),
           ],
         ),
       ),
@@ -82,6 +87,20 @@ class _PanikState extends State<PanikMenu> {
       ),
       title: Text('Panik Menu'),
       backgroundColor: darkGreen1,
+    );
+  }
+
+  Widget _historyBtn() {
+    return Ink(
+      decoration: ShapeDecoration(
+        shape: CircleBorder(),
+        color: White,
+      ),
+      child: IconButton(
+        onPressed: () {},
+        icon: Image.asset('assets/images/history.png'),
+        iconSize: 50,
+      ),
     );
   }
 }

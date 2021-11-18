@@ -23,68 +23,17 @@ class _PengaduanState extends State<Pengaduan> {
         body: Column(
           children: [
             _headerPage(),
+            SizedBox(
+              height: 20,
+            ),
             Expanded(
-                child: ListView.builder(
-                    itemCount: kategori.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 2),
-                        child: Container(
-                          height: 85,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        width: 300,
-                                        height: 55,
-                                        child: Center(
-                                          child: Column(
-                                            children: [
-                                              Text(kategori[index],
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.bold,
-                                                  )),
-                                              Text(subKategori[index],
-                                                  textAlign: TextAlign.center,
-                                                  style: GoogleFonts.dmSans(
-                                                    fontSize: 12,
-                                                  ))
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: IconButton(
-                                        onPressed: () {
-                                          Navigator.pushReplacement(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return DetailPengaduan();
-                                          }));
-                                        },
-                                        icon: Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 25,
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }))
+              child: listKategori(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0, bottom: 40),
+              child:
+                  Align(alignment: Alignment.centerRight, child: _historyBtn()),
+            ),
           ],
         ),
       ),
@@ -145,6 +94,101 @@ class _PengaduanState extends State<Pengaduan> {
       ),
       title: Text('Pengaduan'),
       backgroundColor: darkGreen1,
+    );
+  }
+
+  Widget _historyBtn() {
+    return Ink(
+      decoration: ShapeDecoration(
+        shape: CircleBorder(),
+        color: White,
+      ),
+      child: IconButton(
+        onPressed: () {},
+        icon: Image.asset('assets/images/history.png'),
+        iconSize: 50,
+      ),
+    );
+  }
+}
+
+class listKategori extends StatelessWidget {
+  const listKategori({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: kategori.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+          child: Container(
+            height: 85,
+            child: GestureDetector(
+              onTap: () => {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return DetailPengaduan();
+                    },
+                  ),
+                ),
+              },
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 320,
+                              height: 55,
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      kategori[index],
+                                      style: textKategori,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      subKategori[index],
+                                      textAlign: TextAlign.center,
+                                      style: textSubKategori,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Image.asset(
+                            'assets/images/arrow_forward.png',
+                            width: 20,
+                            height: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
