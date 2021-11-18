@@ -87,3 +87,9 @@ final textSubKategori = GoogleFonts.dmSans(
   fontSize: 12,
   color: Color(0xffc4c4c4),
 );
+
+//font Tagihan
+final textTagihan = GoogleFonts.poppins(
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+);
