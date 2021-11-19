@@ -150,9 +150,6 @@ final List kategori = [
   "Akta Kelahiran",
   "Akta Kematian",
   "Kartu Pencari Kerja",
-  "Pembuatan KTP Baru",
-  "KTP Hilang Atau Rusak",
-  "KTP Perubahan Data",
 ];
 
 // final List subKategori = [
