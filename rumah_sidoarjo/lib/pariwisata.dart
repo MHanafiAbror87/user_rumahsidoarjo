@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pemancingan.dart';
+import 'package:rumah_sidoarjo/pages/pariwisata/pusatinformasi.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/sejarah.dart';
 
 class Pariwisata extends StatefulWidget {
@@ -23,64 +24,72 @@ class _PariwisataState extends State<Pariwisata> {
             _headerPage(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Container(
-                width: double.infinity,
-                height: 110,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20), color: White),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                colors: [lightGreen, darkGreen1],
-                                end: Alignment.centerRight,
-                                begin: Alignment.centerLeft),
-                            borderRadius: BorderRadius.circular(10),
-                            color: darkGreen),
-                        child: Icon(
-                          Icons.home_outlined,
-                          color: White,
-                          size: 70,
-                        )),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 25),
-                        Text('Pusat Informasi Wisata',
-                            style: GoogleFonts.dmSans(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: darkGreen)),
-                        Container(
-                          width: 200,
-                          height: 40,
-                          child: Text(
-                              'Dinas Kepemudaan Olahraga & Pariwisata Sidoarjo',
+              child: GestureDetector(
+                onTap: () => {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
+                    return PusatInformasi();
+                  }))
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 110,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20), color: White),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [lightGreen, darkGreen1],
+                                  end: Alignment.centerRight,
+                                  begin: Alignment.centerLeft),
+                              borderRadius: BorderRadius.circular(10),
+                              color: darkGreen),
+                          child: Icon(
+                            Icons.home_outlined,
+                            color: White,
+                            size: 70,
+                          )),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 25),
+                          Text('Pusat Informasi Wisata',
                               style: GoogleFonts.dmSans(
-                                  fontSize: 12, color: darkGrey)),
-                        ),
-                      ],
-                    ),
-                    Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                colors: [lightGreen, darkGreen1],
-                                end: Alignment.centerRight,
-                                begin: Alignment.centerLeft),
-                            borderRadius: BorderRadius.circular(10),
-                            color: darkGreen),
-                        child: Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: White,
-                          size: 25,
-                        )),
-                  ],
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: darkGreen)),
+                          Container(
+                            width: 200,
+                            height: 40,
+                            child: Text(
+                                'Dinas Kepemudaan Olahraga & Pariwisata Sidoarjo',
+                                style: GoogleFonts.dmSans(
+                                    fontSize: 12, color: darkGrey)),
+                          ),
+                        ],
+                      ),
+                      Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [lightGreen, darkGreen1],
+                                  end: Alignment.centerRight,
+                                  begin: Alignment.centerLeft),
+                              borderRadius: BorderRadius.circular(10),
+                              color: darkGreen),
+                          child: Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            color: White,
+                            size: 25,
+                          )),
+                    ],
+                  ),
                 ),
               ),
             ),

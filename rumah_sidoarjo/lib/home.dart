@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/akun.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
+import 'package:rumah_sidoarjo/layananpublik.dart';
 import 'package:rumah_sidoarjo/lowongankerja.dart';
 import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
+import 'package:rumah_sidoarjo/pages/cctv.dart';
+import 'package:rumah_sidoarjo/pages/media_massa.dart';
 import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
 import 'package:rumah_sidoarjo/pariwisata.dart';
+import 'package:rumah_sidoarjo/tagihan.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
@@ -260,31 +264,18 @@ class _homeState extends State<Home> {
                   ],
                 ),
               ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Pariwisata();
-                      },
-                    ),
-                  );
-                },
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/Pariwisata.png',
-                      width: 45,
-                      height: 45,
-                    ),
-                    Text(
-                      'PARIWISATA',
-                      style:
-                          GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
-                    )
-                  ],
-                ),
+              Column(
+                children: [
+                  Image.asset(
+                    'assets/images/Pariwisata.png',
+                    width: 45,
+                    height: 45,
+                  ),
+                  Text(
+                    'PARIWISATA',
+                    style: GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
+                  )
+                ],
               ),
               FlatButton(
                 onPressed: _showDialog,
@@ -337,7 +328,16 @@ class _homeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () => {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Cctv();
+                              },
+                            ),
+                          ),
+                        },
                         child: Column(
                           children: [
                             Image.asset(
@@ -354,7 +354,16 @@ class _homeState extends State<Home> {
                         ),
                       ),
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () => {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return LayananPublik();
+                              },
+                            ),
+                          ),
+                        },
                         child: Column(
                           children: [
                             Image.asset(
@@ -371,7 +380,16 @@ class _homeState extends State<Home> {
                         ),
                       ),
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () => {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Tagihan();
+                              },
+                            ),
+                          ),
+                        },
                         child: Column(
                           children: [
                             Image.asset(
@@ -393,7 +411,16 @@ class _homeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     FlatButton(
-                      onPressed: () {},
+                      onPressed: () => {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return MediaMassa();
+                            },
+                          ),
+                        ),
+                      },
                       child: Column(
                         children: [
                           Image.asset(
@@ -496,6 +523,7 @@ class _homeState extends State<Home> {
                               height: 30,
                               width: 180,
                               child: Text(berita[index],
+                                  maxLines: 2,
                                   style: TextStyle(
                                     fontSize: 10,
                                   )))
@@ -549,6 +577,7 @@ class _homeState extends State<Home> {
                               height: 30,
                               width: 180,
                               child: Text(berita[index],
+                                  maxLines: 2,
                                   style: TextStyle(
                                     fontSize: 10,
                                   )))
@@ -611,6 +640,7 @@ class _homeState extends State<Home> {
                                     height: 30,
                                     width: 180,
                                     child: Text(berita[index],
+                                        maxLines: 2,
                                         style: TextStyle(
                                           fontSize: 10,
                                         )))

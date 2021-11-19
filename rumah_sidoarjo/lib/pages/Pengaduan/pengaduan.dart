@@ -125,7 +125,7 @@ class listKategori extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
           child: Container(
-            height: 85,
+            height: 100,
             child: GestureDetector(
               onTap: () => {
                 Navigator.pushReplacement(
@@ -150,7 +150,7 @@ class listKategori extends StatelessWidget {
                           children: [
                             Container(
                               width: 320,
-                              height: 55,
+                              height: 70,
                               child: Center(
                                 child: Column(
                                   children: [

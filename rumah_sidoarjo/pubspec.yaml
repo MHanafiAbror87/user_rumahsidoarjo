@@ -38,7 +38,6 @@ dependencies:
   google_fonts: ^2.1.0
   getwidget: ^2.0.4
   slide_popup_dialog: ^0.0.2
-  google_maps_flutter: ^2.0.5
   image_picker: ^0.8.4+4
   path_provider: ^2.0.6
   intl: ^0.17.0
@@ -91,6 +90,8 @@ flutter:
     - assets/images/umkm.png
     - assets/images/vr.jpg
     - assets/images/IU.jpg
+    - assets/images/cctv2.png
+    - assets/images/radio.png
     - assets/images/arrow_forward.png
 
     
