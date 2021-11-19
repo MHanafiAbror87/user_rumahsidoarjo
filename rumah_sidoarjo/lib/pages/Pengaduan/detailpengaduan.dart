@@ -120,7 +120,7 @@ class _DetailPengaduanState extends State<DetailPengaduan> {
                           ? Image.file(image!,
                               width: 120, height: 120, fit: BoxFit.cover)
                           : Image.asset(
-                              'assets/images/Kesehatan.png',
+                              'assets/images/addcamera.png',
                               width: 120,
                               height: 120,
                             ),

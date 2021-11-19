@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Detail_lowongankerja extends StatefulWidget {
   @override

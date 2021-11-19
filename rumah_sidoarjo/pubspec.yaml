@@ -93,6 +93,7 @@ flutter:
     - assets/images/cctv2.png
     - assets/images/radio.png
     - assets/images/arrow_forward.png
+    - assets/images/addcamera.png
 
     
     # - images/a_dot_ham.jpeg
