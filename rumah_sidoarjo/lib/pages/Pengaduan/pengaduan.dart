@@ -75,7 +75,7 @@ class _PengaduanState extends State<Pengaduan> {
 
   AppBar appBar() {
     return AppBar(
-      elevation: 0,
+      
       leading: FlatButton(
         child: Icon(
           Icons.arrow_back_ios,

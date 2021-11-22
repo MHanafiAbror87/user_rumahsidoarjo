@@ -68,7 +68,6 @@ class _PanikState extends State<PanikMenu> {
 
   AppBar appBar() {
     return AppBar(
-      elevation: 0,
       leading: FlatButton(
         child: Icon(
           Icons.arrow_back_ios,
