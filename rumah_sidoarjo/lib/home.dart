@@ -7,11 +7,15 @@ import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
 import 'package:rumah_sidoarjo/pages/cctv.dart';
 import 'package:rumah_sidoarjo/pages/media_massa.dart';
 import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
+import 'package:rumah_sidoarjo/pages/pendidikan/pendidikan.dart';
+import 'package:rumah_sidoarjo/pages/umkm/umkm.dart';
 import 'package:rumah_sidoarjo/pariwisata.dart';
 import 'package:rumah_sidoarjo/tagihan.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
+
+import 'pages/kesehatan/kesehatan.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -227,7 +231,16 @@ class _homeState extends State<Home> {
               ),
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: () => {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Kesehatan();
+                    },
+                  ),
+                ),
+              },
               child: Column(
                 children: [
                   Image.asset(
@@ -248,7 +261,16 @@ class _homeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               FlatButton(
-                onPressed: () {},
+                onPressed: () => {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Pendidikan();
+                      },
+                    ),
+                  ),
+                },
                 child: Column(
                   children: [
                     Image.asset(
@@ -266,10 +288,22 @@ class _homeState extends State<Home> {
               ),
               Column(
                 children: [
-                  Image.asset(
-                    'assets/images/Pariwisata.png',
-                    width: 45,
-                    height: 45,
+                  FlatButton(
+                    onPressed: () => {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Pariwisata();
+                          },
+                        ),
+                      ),
+                    },
+                    child: Image.asset(
+                      'assets/images/Pariwisata.png',
+                      width: 45,
+                      height: 45,
+                    ),
                   ),
                   Text(
                     'PARIWISATA',
@@ -437,7 +471,16 @@ class _homeState extends State<Home> {
                       ),
                     ),
                     FlatButton(
-                      onPressed: () {},
+                      onPressed: () => {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Umkm();
+                            },
+                          ),
+                        ),
+                      },
                       child: Column(
                         children: [
                           Image.asset(
