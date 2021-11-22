@@ -119,16 +119,7 @@ class listKategori extends StatelessWidget {
           child: Container(
             height: 85,
             child: GestureDetector(
-              onTap: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Beritainformasi();
-                    },
-                  ),
-                ),
-              },
+              onTap: () {},
               child: Card(
                 elevation: 4,
                 shape: RoundedRectangleBorder(

@@ -670,11 +670,11 @@ class _homeState extends State<Home> {
   ];
 
   final List gambar = [
-    Image.asset('assets/images/Pengaduan.png', width: 50),
-    Image.asset('assets/images/Pengaduan.png', width: 50),
-    Image.asset('assets/images/Pengaduan.png', width: 50),
-    Image.asset('assets/images/Pengaduan.png', width: 50),
-    Image.asset('assets/images/Pengaduan.png', width: 50),
+    Image.asset('assets/images/no_image.png', width: 50),
+    Image.asset('assets/images/no_image.png', width: 50),
+    Image.asset('assets/images/no_image.png', width: 50),
+    Image.asset('assets/images/no_image.png', width: 50),
+    Image.asset('assets/images/no_image.png', width: 50),
   ];
 
   FlatButton _TrophyMasks() {

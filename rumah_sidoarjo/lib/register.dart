@@ -99,7 +99,7 @@ class _RegisterState extends State<Register> {
                                         height: 120,
                                         fit: BoxFit.cover)
                                     : Image.asset(
-                                        'assets/images/Kesehatan.png',
+                                        'assets/images/addcamera.png',
                                         width: 120,
                                         height: 120,
                                       ),
@@ -122,7 +122,7 @@ class _RegisterState extends State<Register> {
                                         height: 120,
                                         fit: BoxFit.cover)
                                     : Image.asset(
-                                        'assets/images/Kesehatan.png',
+                                        'assets/images/addcamera.png',
                                         width: 120,
                                         height: 120,
                                       ),

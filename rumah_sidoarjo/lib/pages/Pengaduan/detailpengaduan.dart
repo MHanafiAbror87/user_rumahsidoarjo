@@ -56,7 +56,7 @@ class _DetailPengaduanState extends State<DetailPengaduan> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Container(
-                height: 600,
+                height: 610,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40), color: White),
@@ -91,6 +91,7 @@ class _DetailPengaduanState extends State<DetailPengaduan> {
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: 'Lokasi Kejadian')),
+                      SizedBox(height: 10),
                       Text(_dateTime == null
                           ? 'Nothing has been picked yet'
                           : DateFormat.yMEd().format(_dateTime!)),

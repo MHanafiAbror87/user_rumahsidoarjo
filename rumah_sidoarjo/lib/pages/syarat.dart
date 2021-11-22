@@ -22,23 +22,20 @@ class _SyaratState extends State<Syarat> {
           backgroundColor: White,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.light,
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
-              child: Stack(
-                children: <Widget>[
-                  SingleChildScrollView(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 40.0,
-                      vertical: 120.0,
-                    ),
+            child: Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 40.0,
+                    vertical: 120.0,
                   ),
-                  _headerPage(),
-                  Expanded(
-                    child: _sk(),
-                  ),
-                ],
-              ),
+                ),
+                _headerPage(),
+                Expanded(
+                  child: _sk(),
+                ),
+              ],
             ),
           ),
         ),

@@ -39,7 +39,7 @@ class _Detail_lowongankerjaState extends State<Detail_lowongankerja> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: AssetImage('assets/images/IU.jpg')),
+                      image: AssetImage('assets/images/no_image.png')),
                 ),
               ),
             ),
