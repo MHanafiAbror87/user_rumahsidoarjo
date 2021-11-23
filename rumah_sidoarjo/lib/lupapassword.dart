@@ -118,22 +118,23 @@ class _LupaPasswordState extends State<LupaPassword> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 50.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 45.0,
-          width: 390,
-          child: TextField(
-            style: TextStyle(
-              color: darkGrey,
-              letterSpacing: 2,
-              fontFamily: 'DMSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 15),
-              hintText: 'Email',
-              hintStyle: kHintTextStyle,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Container(
+            decoration: kBoxDecorationStyle,
+            width: double.infinity,
+            child: TextField(
+              style: TextStyle(
+                color: darkGrey,
+                letterSpacing: 2,
+                fontFamily: 'DMSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 15),
+                hintText: 'Email',
+                hintStyle: kHintTextStyle,
+              ),
             ),
           ),
         ),
@@ -150,15 +151,24 @@ class _LupaPasswordState extends State<LupaPassword> {
           content: const Text('Silahkan cek email Anda'),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
+              onPressed: () => {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginPage();
+                    },
+                  ),
+                ),
+              },
               child: const Text('OK'),
             ),
           ],
         ),
       ),
       child: Container(
-        height: 50,
-        padding: EdgeInsets.all(12.0),
+        // height: 50,
+        padding: EdgeInsets.all(10.0),
         width: double.infinity,
         child: Text(
           'Kirim',

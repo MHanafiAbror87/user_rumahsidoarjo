@@ -48,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                       _buildUsername(),
                       _buildPasswordTF(),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           _buildRememberMeCheckbox(),
                           _buildLupaPasswordBtn(),
@@ -128,7 +129,6 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildPasswordTF() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 20.0),
         Container(
@@ -158,26 +158,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildLupaPasswordBtn() {
-    return Container(
-      alignment: Alignment.centerRight,
-      child: FlatButton(
-        onPressed: () => {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return LupaPassword();
-              },
-            ),
+    return TextButton(
+      onPressed: () => {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return LupaPassword();
+            },
           ),
-        },
-        padding: EdgeInsets.only(left: 95, right: 0.0),
-        child: Text(
-          'Lupa Password?',
-          style: TextStyle(
-            color: darkOrange,
-            fontFamily: 'DMSans',
-          ),
+        ),
+      },
+      // padding: EdgeInsets.only(left: 95, right: 0.0),
+      child: Text(
+        'Lupa Password?',
+        style: TextStyle(
+          color: darkOrange,
+          fontFamily: 'DMSans',
         ),
       ),
     );

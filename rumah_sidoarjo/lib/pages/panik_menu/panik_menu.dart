@@ -117,7 +117,6 @@ class listKategori extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
           child: Container(
-            height: 85,
             child: GestureDetector(
               onTap: () {},
               child: Card(
@@ -128,6 +127,7 @@ class listKategori extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           children: [

@@ -13,7 +13,6 @@ import 'package:rumah_sidoarjo/pariwisata.dart';
 import 'package:rumah_sidoarjo/tagihan.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:getwidget/getwidget.dart';
 
 import 'pages/kesehatan/kesehatan.dart';
 
@@ -57,8 +56,9 @@ class _homeState extends State<Home> {
             ),
             _TrophyMasks(),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              padding: EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
@@ -69,25 +69,24 @@ class _homeState extends State<Home> {
                             fontWeight: FontWeight.bold,
                             color: Colors.black)),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 197),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () => {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Beritainformasi();
-                              },
-                            ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () => {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Beritainformasi();
+                            },
                           ),
-                        },
-                        child: Text('Lihat Semua',
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.openSans(
-                                fontSize: 12, color: darkGreen)),
+                        ),
+                      },
+                      child: Text(
+                        'Lihat Semua',
+                        // textAlign: TextAlign.right,
+                        style: GoogleFonts.openSans(
+                            fontSize: 12, color: darkGreen),
                       ),
                     ),
                   ),
@@ -96,8 +95,9 @@ class _homeState extends State<Home> {
             ),
             _ListViewBerita(),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              padding: EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
@@ -108,22 +108,19 @@ class _homeState extends State<Home> {
                             fontWeight: FontWeight.bold,
                             color: Colors.black)),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 194),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () => {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Beritainformasi();
-                          }))
-                        },
-                        child: Text('Lihat Semua',
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.openSans(
-                                fontSize: 12, color: darkGreen)),
-                      ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () => {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) {
+                          return Beritainformasi();
+                        }))
+                      },
+                      child: Text('Lihat Semua',
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.openSans(
+                              fontSize: 12, color: darkGreen)),
                     ),
                   ),
                 ],
@@ -131,8 +128,9 @@ class _homeState extends State<Home> {
             ),
             _ListViewWisata(),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              padding: EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
@@ -143,22 +141,19 @@ class _homeState extends State<Home> {
                             fontWeight: FontWeight.bold,
                             color: Colors.black)),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 47),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () => {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Beritainformasi();
-                          }))
-                        },
-                        child: Text('Lihat Semua',
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.openSans(
-                                fontSize: 12, color: darkGreen)),
-                      ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () => {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) {
+                          return Beritainformasi();
+                        }))
+                      },
+                      child: Text('Lihat Semua',
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.openSans(
+                              fontSize: 12, color: darkGreen)),
                     ),
                   ),
                 ],
@@ -722,22 +717,22 @@ class _homeState extends State<Home> {
 
   FlatButton _TrophyMasks() {
     return FlatButton(
-      onPressed: () {},
+      onPressed: () => {},
       child: Container(
-        width: 380,
+        width: double.infinity,
         height: 100,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: [lightGreen, darkGreen1],
                 end: Alignment.centerRight,
                 begin: Alignment.centerLeft),
-            color: darkGreen,
             borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Container(
+        child: Padding(
+          padding: const EdgeInsets.only(right: 30, left: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
                   width: 200,
                   child: Text('Ayo cari tau agenda yang akan dilaksanakan',
                       textAlign: TextAlign.center,
@@ -745,16 +740,13 @@ class _homeState extends State<Home> {
                           fontSize: 14,
                           color: White,
                           fontWeight: FontWeight.bold))),
-            ),
-            SizedBox(
-              width: 40,
-            ),
-            Image.asset(
-              'assets/images/TrophyMasks.png',
-              width: 90,
-              height: 90,
-            )
-          ],
+              Image.asset(
+                'assets/images/TrophyMasks.png',
+                width: 90,
+                height: 90,
+              )
+            ],
+          ),
         ),
       ),
     );
