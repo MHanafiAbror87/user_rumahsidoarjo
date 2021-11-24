@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/pages/Tagihan/cek_tagihan.dart';
 
 class Tagihan extends StatefulWidget {
@@ -116,34 +114,20 @@ class listKategori extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    child: Center(
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 320,
-                            height: 25,
-                            child: Column(
-                              children: [
-                                Text(
-                                  kategori[index],
-                                  style: textKategori,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Image.asset(
-                              'assets/images/arrow_forward.png',
-                              width: 20,
-                              height: 20,
-                            ),
-                          ),
-                        ],
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        kategori[index],
+                        style: textKategori,
                       ),
-                    ),
+                      Image.asset(
+                        'assets/images/arrow_forward.png',
+                        width: 20,
+                        height: 20,
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../beritainformasi.dart';
 
 class PanikMenu extends StatefulWidget {
   static String routeName = "/panik";
@@ -124,7 +121,8 @@ class listKategori extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0, vertical: 10),
                   child: Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,13 +153,10 @@ class listKategori extends StatelessWidget {
                             )
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Image.asset(
-                            'assets/images/arrow_forward.png',
-                            width: 20,
-                            height: 20,
-                          ),
+                        Image.asset(
+                          'assets/images/arrow_forward.png',
+                          width: 20,
+                          height: 20,
                         ),
                       ],
                     ),

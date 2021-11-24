@@ -75,7 +75,6 @@ class _PengaduanState extends State<Pengaduan> {
 
   AppBar appBar() {
     return AppBar(
-      
       leading: FlatButton(
         child: Icon(
           Icons.arrow_back_ios,
@@ -125,26 +124,18 @@ class listKategori extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
           child: Container(
-            height: 100,
             child: GestureDetector(
-              onTap: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return DetailPengaduan();
-                    },
-                  ),
-                ),
-              },
+              onTap: () {},
               child: Card(
                 elevation: 4,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.only(
+                      left: 10, top: 10, bottom: 10, right: 15),
                   child: Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           children: [
@@ -172,13 +163,10 @@ class listKategori extends StatelessWidget {
                             )
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Image.asset(
-                            'assets/images/arrow_forward.png',
-                            width: 20,
-                            height: 20,
-                          ),
+                        Image.asset(
+                          'assets/images/arrow_forward.png',
+                          width: 20,
+                          height: 20,
                         ),
                       ],
                     ),

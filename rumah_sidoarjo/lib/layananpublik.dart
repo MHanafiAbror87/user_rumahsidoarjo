@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 
@@ -105,30 +104,20 @@ class listKategori extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 320,
-                          height: 25,
-                          child: Column(
-                            children: [
-                              Text(
-                                kategori[index],
-                                style: textKategori,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/images/arrow_forward.png',
-                          width: 20,
-                          height: 20,
-                        ),
-                      ],
-                    ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        kategori[index],
+                        style: textKategori,
+                      ),
+                      Image.asset(
+                        'assets/images/arrow_forward.png',
+                        width: 20,
+                        height: 20,
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -151,10 +140,3 @@ final List kategori = [
   "Akta Kematian",
   "Kartu Pencari Kerja",
 ];
-
-// final List subKategori = [
-//   "Pencurian, Pembunuhan, Pemerkosaan, Dll",
-//   "Kecelakaan saat berkendara di Jalan",
-//   "Kebakaran, Banjir, Longsor, Pohon Tumbang, Dll",
-//   "Kebakaran, Banjir, Longsor, Pohon Tumbang, Dll",
-// ];

@@ -60,6 +60,9 @@ final headerSubTextStyle = GoogleFonts.dmSans(
   fontSize: 17,
 );
 
+final iconText = GoogleFonts.bebasNeue(
+    fontSize: 14, color: Color(0xff626262), letterSpacing: 1);
+
 final uploadText = GoogleFonts.dmSans(
   fontSize: 16,
   color: darkGrey,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:rumah_sidoarjo/akun.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
 import 'package:rumah_sidoarjo/layananpublik.dart';
@@ -13,7 +14,6 @@ import 'package:rumah_sidoarjo/pariwisata.dart';
 import 'package:rumah_sidoarjo/tagihan.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'pages/kesehatan/kesehatan.dart';
 
 class Home extends StatefulWidget {
@@ -29,19 +29,13 @@ class _homeState extends State<Home> {
       home: Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: appBar(),
-        body: Column(
+        body: ListView(
           children: [
-            Center(
-              child: Column(
-                children: [
-                  _selamatDatang(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  _menu(),
-                ],
-              ),
+            _selamatDatang(),
+            SizedBox(
+              height: 20,
             ),
+            _menu(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Align(
@@ -168,7 +162,7 @@ class _homeState extends State<Home> {
 
   Widget _menu() {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(top: 15),
       width: double.infinity,
       height: 180,
       color: White,
@@ -193,10 +187,8 @@ class _homeState extends State<Home> {
                     width: 45,
                     height: 45,
                   ),
-                  Text(
-                    'PANIC MENU',
-                    style: GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
-                  )
+                  SizedBox(height: 5),
+                  Text('PANIC MENU', style: iconText)
                 ],
               ),
             ),
@@ -218,10 +210,8 @@ class _homeState extends State<Home> {
                     width: 45,
                     height: 45,
                   ),
-                  Text(
-                    'PENGADUAN',
-                    style: GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
-                  )
+                  SizedBox(height: 5),
+                  Text('PENGADUAN', style: iconText)
                 ],
               ),
             ),
@@ -243,15 +233,13 @@ class _homeState extends State<Home> {
                     width: 45,
                     height: 45,
                   ),
-                  Text(
-                    'KESEHATAN',
-                    style: GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
-                  )
+                  SizedBox(height: 5),
+                  Text('KESEHATAN', style: iconText)
                 ],
               ),
             ),
           ]),
-          Padding(padding: EdgeInsets.only(top: 20)),
+          Padding(padding: EdgeInsets.only(top: 15)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -273,11 +261,8 @@ class _homeState extends State<Home> {
                       width: 45,
                       height: 45,
                     ),
-                    Text(
-                      'PENDIDIKAN',
-                      style:
-                          GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
-                    )
+                    SizedBox(height: 5),
+                    Text('PENDIDIKAN', style: iconText)
                   ],
                 ),
               ),
@@ -300,9 +285,10 @@ class _homeState extends State<Home> {
                       height: 45,
                     ),
                   ),
+                  SizedBox(height: 5),
                   Text(
                     'PARIWISATA',
-                    style: GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
+                    style: iconText,
                   )
                 ],
               ),
@@ -315,11 +301,8 @@ class _homeState extends State<Home> {
                       width: 45,
                       height: 45,
                     ),
-                    Text(
-                      'Lainnya',
-                      style:
-                          GoogleFonts.bebasNeue(fontSize: 12, color: darkGrey),
-                    )
+                    SizedBox(height: 5),
+                    Text('Lainnya', style: iconText)
                   ],
                 ),
               ),
@@ -347,7 +330,8 @@ class _homeState extends State<Home> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Fitur Lainnya',
-                          style: GoogleFonts.poppins(fontSize: 12),
+                          style: GoogleFonts.poppins(
+                              fontSize: 14, fontWeight: FontWeight.w500),
                         ),
                       ),
                     )
@@ -374,11 +358,8 @@ class _homeState extends State<Home> {
                               width: 45,
                               height: 45,
                             ),
-                            Text(
-                              'CCTV',
-                              style: GoogleFonts.bebasNeue(
-                                  fontSize: 12, color: darkGrey),
-                            )
+                            SizedBox(height: 5),
+                            Text('CCTV', style: iconText)
                           ],
                         ),
                       ),
@@ -400,11 +381,8 @@ class _homeState extends State<Home> {
                               width: 45,
                               height: 45,
                             ),
-                            Text(
-                              'LAYANAN PUBLIK',
-                              style: GoogleFonts.bebasNeue(
-                                  fontSize: 12, color: darkGrey),
-                            )
+                            SizedBox(height: 5),
+                            Text('LAYANAN PUBLIK', style: iconText)
                           ],
                         ),
                       ),
@@ -426,11 +404,8 @@ class _homeState extends State<Home> {
                               width: 45,
                               height: 45,
                             ),
-                            Text(
-                              'TAGIHAN',
-                              style: GoogleFonts.bebasNeue(
-                                  fontSize: 12, color: darkGrey),
-                            )
+                            SizedBox(height: 5),
+                            Text('TAGIHAN', style: iconText)
                           ],
                         ),
                       ),
@@ -457,11 +432,8 @@ class _homeState extends State<Home> {
                             width: 45,
                             height: 45,
                           ),
-                          Text(
-                            'MEDIA MASSA',
-                            style: GoogleFonts.bebasNeue(
-                                fontSize: 12, color: darkGrey),
-                          )
+                          SizedBox(height: 5),
+                          Text('MEDIA MASSA', style: iconText)
                         ],
                       ),
                     ),
@@ -483,11 +455,8 @@ class _homeState extends State<Home> {
                             width: 45,
                             height: 45,
                           ),
-                          Text(
-                            'UMKM',
-                            style: GoogleFonts.bebasNeue(
-                                fontSize: 12, color: darkGrey),
-                          )
+                          SizedBox(height: 5),
+                          Text('UMKM', style: iconText)
                         ],
                       ),
                     ),
@@ -509,11 +478,8 @@ class _homeState extends State<Home> {
                             width: 45,
                             height: 45,
                           ),
-                          Text(
-                            'PEKERJAAN',
-                            style: GoogleFonts.bebasNeue(
-                                fontSize: 12, color: darkGrey),
-                          )
+                          SizedBox(height: 5),
+                          Text('PEKERJAAN', style: iconText)
                         ],
                       ),
                     ),
@@ -784,28 +750,31 @@ class _homeState extends State<Home> {
   }
 
   Widget _selamatDatang() {
-    return Container(
-      width: 380,
-      height: 45.0,
-      decoration: BoxDecoration(
-          color: White,
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 5),
-            child: Text('Selamat Datang',
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Container(
+        width: double.infinity,
+        height: 45.0,
+        decoration: BoxDecoration(
+            color: White,
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 5),
+              child: Text('Selamat Datang',
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                    color: Colors.black,
+                  )),
+            ),
+            Text('Muhammad Hanafi Abror',
                 style: GoogleFonts.poppins(
-                  fontSize: 10,
-                  color: Colors.black,
-                )),
-          ),
-          Text('Muhammad Hanafi Abror',
-              style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold))
-        ],
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold))
+          ],
+        ),
       ),
     );
   }

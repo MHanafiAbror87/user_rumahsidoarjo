@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 
 class Pemancingan extends StatefulWidget {
@@ -29,11 +28,11 @@ class _PemancinganState extends State<Pemancingan> {
                       child: Row(
                         children: [
                           gambar[index],
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Container(
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Column(
+                              children: [
+                                Container(
                                   height: 30,
                                   width: 300,
                                   child: Text(
@@ -43,21 +42,18 @@ class _PemancinganState extends State<Pemancingan> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Container(
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
                                     height: 30,
                                     width: 300,
                                     child: Text(
                                       berita[index],
                                       style: TextStyle(fontSize: 12),
-                                    )),
-                              )
-                            ],
+                                    ))
+                              ],
+                            ),
                           )
                         ],
                       ),

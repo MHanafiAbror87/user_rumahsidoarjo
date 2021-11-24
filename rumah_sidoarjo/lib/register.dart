@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/pages/syarat.dart';
@@ -70,79 +71,72 @@ class _RegisterState extends State<Register> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: appBar(context),
-        body: Container(
-          child: ListView(
-            children: [
-              Center(
-                child: Column(
-                  children: [
-                    _headerPage(context),
-                    _buildNIK(),
-                    _buildNamaLengkap(),
-                    _buildPasswordTF(),
-                    _buildNoTelp(),
-                    _buildEmail(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, left: 15),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text('Unggah Foto KTP', style: uploadText),
-                                image != null
-                                    ? Image.file(image!,
-                                        width: 120,
-                                        height: 120,
-                                        fit: BoxFit.cover)
-                                    : Image.asset(
-                                        'assets/images/addcamera.png',
-                                        width: 120,
-                                        height: 120,
-                                      ),
-                                RaisedButton(
-                                  onPressed: () => _pickImage(),
-                                  child: Text("Masukkan Foto"),
-                                )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, left: 15),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text('Selfie Dengan KTP', style: uploadText),
-                                images != null
-                                    ? Image.file(images!,
-                                        width: 120,
-                                        height: 120,
-                                        fit: BoxFit.cover)
-                                    : Image.asset(
-                                        'assets/images/addcamera.png',
-                                        width: 120,
-                                        height: 120,
-                                      ),
-                                RaisedButton(
-                                  onPressed: () => _pickImages(),
-                                  child: Text("Masukkan Foto"),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+        body: ListView(
+          children: [
+            Center(
+              child: Column(
+                children: [
+                  _headerPage(context),
+                  _buildNIK(),
+                  _buildNamaLengkap(),
+                  _buildPasswordTF(),
+                  _buildNoTelp(),
+                  _buildEmail(),
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text('Unggah Foto KTP', style: uploadText),
+                            image != null
+                                ? Image.file(image!,
+                                    width: 120, height: 120, fit: BoxFit.cover)
+                                : Image.asset(
+                                    'assets/images/addcamera.png',
+                                    width: 120,
+                                    height: 120,
+                                  ),
+                            RaisedButton(
+                              onPressed: () => _pickImage(),
+                              child: Text("Masukkan Foto"),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    _buildSKCheckbox(context),
-                    _buildDaftarBtn(context),
-                  ],
-                ),
-              )
-            ],
-          ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text('Selfie Dengan KTP', style: uploadText),
+                            images != null
+                                ? Image.file(images!,
+                                    width: 120, height: 120, fit: BoxFit.cover)
+                                : Image.asset(
+                                    'assets/images/addcamera.png',
+                                    width: 120,
+                                    height: 120,
+                                  ),
+                            RaisedButton(
+                              onPressed: () => _pickImages(),
+                              child: Text("Masukkan Foto"),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  _buildSKCheckbox(context),
+                  _buildDaftarBtn(context),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -166,9 +160,7 @@ class _RegisterState extends State<Register> {
           ),
         },
       ),
-      title: Center(
-        child: Text('Form Pendaftaran'),
-      ),
+      title: Text('Form Pendaftaran'),
       backgroundColor: darkGreen1,
     );
   }
@@ -189,12 +181,8 @@ class _RegisterState extends State<Register> {
                   style: headerTextStyle,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 85,
-                      ),
-                    ),
                     Text(
                       'Sudah memiliki akun?',
                       style: headerSubTextStyle,
@@ -213,7 +201,10 @@ class _RegisterState extends State<Register> {
                       // padding: EdgeInsets.only(left: 95, right: 0.0),
                       child: Text(
                         'Log In',
-                        style: headerSubTextStyle,
+                        style: GoogleFonts.dmSans(
+                            color: White,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -232,16 +223,16 @@ class _RegisterState extends State<Register> {
       children: <Widget>[
         SizedBox(height: 20.0),
         Padding(
-          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
-            alignment: Alignment.centerLeft,
             decoration: kBoxDecorationStyle,
             height: 45.0,
             width: double.infinity,
             child: TextField(
+              keyboardType: TextInputType.number,
+              maxLength: 16,
               style: TextStyle(
                 color: darkGrey,
-                letterSpacing: 2,
                 fontFamily: 'DMSans',
               ),
               decoration: InputDecoration(
@@ -262,22 +253,24 @@ class _RegisterState extends State<Register> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 15.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 45.0,
-          width: 390,
-          child: TextField(
-            style: TextStyle(
-              color: darkGrey,
-              letterSpacing: 2,
-              fontFamily: 'DMSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 15),
-              hintText: 'Nama Lengkap',
-              hintStyle: kHintTextStyle,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Container(
+            decoration: kBoxDecorationStyle,
+            height: 45.0,
+            width: double.infinity,
+            child: TextField(
+              style: TextStyle(
+                color: darkGrey,
+                letterSpacing: 2,
+                fontFamily: 'DMSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 15),
+                hintText: 'Nama Lengkap',
+                hintStyle: kHintTextStyle,
+              ),
             ),
           ),
         ),
@@ -290,26 +283,28 @@ class _RegisterState extends State<Register> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 15.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 45,
-          width: 390,
-          child: TextField(
-            obscureText: true,
-            style: TextStyle(
-              color: darkGrey,
-              letterSpacing: 2,
-              fontFamily: 'DMSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 15, top: 9),
-              hintText: 'Password',
-              hintStyle: kHintTextStyle,
-              suffixIcon: Icon(
-                Icons.visibility_off_outlined,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            decoration: kBoxDecorationStyle,
+            height: 45,
+            width: double.infinity,
+            child: TextField(
+              obscureText: true,
+              style: TextStyle(
                 color: darkGrey,
+                fontFamily: 'DMSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 15, top: 9),
+                hintText: 'Password',
+                hintStyle: kHintTextStyle,
+                suffixIcon: Icon(
+                  Icons.visibility_off_outlined,
+                  color: darkGrey,
+                ),
               ),
             ),
           ),
@@ -323,22 +318,25 @@ class _RegisterState extends State<Register> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 15.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 45.0,
-          width: 390,
-          child: TextField(
-            style: TextStyle(
-              color: darkGrey,
-              letterSpacing: 2,
-              fontFamily: 'DMSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 15),
-              hintText: 'No. Telp',
-              hintStyle: kHintTextStyle,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Container(
+            decoration: kBoxDecorationStyle,
+            height: 45.0,
+            width: double.infinity,
+            child: TextField(
+              keyboardType: TextInputType.number,
+              maxLength: 13,
+              style: TextStyle(
+                color: darkGrey,
+                fontFamily: 'DMSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 15),
+                hintText: 'No. Telp',
+                hintStyle: kHintTextStyle,
+              ),
             ),
           ),
         ),
@@ -351,22 +349,24 @@ class _RegisterState extends State<Register> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 15.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 45.0,
-          width: 390,
-          child: TextField(
-            style: TextStyle(
-              color: darkGrey,
-              letterSpacing: 2,
-              fontFamily: 'DMSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 15),
-              hintText: 'Email',
-              hintStyle: kHintTextStyle,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Container(
+            decoration: kBoxDecorationStyle,
+            height: 45.0,
+            width: double.infinity,
+            child: TextField(
+              style: TextStyle(
+                color: darkGrey,
+                letterSpacing: 2,
+                fontFamily: 'DMSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 15),
+                hintText: 'Email',
+                hintStyle: kHintTextStyle,
+              ),
             ),
           ),
         ),
@@ -375,58 +375,61 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _buildSKCheckbox(BuildContext context) {
-    return Container(
-      height: 40.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: lightGrey),
-            child: Checkbox(
-              value: _syarat,
-              checkColor: White,
-              activeColor: darkGreen,
-              onChanged: (value) {
-                setState(() {
-                  _syarat = true;
-                });
-              },
-            ),
-          ),
-          Row(
-            children: [
-              Text(
-                'Setujui',
-                style: TextStyle(
-                  color: Color(0xffA6A6A6),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                  fontFamily: 'DMSans',
-                ),
-              ),
-              TextButton(
-                onPressed: () => {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Syarat();
-                      },
-                    ),
-                  ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 15.0),
+      child: Container(
+        height: 40.0,
+        child: Row(
+          children: <Widget>[
+            Theme(
+              data: ThemeData(unselectedWidgetColor: lightGrey),
+              child: Checkbox(
+                value: _syarat,
+                checkColor: White,
+                activeColor: darkGreen,
+                onChanged: (value) {
+                  setState(() {
+                    _syarat = true;
+                  });
                 },
-                // padding: EdgeInsets.only(left: 95, right: 0.0),
-                child: Text(
-                  'Syarat & Ketentuan',
+              ),
+            ),
+            Row(
+              children: [
+                Text(
+                  'Setujui',
                   style: TextStyle(
+                    color: Color(0xffA6A6A6),
+                    fontWeight: FontWeight.bold,
                     fontSize: 13,
-                    color: darkGreen,
                     fontFamily: 'DMSans',
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                TextButton(
+                  onPressed: () => {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return Syarat();
+                        },
+                      ),
+                    ),
+                  },
+                  // padding: EdgeInsets.only(left: 95, right: 0.0),
+                  child: Text(
+                    'Syarat & Ketentuan',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: darkGreen,
+                      fontFamily: 'DMSans',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -455,24 +458,27 @@ class _RegisterState extends State<Register> {
           ],
         ),
       ),
-      child: Container(
-        height: 50,
-        padding: EdgeInsets.all(12.0),
-        width: double.infinity,
-        child: Text(
-          'Daftar',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: White,
-            letterSpacing: 2,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'DMSans',
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Container(
+          height: 50,
+          padding: EdgeInsets.all(12.0),
+          width: double.infinity,
+          child: Text(
+            'Daftar',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: White,
+              letterSpacing: 2,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'DMSans',
+            ),
           ),
-        ),
-        decoration: BoxDecoration(
-          color: lightGreen,
-          borderRadius: BorderRadius.circular(30.0),
+          decoration: BoxDecoration(
+            color: lightGreen,
+            borderRadius: BorderRadius.circular(30.0),
+          ),
         ),
       ),
     );

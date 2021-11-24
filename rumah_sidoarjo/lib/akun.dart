@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'custom_template.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:getwidget/getwidget.dart';
 
 class Akun extends StatefulWidget {
   static String routeName = '/akun';
@@ -22,17 +20,14 @@ class _AkunState extends State<Akun> {
       home: Scaffold(
         backgroundColor: White,
         appBar: _appBar(),
-        body: Container(
-          child: Center(
-            child: Column(
-              children: [
-                _akunimage(),
-                _buildInformasiAkun(),
-                // _logoutbtn(),
-                _buildLogoutBtn(),
-              ],
-            ),
-          ),
+        body: ListView(
+          children: [
+            _akunimage(),
+            SizedBox(height: 50),
+            _buildInformasiAkun(),
+            SizedBox(height: 50),
+            _buildLogoutBtn(),
+          ],
         ),
       ),
     );
@@ -51,7 +46,7 @@ class _AkunState extends State<Akun> {
             Icons.arrow_back_ios,
             color: White,
           )),
-      title: Text('Akun'),
+      title: Text('Informsi Akun'),
       backgroundColor: darkGreen1,
     );
   }
@@ -105,36 +100,32 @@ class _AkunState extends State<Akun> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    namaAkun(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 170, right: 0),
-                      child: tbUbah(),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      namaAkun(),
+                      tbUbah(),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 8),
                 _space(),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 email(),
-                SizedBox(height: 8),
                 _space(),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 tanggalLahir(),
-                SizedBox(height: 8),
                 _space(),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 noTelp(),
-                SizedBox(height: 8),
                 _space(),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 nik(),
-                SizedBox(height: 8),
                 _space(),
               ],
             ),
@@ -328,20 +319,4 @@ class _AkunState extends State<Akun> {
       ),
     );
   }
-
-  // Widget _logoutbtn() {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(horizontal: 10),
-  //     child: GFButton(
-  //       onPressed: () {},
-  //       text: "Logout",
-  //       textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-  //       fullWidthButton: true,
-  //       size: GFSize.LARGE,
-  //       color: Colors.red.shade600,
-  //       shape: GFButtonShape.pills,
-  //       borderSide: BorderSide(width: 3, color: White),
-  //     ),
-  //   );
-  // }
 }

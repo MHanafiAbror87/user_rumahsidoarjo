@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'custom_template.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LupaPassword extends StatefulWidget {
   static String routeName = "/lupapassword";
@@ -115,11 +114,10 @@ class _LupaPasswordState extends State<LupaPassword> {
 
   Widget _buildEmail() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 50.0),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Container(
             decoration: kBoxDecorationStyle,
             width: double.infinity,
@@ -166,17 +164,20 @@ class _LupaPasswordState extends State<LupaPassword> {
           ],
         ),
       ),
-      child: Container(
-        // height: 50,
-        padding: EdgeInsets.all(10.0),
-        width: double.infinity,
-        child: Text(
-          'Kirim',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20, color: White),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Container(
+          // height: 50,
+          padding: EdgeInsets.all(10.0),
+          width: double.infinity,
+          child: Text(
+            'Kirim',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20, color: White),
+          ),
+          decoration: BoxDecoration(
+              color: lightGreen, borderRadius: BorderRadius.circular(30.0)),
         ),
-        decoration: BoxDecoration(
-            color: lightGreen, borderRadius: BorderRadius.circular(30.0)),
       ),
       // const Text(
       //   'Kirim',

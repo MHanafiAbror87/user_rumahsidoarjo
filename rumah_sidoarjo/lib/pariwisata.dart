@@ -94,7 +94,7 @@ class _PariwisataState extends State<Pariwisata> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text('Pilihan Wisata',
@@ -105,7 +105,7 @@ class _PariwisataState extends State<Pariwisata> {
               ),
             ),
             DefaultTabController(
-                length: 4,
+                length: 3,
                 child: Column(
                   children: [
                     TabBar(
@@ -119,31 +119,25 @@ class _PariwisataState extends State<Pariwisata> {
                             borderRadius: BorderRadius.circular(20)),
                         labelColor: White,
                         labelStyle: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                            fontWeight: FontWeight.bold, fontSize: 14),
                         unselectedLabelColor: darkGrey,
-                        unselectedLabelStyle: TextStyle(
-                            fontWeight: FontWeight.normal, fontSize: 14),
+                        unselectedLabelStyle: TextStyle(fontSize: 14),
                         tabs: [
                           Tab(child: Text('Pemancingan')),
                           Tab(child: Text('Sejarah')),
                           Tab(child: Text('Kuliner')),
-                          Tab(child: Text('Taman')),
                         ]),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Container(
-                          height: 422,
-                          width: double.infinity,
-                          color: Colors.grey.shade300,
-                          child: TabBarView(
-                            children: [
-                              Pemancingan(),
-                              Pemancingan(),
-                              Pemancingan(),
-                              Pemancingan()
-                            ],
-                          )),
-                    )
+                    SizedBox(height: 10),
+                    Container(
+                        height: 450,
+                        width: double.infinity,
+                        child: TabBarView(
+                          children: [
+                            Pemancingan(),
+                            Pemancingan(),
+                            Pemancingan(),
+                          ],
+                        ))
                   ],
                 ))
           ],
