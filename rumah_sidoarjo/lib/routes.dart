@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
 import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
 import 'package:rumah_sidoarjo/pages/syarat.dart';
-import 'register.dart';
+import 'addregister.dart';
 import 'login.dart';
 import 'lupapassword.dart';
 import 'splash_screen.dart';
@@ -11,7 +11,7 @@ import 'pages/syarat.dart';
 
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
-  Register.routeName: (context) => Register(),
+  addRegister.routeName: (context) => addRegister(),
   LoginPage.routeName: (context) => LoginPage(),
   LupaPassword.routeName: (context) => LupaPassword(),
   Akun.routeName: (context) => Akun(),

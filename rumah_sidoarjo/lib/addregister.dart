@@ -11,57 +11,42 @@ import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:rumah_sidoarjo/models/register.dart';
+import 'package:http/http.dart';
+import 'package:rumah_sidoarjo/services/api_services.dart';
 
-class Register extends StatefulWidget {
+enum Gender { male, female }
+
+class addRegister extends StatefulWidget {
   static String routeName = "/register";
+  addRegister();
+
   @override
-  _RegisterState createState() => _RegisterState();
+  _addRegisterState createState() => _addRegisterState();
 }
 
-class _RegisterState extends State<Register> {
-  File? image;
-  File? images;
+class _addRegisterState extends State<addRegister> {
+  final ApiServices api = ApiServices();
+  final _addFormKey = GlobalKey<FormState>();
+  final _NIKController = TextEditingController();
+  final _namaController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _notelpController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String gender = 'male';
+  Gender? _gender = Gender.male;
 
-  Future _pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera);
-      if (image == null) return;
-
-      // final imageTemporary = File(image.path);
-      final imagePermanent = await saveImagePermanently(image.path);
-      setState(() => this.image = imagePermanent);
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+  bool validate() {
+    bool status = false;
+    final form = _addFormKey.currentState;
+    form?.save();
+    if (form!.validate()) {
+      form.save();
+      status = true;
+    } else {
+      status = false;
     }
-  }
-
-  Future _pickImages() async {
-    try {
-      final images = await ImagePicker().pickImage(source: ImageSource.camera);
-      if (images == null) return;
-
-      // final imageTemporary = File(image.path);
-      final imagesPermanent = await saveImagePermanently(images.path);
-      setState(() => this.images = imagesPermanent);
-    } on PlatformException catch (e) {
-      print('Failed to pick images: $e');
-    }
-  }
-
-  Future<File> saveImagePermanently(String imagePath) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final name = basename(imagePath);
-    final image = File('${directory.path}/$name');
-
-    return File(imagePath).copy(image.path);
-  }
-
-  Future<File> saveImagesPermanently(String imagesPath) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final name = basename(imagesPath);
-    final images = File('${directory.path}/$name');
-
-    return File(imagesPath).copy(images.path);
+    return status;
   }
 
   bool _syarat = (false);
@@ -71,72 +56,54 @@ class _RegisterState extends State<Register> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: appBar(context),
-        body: ListView(
-          children: [
-            Center(
-              child: Column(
-                children: [
-                  _headerPage(context),
-                  _buildNIK(),
-                  _buildNamaLengkap(),
-                  _buildPasswordTF(),
-                  _buildNoTelp(),
-                  _buildEmail(),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, left: 15),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text('Unggah Foto KTP', style: uploadText),
-                            image != null
-                                ? Image.file(image!,
-                                    width: 120, height: 120, fit: BoxFit.cover)
-                                : Image.asset(
-                                    'assets/images/addcamera.png',
-                                    width: 120,
-                                    height: 120,
-                                  ),
-                            RaisedButton(
-                              onPressed: () => _pickImage(),
-                              child: Text("Masukkan Foto"),
-                            )
-                          ],
-                        ),
+        body: Form(
+          key: _addFormKey,
+          child: ListView(
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    _headerPage(context),
+                    _buildNIK(),
+                    _buildNamaLengkap(),
+                    _buildPasswordTF(),
+                    _buildNoTelp(),
+                    _buildEmail(),
+                    Text('Gender'),
+                    ListTile(
+                      title: const Text('Male'),
+                      leading: Radio(
+                        value: Gender.male,
+                        groupValue: _gender,
+                        onChanged: (Gender? value) {
+                          setState(() {
+                            _gender = value;
+                            gender = 'male';
+                          });
+                        },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, left: 15),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text('Selfie Dengan KTP', style: uploadText),
-                            images != null
-                                ? Image.file(images!,
-                                    width: 120, height: 120, fit: BoxFit.cover)
-                                : Image.asset(
-                                    'assets/images/addcamera.png',
-                                    width: 120,
-                                    height: 120,
-                                  ),
-                            RaisedButton(
-                              onPressed: () => _pickImages(),
-                              child: Text("Masukkan Foto"),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  _buildSKCheckbox(context),
-                  _buildDaftarBtn(context),
-                ],
+                    ),
+                    ListTile(
+                      title: const Text('Female'),
+                      leading: Radio(
+                        value: Gender.female,
+                        groupValue: _gender,
+                        onChanged: (Gender? value) {
+                          setState(() {
+                            _gender = value;
+                            gender = 'female';
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    _buildSKCheckbox(context),
+                    _buildDaftarBtn(context),
+                  ],
+                ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -229,6 +196,7 @@ class _RegisterState extends State<Register> {
             height: 45.0,
             width: double.infinity,
             child: TextField(
+              controller: _NIKController,
               keyboardType: TextInputType.number,
               maxLength: 16,
               style: TextStyle(
@@ -241,6 +209,13 @@ class _RegisterState extends State<Register> {
                 hintText: 'NIK',
                 hintStyle: kHintTextStyle,
               ),
+              // validator: (value) {
+              //   if (value.isEmpty) {
+              //     return 'Please enter full name';
+              //   }
+              //   return null;
+              // },
+              // onChanged: (value) {},
             ),
           ),
         ),
@@ -260,6 +235,7 @@ class _RegisterState extends State<Register> {
             height: 45.0,
             width: double.infinity,
             child: TextField(
+              controller: _namaController,
               style: TextStyle(
                 color: darkGrey,
                 letterSpacing: 2,
@@ -291,6 +267,7 @@ class _RegisterState extends State<Register> {
             height: 45,
             width: double.infinity,
             child: TextField(
+              controller: _passwordController,
               obscureText: true,
               style: TextStyle(
                 color: darkGrey,
@@ -325,6 +302,7 @@ class _RegisterState extends State<Register> {
             height: 45.0,
             width: double.infinity,
             child: TextField(
+              controller: _notelpController,
               keyboardType: TextInputType.number,
               maxLength: 13,
               style: TextStyle(
@@ -356,6 +334,7 @@ class _RegisterState extends State<Register> {
             height: 45.0,
             width: double.infinity,
             child: TextField(
+              controller: _emailController,
               style: TextStyle(
                 color: darkGrey,
                 letterSpacing: 2,
@@ -443,15 +422,25 @@ class _RegisterState extends State<Register> {
           content: const Text('Silahkan Log In'),
           actions: <Widget>[
             TextButton(
-              onPressed: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginPage();
-                    },
-                  ),
-                ),
+              onPressed: () {
+                if (validate()) {
+                  api.createRegister(Register(
+                    NIK: _NIKController.text,
+                    nama: _namaController.text,
+                    jenis_kelamin: _namaController.text,
+                    password: _passwordController.text,
+                    no_telepon: _notelpController.text,
+                    email: _emailController.text,
+                  ));
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginPage();
+                      },
+                    ),
+                  );
+                }
               },
               child: const Text('Log In'),
             ),

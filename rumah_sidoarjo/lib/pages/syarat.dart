@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:rumah_sidoarjo/register.dart';
+import 'package:rumah_sidoarjo/addregister.dart';
 import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'package:getwidget/getwidget.dart';
@@ -56,7 +56,7 @@ class _SyaratState extends State<Syarat> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Register();
+                return addRegister();
               },
             ),
           ),

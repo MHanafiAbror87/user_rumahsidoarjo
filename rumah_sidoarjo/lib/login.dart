@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/lupapassword.dart';
-import 'package:rumah_sidoarjo/register.dart';
+import 'package:rumah_sidoarjo/addregister.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
@@ -255,7 +255,7 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Register();
+                return addRegister();
               },
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
+import 'package:rumah_sidoarjo/pages/pariwisata/kuliner.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pemancingan.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pusatinformasi.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/sejarah.dart';
@@ -134,8 +135,8 @@ class _PariwisataState extends State<Pariwisata> {
                         child: TabBarView(
                           children: [
                             Pemancingan(),
-                            Pemancingan(),
-                            Pemancingan(),
+                            Sejarah(),
+                            Kuliner(),
                           ],
                         ))
                   ],
