@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pemancingan.dart';
+import 'package:rumah_sidoarjo/pages/pendidikan/sd.dart';
+import 'package:rumah_sidoarjo/pages/pendidikan/slb.dart';
+import 'package:rumah_sidoarjo/pages/pendidikan/smp.dart';
 
 class Pendidikan extends StatefulWidget {
   Pendidikan({Key? key}) : super(key: key);
@@ -131,9 +134,9 @@ class tabCon extends StatelessWidget {
                 width: double.infinity,
                 child: TabBarView(
                   children: [
-                    Pemancingan(),
-                    Pemancingan(),
-                    Pemancingan(),
+                    SD(),
+                    SLB(),
+                    SMP(),
                   ],
                 ),
               )

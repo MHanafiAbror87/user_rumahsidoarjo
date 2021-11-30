@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
+import 'package:rumah_sidoarjo/pages/kesehatan/pkmp.dart';
+import 'package:rumah_sidoarjo/pages/kesehatan/pkmu.dart';
+import 'package:rumah_sidoarjo/pages/kesehatan/rs.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pemancingan.dart';
 
 class Kesehatan extends StatefulWidget {
@@ -135,9 +138,9 @@ class tabCon extends StatelessWidget {
                 width: double.infinity,
                 child: TabBarView(
                   children: [
-                    Pemancingan(),
-                    Pemancingan(),
-                    Pemancingan(),
+                    Pkmu(),
+                    Pkmp(),
+                    RumahSakit(),
                   ],
                 ),
               )
