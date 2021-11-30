@@ -39,7 +39,6 @@ class ApiServices {
       'tanggal_lahir': register.tanggal_lahir,
       'jenis_kelamin': register.jenis_kelamin,
       'no_telepon': register.no_telepon,
-      'username': register.username,
       'password': register.password,
       // 'foto_profil': register.foto_profil,
       'status': register.status

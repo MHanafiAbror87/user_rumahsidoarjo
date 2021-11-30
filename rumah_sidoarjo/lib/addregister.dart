@@ -32,7 +32,6 @@ class _addRegisterState extends State<addRegister> {
   final _namaController = TextEditingController();
   final _emailController = TextEditingController();
   final _notelpController = TextEditingController();
-  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   String gender = 'male';
   Gender? _gender = Gender.male;
@@ -67,7 +66,6 @@ class _addRegisterState extends State<addRegister> {
                     _headerPage(context),
                     _buildNIK(),
                     _buildNamaLengkap(),
-                    _buildUsernameTF(),
                     _buildPasswordTF(),
                     _buildNoTelp(),
                     _buildEmail(),
@@ -256,37 +254,6 @@ class _addRegisterState extends State<addRegister> {
     );
   }
 
-  Widget _buildUsernameTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(height: 15.0),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: Container(
-            decoration: kBoxDecorationStyle,
-            height: 45.0,
-            width: double.infinity,
-            child: TextField(
-              controller: _usernameController,
-              style: TextStyle(
-                color: darkGrey,
-                letterSpacing: 2,
-                fontFamily: 'DMSans',
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 15),
-                hintText: 'Username',
-                hintStyle: kHintTextStyle,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildPasswordTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -466,7 +433,6 @@ class _addRegisterState extends State<addRegister> {
                     NIK: _NIKController.text,
                     nama: _namaController.text,
                     jenis_kelamin: gender,
-                    username: _usernameController.text,
                     password: _passwordController.text,
                     no_telepon: _notelpController.text,
                     email: _emailController.text,
