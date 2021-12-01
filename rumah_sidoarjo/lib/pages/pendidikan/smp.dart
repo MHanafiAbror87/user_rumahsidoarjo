@@ -65,16 +65,16 @@ class _SMPState extends State<SMP> {
 }
 
 final List nama = [
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
-  "Rumah Sakit Umum Daerah Sidoarjo",
+  "SMP Negeri 1 Sidoarjo",
+  "SMP Negeri 2 Sidoarjo",
+  "SMP Negeri 3 Sidoarjo",
+  "SMP Negeri 4 Sidoarjo",
+  "SMP Negeri 1 Sidoarjo",
+  "SMP Negeri 2 Sidoarjo",
+  "SMP Negeri 3 Sidoarjo",
+  "SMP Negeri 4 Sidoarjo",
+  "SMP Negeri 1 Sidoarjo",
+  "SMP Negeri 2 Sidoarjo",
 ];
 
 final List alamat = [

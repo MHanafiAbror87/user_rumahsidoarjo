@@ -3,7 +3,7 @@ import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
-import 'package:rumah_sidoarjo/pariwisata.dart';
+import 'package:rumah_sidoarjo/pages/pariwisata/pariwisata.dart';
 
 class PusatInformasi extends StatefulWidget {
   @override

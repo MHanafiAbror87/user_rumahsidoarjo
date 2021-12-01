@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 
-class Pkmp extends StatefulWidget {
+class Pertanian extends StatefulWidget {
   @override
-  _PkmpState createState() => _PkmpState();
+  _PertanianState createState() => _PertanianState();
 }
 
-class _PkmpState extends State<Pkmp> {
+class _PertanianState extends State<Pertanian> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -65,17 +65,18 @@ class _PkmpState extends State<Pkmp> {
 }
 
 final List nama = [
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
+  "Keripik Gayam Sidoarjo",
 ];
+
 final List alamat = [
   "Jl. Dr. Soetomo No.14 Sidoarjo",
   "Jl. Dr. Soetomo No.14 Sidoarjo",
@@ -90,14 +91,14 @@ final List alamat = [
 ];
 
 final List gambar = [
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
+  Image.asset('assets/images/Pengaduan.png', width: 50),
 ];

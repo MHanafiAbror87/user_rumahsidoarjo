@@ -125,8 +125,8 @@ class tabCon extends StatelessWidget {
                   unselectedLabelStyle: TextStyle(fontSize: 14),
                   tabs: [
                     Tab(child: Text('SD')),
+                    Tab(child: Text('SLB')),
                     Tab(child: Text('SMP')),
-                    Tab(child: Text('SMA')),
                   ]),
               SizedBox(height: 10),
               Container(

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/kuliner.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pemancingan.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pusatinformasi.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/sejarah.dart';
+
+import 'kuliner.dart';
 
 class Pariwisata extends StatefulWidget {
   @override
@@ -75,20 +76,21 @@ class _PariwisataState extends State<Pariwisata> {
                         ],
                       ),
                       Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [lightGreen, darkGreen1],
-                                  end: Alignment.centerRight,
-                                  begin: Alignment.centerLeft),
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGreen),
-                          child: Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: White,
-                            size: 25,
-                          )),
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: [lightGreen, darkGreen1],
+                                end: Alignment.centerRight,
+                                begin: Alignment.centerLeft),
+                            borderRadius: BorderRadius.circular(10),
+                            color: darkGreen),
+                        child: Icon(
+                          Icons.arrow_forward_ios_outlined,
+                          color: White,
+                          size: 25,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -106,41 +108,43 @@ class _PariwisataState extends State<Pariwisata> {
               ),
             ),
             DefaultTabController(
-                length: 3,
-                child: Column(
-                  children: [
-                    TabBar(
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicatorColor: darkGreen1,
-                        indicator: BoxDecoration(
-                            gradient: LinearGradient(
-                                colors: [lightGreen, darkGreen1],
-                                end: Alignment.centerRight,
-                                begin: Alignment.centerLeft),
-                            borderRadius: BorderRadius.circular(20)),
-                        labelColor: White,
-                        labelStyle: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14),
-                        unselectedLabelColor: darkGrey,
-                        unselectedLabelStyle: TextStyle(fontSize: 14),
-                        tabs: [
-                          Tab(child: Text('Pemancingan')),
-                          Tab(child: Text('Sejarah')),
-                          Tab(child: Text('Kuliner')),
-                        ]),
-                    SizedBox(height: 10),
-                    Container(
-                        height: 450,
-                        width: double.infinity,
-                        child: TabBarView(
-                          children: [
-                            Pemancingan(),
-                            Sejarah(),
-                            Kuliner(),
-                          ],
-                        ))
-                  ],
-                ))
+              length: 3,
+              child: Column(
+                children: [
+                  TabBar(
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicatorColor: darkGreen1,
+                      indicator: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [lightGreen, darkGreen1],
+                              end: Alignment.centerRight,
+                              begin: Alignment.centerLeft),
+                          borderRadius: BorderRadius.circular(30)),
+                      labelColor: White,
+                      labelStyle:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      unselectedLabelColor: darkGrey,
+                      unselectedLabelStyle: TextStyle(fontSize: 14),
+                      tabs: [
+                        Tab(child: Text('Pemancingan')),
+                        Tab(child: Text('Sejarah')),
+                        Tab(child: Text('Kuliner')),
+                      ]),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 450,
+                    width: double.infinity,
+                    child: TabBarView(
+                      children: [
+                        Pemancingan(),
+                        Sejarah(),
+                        Kuliner(),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

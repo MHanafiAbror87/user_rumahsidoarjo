@@ -93,14 +93,14 @@ final List alamat = [
 ];
 
 final List gambar = [
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
-  Image.asset('assets/images/no_imageakun.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
+  Image.asset('assets/images/no_image.png', width: 50),
 ];

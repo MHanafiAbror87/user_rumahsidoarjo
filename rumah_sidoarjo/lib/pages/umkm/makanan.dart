@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 
-class Pkmp extends StatefulWidget {
+class Makanan extends StatefulWidget {
   @override
-  _PkmpState createState() => _PkmpState();
+  _MakananState createState() => _MakananState();
 }
 
-class _PkmpState extends State<Pkmp> {
+class _MakananState extends State<Makanan> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -65,16 +65,16 @@ class _PkmpState extends State<Pkmp> {
 }
 
 final List nama = [
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
-  "Puskesmas Urangagung",
+  "Rawon Gajah Mada",
+  "Kerupuk Laris",
+  "Rawon Gajah Mada",
+  "Kerupuk Laris",
+  "Rawon Gajah Mada",
+  "Kerupuk Laris",
+  "Rawon Gajah Mada",
+  "Kerupuk Laris",
+  "Rawon Gajah Mada",
+  "Kerupuk Laris",
 ];
 final List alamat = [
   "Jl. Dr. Soetomo No.14 Sidoarjo",
