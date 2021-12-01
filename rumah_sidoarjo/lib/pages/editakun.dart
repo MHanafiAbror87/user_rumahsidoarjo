@@ -111,7 +111,11 @@ class _EditAkunState extends State<EditAkun> {
                       isObsecurePassword = !isObsecurePassword;
                     });
                   },
-                  icon: Icon(Icons.remove_red_eye, color: darkGrey),
+                  icon: Icon(
+                      isObsecurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: darkGrey),
                 )
               : null,
           contentPadding: EdgeInsets.only(bottom: 5),
