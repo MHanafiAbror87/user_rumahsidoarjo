@@ -279,15 +279,16 @@ class _addRegisterState extends State<addRegister> {
                 contentPadding: EdgeInsets.only(left: 15, top: 9),
                 hintText: 'Password',
                 hintStyle: kHintTextStyle,
-                suffixIcon: GestureDetector(onTap: (){setState(() {
-                  _obsecureText = !_obsecureText;
-                });
-                },
-                child: Icon(
-                  _obsecureText ? Icons.visibility_off : Icons.visibility,
-                  color: darkGrey,
-                ),
-                ),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _obsecureText = !_obsecureText;
+                    });
+                  },
+                  child: Icon(
+                    _obsecureText ? Icons.visibility_off : Icons.visibility,
+                    color: darkGrey,
+                  ),
                 ),
               ),
             ),
