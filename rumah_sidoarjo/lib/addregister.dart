@@ -50,6 +50,7 @@ class _addRegisterState extends State<addRegister> {
   }
 
   bool _syarat = (false);
+  bool _obsecureText = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -268,7 +269,7 @@ class _addRegisterState extends State<addRegister> {
             width: double.infinity,
             child: TextField(
               controller: _passwordController,
-              obscureText: true,
+              obscureText: _obsecureText,
               style: TextStyle(
                 color: darkGrey,
                 fontFamily: 'DMSans',
@@ -278,9 +279,15 @@ class _addRegisterState extends State<addRegister> {
                 contentPadding: EdgeInsets.only(left: 15, top: 9),
                 hintText: 'Password',
                 hintStyle: kHintTextStyle,
-                suffixIcon: Icon(
-                  Icons.visibility_off_outlined,
+                suffixIcon: GestureDetector(onTap: (){setState(() {
+                  _obsecureText = !_obsecureText;
+                });
+                },
+                child: Icon(
+                  _obsecureText ? Icons.visibility_off : Icons.visibility,
                   color: darkGrey,
+                ),
+                ),
                 ),
               ),
             ),
