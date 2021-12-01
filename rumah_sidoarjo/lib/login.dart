@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/lupapassword.dart';
-import 'package:rumah_sidoarjo/addregister.dart';
+import 'package:rumah_sidoarjo/register.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +17,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _rememberMe = (false);
+  bool _obsecureText = true;
 
+  get color => null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
           decoration: kBoxDecorationStyle,
           height: 50.0,
           child: TextField(
-            obscureText: true,
+            obscureText: _obsecureText,
             style: TextStyle(
               color: darkGrey,
               fontFamily: 'DMSans',
@@ -146,9 +148,16 @@ class _LoginPageState extends State<LoginPage> {
               contentPadding: EdgeInsets.all(10),
               hintText: 'Password',
               hintStyle: kHintTextStyle,
-              suffixIcon: Icon(
-                Icons.visibility_off_outlined,
-                color: darkGrey,
+              suffixIcon: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _obsecureText = !_obsecureText;
+                  });
+                },
+                child: Icon(
+                  _obsecureText ? Icons.visibility_off : Icons.visibility,
+                  color: darkGrey,
+                ),
               ),
             ),
           ),
@@ -189,12 +198,11 @@ class _LoginPageState extends State<LoginPage> {
             data: ThemeData(unselectedWidgetColor: lightGrey),
             child: Checkbox(
               value: _rememberMe,
-              checkColor: darkGreen,
-              activeColor: White,
+              checkColor: White,
+              activeColor: darkGreen,
               onChanged: (value) {
-                setState(() {
-                  _rememberMe = true;
-                });
+                _rememberMe = !_rememberMe;
+                setState(() {});
               },
             ),
           ),
@@ -255,7 +263,7 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return addRegister();
+                return Register();
               },
             ),
           ),

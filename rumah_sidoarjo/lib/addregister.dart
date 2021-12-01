@@ -367,9 +367,8 @@ class _addRegisterState extends State<addRegister> {
                 checkColor: White,
                 activeColor: darkGreen,
                 onChanged: (value) {
-                  setState(() {
-                    _syarat = true;
-                  });
+                  _syarat = !_syarat;
+                  setState(() {});
                 },
               ),
             ),
