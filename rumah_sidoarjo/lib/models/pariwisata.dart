@@ -1,4 +1,5 @@
 class Pariwisata {
+  final String id_wisata;
   final String id_kategori_wisata;
   final String nama_wisata;
   final String alamat;
@@ -11,6 +12,7 @@ class Pariwisata {
   final String foto3;
 
   Pariwisata({
+    this.id_wisata = '',
     this.id_kategori_wisata = '',
     this.nama_wisata = '',
     this.alamat = '',
@@ -25,6 +27,7 @@ class Pariwisata {
 
   factory Pariwisata.fromJson(Map<String, dynamic> json) {
     return Pariwisata(
+      id_wisata: json['id_wisata'] as String,
       id_kategori_wisata: json['id_kategori_wisata'] as String,
       nama_wisata: json['nama_wisata'] as String,
       alamat: json['alamat'] as String,
@@ -38,8 +41,8 @@ class Pariwisata {
     );
   }
 
-  @override
-  String toString() {
-    return 'Pariwisata{id_kategori_wisata: $id_kategori_wisata, nama_wisata: $nama_wisata, alamat: $alamat, pengelola: $pengelola,no_telepon: $no_telepon,jam_buka: $jam_buka, jam_tutup: $jam_tutup,foto1: $foto1,foto2: $foto2, foto3: $foto3}';
-  }
+  // @override
+  // String toString() {
+  //   return 'Pariwisata{id_wisata: $id_wisata, id_kategori_wisata: $id_kategori_wisata, nama_wisata: $nama_wisata, alamat: $alamat, pengelola: $pengelola,no_telepon: $no_telepon,jam_buka: $jam_buka, jam_tutup: $jam_tutup,foto1: $foto1,foto2: $foto2, foto3: $foto3}';
+  // }
 }

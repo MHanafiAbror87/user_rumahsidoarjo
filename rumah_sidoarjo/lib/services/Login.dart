@@ -3,9 +3,9 @@ import 'package:rumah_sidoarjo/services/Login.dart';
 import 'package:rumah_sidoarjo/models/login.dart';
 import 'package:http/http.dart';
 
-class ApiServices {
+class ApiLogin {
   final String apiUrl =
-      "http://192.168.137.1/RumahSidoarjoAdmin/rest_ci/index.php/Akun";
+      "http://10.50.1.162/RumahSidoarjoAdmin/rest_ci/index.php/Akun";
 
   Future<List<Login>> getLogin() async {
     Response res = await get(Uri.parse(apiUrl));
@@ -30,11 +30,10 @@ class ApiServices {
     }
   }
 
-  Future<Login> createRegister(Login login) async {
+  Future<Login> apiLogin(Login login) async {
     Map data = {
-      'username': login.username,
+      'email': login.email,
       'password': login.password,
-      'status': login.status
     };
 
     final Response response = await post(
@@ -53,7 +52,7 @@ class ApiServices {
 
   Future<Login> updateLogin(String id, Login login) async {
     Map data = {
-      'username': login.username,
+      'email': login.email,
       'password': login.password,
       'status': login.status
     };

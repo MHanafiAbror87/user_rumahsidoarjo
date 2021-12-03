@@ -3,9 +3,14 @@ import 'package:rumah_sidoarjo/services/Pariwisata.dart';
 import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:http/http.dart';
 
-class ApiServices {
+class ApiPariwisata {
   final String apiUrl =
-      "http://192.168.137.1/RumahSidoarjoAdmin/rest_ci/index.php/Akun";
+      "http://10.50.1.162/RumahSidoarjoAdmin/rumahsidoarjo/rest-api/Api_Pariwisata";
+
+  Future<List<dynamic>> getWisata() async {
+    var result = await get(Uri.parse(apiUrl));
+    return jsonDecode(result.body);
+  }
 
   Future<List<Pariwisata>> getPariwisata() async {
     Response res = await get(Uri.parse(apiUrl));
