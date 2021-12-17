@@ -38,7 +38,8 @@ class Pemancingan extends StatelessWidget {
                             ListTile(
                               title: Text(wisata.namaWisata),
                               subtitle: Text(wisata.alamat),
-                              onTap: () => Navigator.of(context).push(
+                              onTap: () =>
+                                  Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                   builder: (context) => Detail_pariwisata(
                                     wisata: wisata,

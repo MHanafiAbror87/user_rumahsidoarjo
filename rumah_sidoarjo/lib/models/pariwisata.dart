@@ -18,6 +18,7 @@ class DetailPariwisataModel {
     required this.pariwisata,
     required this.tarif,
     required this.ulasan,
+    required this.menu,
   });
 
   bool status;
@@ -25,6 +26,7 @@ class DetailPariwisataModel {
   Pariwisata pariwisata;
   List<Tarif> tarif;
   List<Ulasan> ulasan;
+  List<Menu> menu;
 
   factory DetailPariwisataModel.fromJson(Map<String, dynamic> json) =>
       DetailPariwisataModel(
@@ -34,6 +36,7 @@ class DetailPariwisataModel {
         tarif: List<Tarif>.from(json["tarif"].map((x) => Tarif.fromJson(x))),
         ulasan:
             List<Ulasan>.from(json["ulasan"].map((x) => Ulasan.fromJson(x))),
+        menu: List<Menu>.from(json["menu"].map((x) => Menu.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,6 +45,7 @@ class DetailPariwisataModel {
         "pariwisata": pariwisata.toJson(),
         "tarif": List<dynamic>.from(tarif.map((x) => x.toJson())),
         "ulasan": List<dynamic>.from(ulasan.map((x) => x)),
+        "menu": List<dynamic>.from(menu.map((x) => x)),
       };
 }
 
@@ -230,5 +234,37 @@ class Ulasan {
         "foto_profil": fotoProfil,
         "selfie_ktp": selfieKtp,
         "status": status,
+      };
+}
+
+Menu menuFromJson(String str) => Menu.fromJson(json.decode(str));
+
+String menuToJson(Menu data) => json.encode(data.toJson());
+
+class Menu {
+  Menu({
+    required this.idKuliner,
+    required this.idWisata,
+    required this.nama,
+    required this.harga,
+  });
+
+  String idKuliner;
+  String idWisata;
+  String nama;
+  String harga;
+
+  factory Menu.fromJson(Map<String, dynamic> json) => Menu(
+        idKuliner: json["id_kuliner"],
+        idWisata: json["id_wisata"],
+        nama: json["nama"],
+        harga: json["harga"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id_kuliner": idKuliner,
+        "id_wisata": idWisata,
+        "nama": nama,
+        "harga": harga,
       };
 }

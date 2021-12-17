@@ -65,7 +65,7 @@ class ApiServices {
     }
   }
 
-  Future<bool> postUlalsan(List<File> foto, int idUser, String ulasan) async {
+  Future<bool> postUlasan(List<File> foto, int idUser, String ulasan) async {
     final nik = await SessionHelper.getNik();
 
     Map<String, String> data = {

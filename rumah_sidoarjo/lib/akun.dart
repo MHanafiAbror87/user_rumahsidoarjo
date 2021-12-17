@@ -104,7 +104,7 @@ class _AkunState extends State<Akun> {
             Icons.arrow_back_ios,
             color: White,
           )),
-      title: Text('Informsi Akun'),
+      title: Text('Informasi Akun'),
       backgroundColor: darkGreen1,
     );
   }

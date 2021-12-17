@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/list_pariwisata.dart';
+import 'package:rumah_sidoarjo/pages/pariwisata/pariwisata.dart'
+    as tabPariwisata;
 import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -34,7 +36,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
           ),
           onPressed: () => Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return Home();
+            return tabPariwisata.Pariwisata();
           })),
         ),
         title: Text('Detail Wisata'),
@@ -49,6 +51,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
 
                 final pariwisata = detail!.pariwisata;
                 final tarif = detail.tarif;
+                final menu = detail.menu;
                 final semuaUlasan = detail.ulasan;
 
                 if (semuaUlasan.length > 2) {
@@ -63,433 +66,488 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 15),
+                          horizontal: 10, vertical: 10),
                       child: Container(
                         width: double.infinity,
-                        height: 200,
+                        height: 210,
                         child: Image.network(
                             "$fotoUrl/assets/img/${pariwisata.foto1}",
                             fit: BoxFit.cover),
                       ),
                     ),
-                    Text(
-                      pariwisata.namaWisata,
-                      style: TextStyle(
-                          fontFamily: 'DMSans',
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Alamat',
-                                style: TextStyle(
-                                  fontFamily: 'DMSans',
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                pariwisata.alamat,
-                                style: TextStyle(
+                    Column(
+                      children: [
+                        Text(
+                          pariwisata.namaWisata,
+                          style: TextStyle(
+                              fontFamily: 'DMSans',
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Alamat',
+                                  style: TextStyle(
                                     fontFamily: 'DMSans',
-                                    fontSize: 14,
-                                    color: darkGreen),
-                              ),
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                              height: 25,
-                              thickness: 2,
-                            ),
-                            const Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Kategori',
-                                style: TextStyle(
-                                  fontFamily: 'DMSans',
-                                  fontSize: 16,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                pariwisata.kategori,
-                                style: TextStyle(
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  pariwisata.alamat,
+                                  style: TextStyle(
+                                      fontFamily: 'DMSans',
+                                      fontSize: 14,
+                                      color: darkGreen),
+                                ),
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              const Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Kategori',
+                                  style: TextStyle(
                                     fontFamily: 'DMSans',
-                                    fontSize: 14,
-                                    color: darkGreen),
-                              ),
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                              height: 25,
-                              thickness: 2,
-                            ),
-                            const Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Pengelola',
-                                style: TextStyle(
-                                  fontFamily: 'DMSans',
-                                  fontSize: 16,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                pariwisata.pengelola,
-                                style: TextStyle(
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  pariwisata.kategori,
+                                  style: TextStyle(
+                                      fontFamily: 'DMSans',
+                                      fontSize: 14,
+                                      color: darkGreen),
+                                ),
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              const Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Pengelola',
+                                  style: TextStyle(
                                     fontFamily: 'DMSans',
-                                    fontSize: 14,
-                                    color: darkGreen),
-                              ),
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                              height: 25,
-                              thickness: 2,
-                            ),
-                            Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    const Padding(
-                                      padding: const EdgeInsets.only(right: 27),
-                                      child: Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Text(
-                                          'Telepon',
-                                          style: TextStyle(
-                                            fontFamily: 'DMSans',
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        pariwisata.noTelepon,
-                                        style: TextStyle(
-                                            fontFamily: 'DMSans',
-                                            fontSize: 14,
-                                            color: darkGreen),
-                                      ),
-                                    ),
-                                  ],
+                                    fontSize: 16,
+                                  ),
                                 ),
-                                const SizedBox(width: 200),
-                                InkWell(
-                                  onTap: () =>
-                                      launch("tel://${pariwisata.noTelepon}"),
-                                  child: Container(
-                                      width: 100,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: darkGreen1,
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      child: Center(
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  pariwisata.pengelola,
+                                  style: TextStyle(
+                                      fontFamily: 'DMSans',
+                                      fontSize: 14,
+                                      color: darkGreen),
+                                ),
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 27),
+                                        child: Align(
+                                          alignment: Alignment.bottomLeft,
                                           child: Text(
-                                        'Panggil',
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 14, color: White),
-                                      ))),
-                                ),
-                              ],
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                              height: 25,
-                              thickness: 2,
-                            ),
-                            Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    const Padding(
-                                      padding: const EdgeInsets.only(right: 27),
-                                      child: Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Text(
-                                          'Jam Operasional',
-                                          style: TextStyle(
-                                            fontFamily: 'DMSans',
-                                            fontSize: 16,
+                                            'Telepon',
+                                            style: TextStyle(
+                                              fontFamily: 'DMSans',
+                                              fontSize: 16,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          pariwisata.noTelepon,
+                                          style: TextStyle(
+                                              fontFamily: 'DMSans',
+                                              fontSize: 14,
+                                              color: darkGreen),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  InkWell(
+                                    onTap: () =>
+                                        launch("tel://${pariwisata.noTelepon}"),
+                                    child: Container(
+                                        width: 100,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: darkGreen1,
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        ),
+                                        child: Center(
+                                            child: Text(
+                                          'Panggil',
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 14, color: White),
+                                        ))),
+                                  ),
+                                ],
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Padding(
+                                    padding: const EdgeInsets.only(right: 27),
+                                    child: Align(
+                                      alignment: Alignment.bottomLeft,
                                       child: Text(
+                                        'Jam Operasional',
+                                        style: TextStyle(
+                                          fontFamily: 'DMSans',
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
                                         pariwisata.jamBuka,
                                         style: TextStyle(
                                             fontFamily: 'DMSans',
                                             fontSize: 14,
                                             color: darkGreen),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.only(right: 27),
-                                      child: Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Text(
-                                          '',
-                                          style: TextStyle(
+                                      Text(
+                                        ' - ',
+                                        style: TextStyle(
                                             fontFamily: 'DMSans',
-                                            fontSize: 16,
-                                          ),
-                                        ),
+                                            fontSize: 14,
+                                            color: darkGreen),
                                       ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
+                                      Text(
                                         pariwisata.jamTutup,
                                         style: TextStyle(
                                             fontFamily: 'DMSans',
                                             fontSize: 14,
                                             color: darkGreen),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                              height: 25,
-                              thickness: 2,
-                            ),
-                            const SizedBox(height: 20),
-                            const Text(
-                              'TARIF TIKET',
-                              style: TextStyle(
-                                fontFamily: 'DMSans',
-                                fontSize: 16,
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            Column(
-                              children: tarif.length > 0
-                                  ? tarif
-                                      .map(
-                                        (tarif) => Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 35.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                tarif.namaTiket,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                    fontFamily: 'DMSans',
-                                                    fontSize: 14),
-                                              ),
-                                              Text(
-                                                tarif.tarif,
-                                                style: TextStyle(
-                                                    fontFamily: 'DMSans',
-                                                    fontSize: 14,
-                                                    color: darkGreen),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                      .toList()
-                                  : [
-                                      Text("Tarif Tidak Tersedia"),
-                                    ],
-                            ),
-                            SizedBox(height: 20),
-                            Column(
-                              children: [
-                                Text(
-                                  'MENU MAKANAN',
-                                  style: TextStyle(
-                                    fontFamily: 'DMSans',
-                                    fontSize: 16,
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Harga Tiket Masuk',
+                                    style: TextStyle(
+                                      fontFamily: 'DMSans',
+                                      fontSize: 16,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 10),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 35.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Ayam Geprek',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            fontFamily: 'DMSans', fontSize: 14),
-                                      ),
-                                      Text(
-                                        'Rp:4000.00',
-                                        style: TextStyle(
-                                            fontFamily: 'DMSans',
-                                            fontSize: 14,
-                                            color: darkGreen),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 35.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Soto Lamongan',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            fontFamily: 'DMSans', fontSize: 14),
-                                      ),
-                                      Text(
-                                        'Rp:4000.00',
-                                        style: TextStyle(
-                                            fontFamily: 'DMSans',
-                                            fontSize: 14,
-                                            color: darkGreen),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 35.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Pecel Pincuk',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            fontFamily: 'DMSans', fontSize: 14),
-                                      ),
-                                      Text(
-                                        'Rp:4000.00',
-                                        style: TextStyle(
-                                            fontFamily: 'DMSans',
-                                            fontSize: 14,
-                                            color: darkGreen),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(height: 50),
-                              ],
-                            ),
-                            Column(
-                              children: tampilUlasan.length > 0
-                                  ? tampilUlasan
-                                      .map(
-                                        (ulasan) => Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 2),
-                                          child: Container(
-                                            height: 130,
-                                            child: Card(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: tarif.length > 0
+                                        ? tarif
+                                            .map(
+                                              (tarif) => Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
-                                                      Row(
-                                                        children: [
-                                                          Container(
-                                                              width: 50,
-                                                              height: 50,
-                                                              child: Image.network(
-                                                                  "$fotoUrl/assets/img/${ulasan.fotoProfil}")),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 10),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  ulasan.nama,
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          14,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                                Text(
-                                                                  DateFormat(
-                                                                          'dd MMMM yyyy')
-                                                                      .format(ulasan
-                                                                          .tanggalUpload),
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontFamily:
-                                                                          "DMSans"),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      SizedBox(height: 10),
                                                       Text(
-                                                        ulasan.ulasan,
-                                                        maxLines: 2,
+                                                        tarif.namaTiket,
+                                                        textAlign:
+                                                            TextAlign.left,
                                                         style: TextStyle(
-                                                            fontSize: 14,
                                                             fontFamily:
-                                                                "DMSans"),
+                                                                'DMSans',
+                                                            fontSize: 14,
+                                                            color: darkGreen),
+                                                      ),
+                                                      Text(
+                                                        'Rp ${tarif.tarif}',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'DMSans',
+                                                            fontSize: 14,
+                                                            color: darkGreen),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                            .toList()
+                                        : [
+                                            Text(
+                                              "Harga Tiket Gratis",
+                                              style: TextStyle(
+                                                  fontFamily: 'DMSans',
+                                                  fontSize: 14,
+                                                  color: darkGreen),
+                                            ),
+                                          ],
+                                  ),
+                                ],
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              Column(
+                                children: menu.length > 0
+                                    ? menu
+                                        .map((menu) => Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text(
+                                                    'MENU MAKANAN',
+                                                    style: TextStyle(
+                                                      fontFamily: 'DMSans',
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        menu.nama,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'DMSans',
+                                                            fontSize: 14,
+                                                            color: darkGreen),
+                                                      ),
+                                                      Text(
+                                                        'Rp ${menu.harga}',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'DMSans',
+                                                            fontSize: 14,
+                                                            color: darkGreen),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ]))
+                                        .toList()
+                                    : [],
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Ulasan',
+                                      style: GoogleFonts.dmSans(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
+                                  Text('Lihat Semua',
+                                      style: GoogleFonts.dmSans(
+                                          fontSize: 14, color: darkGreen1)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          children: tampilUlasan.length > 0
+                              ? tampilUlasan
+                                  .map(
+                                    (ulasan) => Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 2),
+                                      child: Container(
+                                        height: 130,
+                                        child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child: Image.network(
+                                                              "$fotoUrl/assets/img/${ulasan.fotoProfil}")),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              ulasan.nama,
+                                                              style: TextStyle(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            Text(
+                                                              DateFormat(
+                                                                      'dd MMMM yyyy')
+                                                                  .format(ulasan
+                                                                      .tanggalUpload),
+                                                              style: TextStyle(
+                                                                  fontSize: 12,
+                                                                  fontFamily:
+                                                                      "DMSans"),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       )
                                                     ],
                                                   ),
-                                                )),
-                                          ),
-                                        ),
-                                      )
-                                      .toList()
-                                  : [
-                                      Text("Ulasan Belum Tersedia"),
-                                    ],
-                            ),
-                          ],
+                                                  SizedBox(height: 10),
+                                                  Text(
+                                                    ulasan.ulasan,
+                                                    maxLines: 2,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: "DMSans"),
+                                                  )
+                                                ],
+                                              ),
+                                            )),
+                                      ),
+                                    ),
+                                  )
+                                  .toList()
+                              : [
+                                  Text("Ulasan Belum Tersedia"),
+                                ],
                         ),
-                      ),
+                        FlatButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                              'assets/images/Pengaduan.png'),
+                                          width: 70,
+                                          height: 70,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ],
+                                    ),
+                                    Text('Ulasan Layanan')
+                                  ],
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () => {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return Home();
+                                          },
+                                        ),
+                                      ),
+                                    },
+                                    child: const Text('Log In'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: Container(
+                              height: 50,
+                              padding: EdgeInsets.all(12.0),
+                              width: double.infinity,
+                              child: Text(
+                                'Tambah Ulasan',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: White,
+                                  letterSpacing: 2,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'DMSans',
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [lightGreen, darkGreen1],
+                                    end: Alignment.centerRight,
+                                    begin: Alignment.centerLeft),
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 );
