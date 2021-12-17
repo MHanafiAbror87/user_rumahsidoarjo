@@ -1,18 +1,14 @@
-import 'dart:io';
-
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/pages/syarat.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 import 'package:rumah_sidoarjo/models/register.dart';
-import 'package:http/http.dart';
 import 'package:rumah_sidoarjo/services/api_services.dart';
 
 enum Gender { male, female }
@@ -33,7 +29,7 @@ class _addRegisterState extends State<addRegister> {
   final _emailController = TextEditingController();
   final _notelpController = TextEditingController();
   final _passwordController = TextEditingController();
-  String gender = 'male';
+  String gender = 'Laki-Laki';
   Gender? _gender = Gender.male;
 
   bool validate() {
@@ -45,6 +41,24 @@ class _addRegisterState extends State<addRegister> {
       status = true;
     } else {
       status = false;
+    }
+
+    if (_NIKController.text.length < 16) {
+      status = false;
+      Fluttertoast.showToast(msg: 'Masukkan nik yang valid');
+      return false;
+    }
+
+    if (!EmailValidator.validate(_emailController.text)) {
+      status = false;
+      Fluttertoast.showToast(msg: 'Masukkan email yang valid');
+      return false;
+    }
+
+    if (_syarat == false) {
+      status = false;
+      Fluttertoast.showToast(msg: 'Harap menyetujui persyaratan');
+      return false;
     }
     return status;
   }
@@ -61,47 +75,50 @@ class _addRegisterState extends State<addRegister> {
           key: _addFormKey,
           child: ListView(
             children: [
-              Center(
-                child: Column(
-                  children: [
-                    _headerPage(context),
-                    _buildNIK(),
-                    _buildNamaLengkap(),
-                    _buildPasswordTF(),
-                    _buildNoTelp(),
-                    _buildEmail(),
-                    Text('Gender'),
-                    ListTile(
-                      title: const Text('Male'),
-                      leading: Radio(
-                        value: Gender.male,
-                        groupValue: _gender,
-                        onChanged: (Gender? value) {
-                          setState(() {
-                            _gender = value;
-                            gender = 'male';
-                          });
-                        },
-                      ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _headerPage(context),
+                  _buildNIK(),
+                  _buildNamaLengkap(),
+                  _buildPasswordTF(),
+                  _buildNoTelp(),
+                  _buildEmail(),
+                  const SizedBox(height: 15),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 25.0),
+                    child: Text('Gender'),
+                  ),
+                  ListTile(
+                    title: const Text('Laki-Laki'),
+                    leading: Radio(
+                      value: Gender.male,
+                      groupValue: _gender,
+                      onChanged: (Gender? value) {
+                        setState(() {
+                          _gender = value;
+                          gender = 'Laki-Laki';
+                        });
+                      },
                     ),
-                    ListTile(
-                      title: const Text('Female'),
-                      leading: Radio(
-                        value: Gender.female,
-                        groupValue: _gender,
-                        onChanged: (Gender? value) {
-                          setState(() {
-                            _gender = value;
-                            gender = 'female';
-                          });
-                        },
-                      ),
+                  ),
+                  ListTile(
+                    title: const Text('Perempuan'),
+                    leading: Radio(
+                      value: Gender.female,
+                      groupValue: _gender,
+                      onChanged: (Gender? value) {
+                        setState(() {
+                          _gender = value;
+                          gender = 'Perempuan';
+                        });
+                      },
                     ),
-                    SizedBox(height: 10),
-                    _buildSKCheckbox(context),
-                    _buildDaftarBtn(context),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 10),
+                  _buildSKCheckbox(context),
+                  _buildDaftarBtn(context),
+                ],
               ),
             ],
           ),
@@ -193,8 +210,9 @@ class _addRegisterState extends State<addRegister> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
             decoration: kBoxDecorationStyle,
-            height: 45.0,
+            // height: 45.0,
             width: double.infinity,
             child: TextFormField(
               controller: _NIKController,
@@ -205,6 +223,7 @@ class _addRegisterState extends State<addRegister> {
                 fontFamily: 'DMSans',
               ),
               decoration: InputDecoration(
+                counterText: '',
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(left: 15),
                 hintText: 'NIK',
@@ -212,7 +231,7 @@ class _addRegisterState extends State<addRegister> {
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter full name';
+                  return 'NIK Tidak Boleh Kosong';
                 }
                 return null;
               },
@@ -232,10 +251,11 @@ class _addRegisterState extends State<addRegister> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
             decoration: kBoxDecorationStyle,
-            height: 45.0,
+            // height: 45.0,
             width: double.infinity,
-            child: TextField(
+            child: TextFormField(
               controller: _namaController,
               style: TextStyle(
                 color: darkGrey,
@@ -248,6 +268,13 @@ class _addRegisterState extends State<addRegister> {
                 hintText: 'Nama Lengkap',
                 hintStyle: kHintTextStyle,
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Nama Lengkap Tidak Boleh Kosong';
+                }
+                return null;
+              },
+              onChanged: (value) {},
             ),
           ),
         ),
@@ -259,15 +286,15 @@ class _addRegisterState extends State<addRegister> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 15.0),
+        const SizedBox(height: 15.0),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
             alignment: Alignment.centerLeft,
             decoration: kBoxDecorationStyle,
-            height: 45,
+            // height: 45,
             width: double.infinity,
-            child: TextField(
+            child: TextFormField(
               controller: _passwordController,
               obscureText: _obsecureText,
               style: TextStyle(
@@ -291,6 +318,13 @@ class _addRegisterState extends State<addRegister> {
                   ),
                 ),
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Password Tidak Boleh Kosong';
+                }
+                return null;
+              },
+              onChanged: (value) {},
             ),
           ),
         ),
@@ -307,9 +341,9 @@ class _addRegisterState extends State<addRegister> {
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
             decoration: kBoxDecorationStyle,
-            height: 45.0,
+            // height: 45.0,
             width: double.infinity,
-            child: TextField(
+            child: TextFormField(
               controller: _notelpController,
               keyboardType: TextInputType.number,
               maxLength: 13,
@@ -318,11 +352,19 @@ class _addRegisterState extends State<addRegister> {
                 fontFamily: 'DMSans',
               ),
               decoration: InputDecoration(
+                counterText: '',
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(left: 15),
                 hintText: 'No. Telp',
                 hintStyle: kHintTextStyle,
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'No Telepon Tidak Boleh Kosong';
+                }
+                return null;
+              },
+              onChanged: (value) {},
             ),
           ),
         ),
@@ -339,9 +381,9 @@ class _addRegisterState extends State<addRegister> {
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
             decoration: kBoxDecorationStyle,
-            height: 45.0,
+            // height: 45.0,
             width: double.infinity,
-            child: TextField(
+            child: TextFormField(
               controller: _emailController,
               style: TextStyle(
                 color: darkGrey,
@@ -354,6 +396,13 @@ class _addRegisterState extends State<addRegister> {
                 hintText: 'Email',
                 hintStyle: kHintTextStyle,
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Email Tidak Boleh Kosong';
+                }
+                return null;
+              },
+              onChanged: (value) {},
             ),
           ),
         ),
@@ -375,8 +424,9 @@ class _addRegisterState extends State<addRegister> {
                 checkColor: White,
                 activeColor: darkGreen,
                 onChanged: (value) {
-                  _syarat = !_syarat;
-                  setState(() {});
+                  setState(() {
+                    _syarat = !_syarat;
+                  });
                 },
               ),
             ),
@@ -422,43 +472,43 @@ class _addRegisterState extends State<addRegister> {
 
   Widget _buildDaftarBtn(BuildContext context) {
     return TextButton(
-      onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('Sukses'),
-          content: const Text('Silahkan Log In'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                if (gender == 'male') {
-                  gender = 'Laki-Laki';
-                } else if (gender == 'female') {
-                  gender = 'Perempuan';
-                }
-                if (validate()) {
-                  api.createRegister(Register(
-                    NIK: _NIKController.text,
-                    nama: _namaController.text,
-                    jenis_kelamin: gender,
-                    password: _passwordController.text,
-                    no_telepon: _notelpController.text,
-                    email: _emailController.text,
-                  ));
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return LoginPage();
-                      },
-                    ),
-                  );
-                }
-              },
-              child: const Text('Log In'),
-            ),
-          ],
-        ),
-      ),
+      onPressed: () async {
+        if (validate()) {
+          bool registStatus = await api.createRegister(DataRegister(
+            nik: _NIKController.text,
+            nama: _namaController.text,
+            jenisKelamin: gender,
+            password: _passwordController.text,
+            noTelepon: _notelpController.text,
+            email: _emailController.text,
+          ));
+
+          if (registStatus) {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Sukses'),
+                content: const Text('Silahkan Log In'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return LoginPage();
+                          },
+                        ),
+                      );
+                    },
+                    child: const Text('Log In'),
+                  ),
+                ],
+              ),
+            );
+          }
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Container(

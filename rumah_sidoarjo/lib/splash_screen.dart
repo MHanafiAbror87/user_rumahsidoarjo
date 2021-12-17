@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rumah_sidoarjo/helper/session_helper.dart';
 import 'package:rumah_sidoarjo/home.dart';
+import 'package:rumah_sidoarjo/login.dart';
 import 'custom_template.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,13 +16,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(milliseconds: 2000), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Home(),
-        ),
-      );
+    Timer(const Duration(milliseconds: 2000), () async {
+      final isLogin = await SessionHelper.checkisLogin();
+
+      if (isLogin) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home(),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginPage(),
+          ),
+        );
+      }
     });
   }
 

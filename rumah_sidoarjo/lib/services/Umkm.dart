@@ -3,9 +3,9 @@ import 'package:rumah_sidoarjo/services/Umkm.dart';
 import 'package:rumah_sidoarjo/models/umkm.dart';
 import 'package:http/http.dart';
 
-class ApiServices {
+class ApiUmkm {
   final String apiUrl =
-      "http://192.168.137.1/RumahSidoarjoAdmin/rest_ci/index.php/Akun";
+      "http://10.50.1.53/RumahSidoarjoAdmin/rumahsidoarjo/rest-api/Api_Umkm";
 
   Future<List<Umkm>> getUmkm() async {
     Response res = await get(Uri.parse(apiUrl));
@@ -40,7 +40,7 @@ class ApiServices {
       'foto2': umkm.foto2,
       'foto3': umkm.foto3,
       'deskripsi': umkm.deskripsi,
-      'no_telepon': umkm.no_telepon,
+      'no_telp': umkm.no_telp,
       'website': umkm.website
     };
 
@@ -68,7 +68,7 @@ class ApiServices {
       'foto2': umkm.foto2,
       'foto3': umkm.foto3,
       'deskripsi': umkm.deskripsi,
-      'no_telepon': umkm.no_telepon,
+      'no_telp': umkm.no_telp,
       'website': umkm.website
     };
 

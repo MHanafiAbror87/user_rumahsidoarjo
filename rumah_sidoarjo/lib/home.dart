@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:rumah_sidoarjo/akun.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
+import 'package:rumah_sidoarjo/helper/session_helper.dart';
 import 'package:rumah_sidoarjo/layananpublik.dart';
 import 'package:rumah_sidoarjo/lowongankerja.dart';
+import 'package:rumah_sidoarjo/models/login.dart';
 import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
 import 'package:rumah_sidoarjo/pages/cctv.dart';
 import 'package:rumah_sidoarjo/pages/media_massa.dart';
@@ -22,6 +24,11 @@ class Home extends StatefulWidget {
 }
 
 class _homeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -736,8 +743,7 @@ class _homeState extends State<Home> {
       actions: [
         IconButton(
             onPressed: () => {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return Akun();
                   }))
                 },
@@ -768,11 +774,27 @@ class _homeState extends State<Home> {
                     color: Colors.black,
                   )),
             ),
-            Text('Muhammad Hanafi Abror',
-                style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold))
+            FutureBuilder<String>(
+                future: SessionHelper.getNama(),
+                builder: (context, snapshot) {
+                  String nama = '---';
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    nama = '---';
+                  }
+
+                  if (snapshot.hasData) {
+                    nama = snapshot.data!;
+                  } else {
+                    nama = '---';
+                  }
+
+                  return Text(nama,
+                      style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold));
+                })
           ],
         ),
       ),

@@ -1,9 +1,12 @@
 import 'dart:math';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/lupapassword.dart';
 import 'package:rumah_sidoarjo/addregister.dart';
+import 'package:rumah_sidoarjo/services/api_services.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
@@ -16,60 +19,87 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final ApiServices api = ApiServices();
+  final _addFormKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   bool _rememberMe = (false);
   bool _obsecureText = true;
+
+  bool validate() {
+    bool status = false;
+    final form = _addFormKey.currentState;
+    form?.save();
+    if (form!.validate()) {
+      form.save();
+      status = true;
+    } else {
+      status = false;
+    }
+
+    if (!EmailValidator.validate(_emailController.text)) {
+      status = false;
+      Fluttertoast.showToast(msg: 'Masukkan email yang valid');
+      return false;
+    }
+    return status;
+  }
 
   get color => null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: White,
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-              ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 120.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      _icLogin(),
-                      SizedBox(height: 33.0),
-                      _buildUsername(),
-                      _buildPasswordTF(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildRememberMeCheckbox(),
-                          _buildLupaPasswordBtn(),
-                        ],
-                      ),
-                      _buildLoginBtn(),
-                      SizedBox(
-                        height: 50.0,
-                      ),
-                      _buildtextdaftar(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      _buildDaftarBtn(),
-                    ],
+      body: Form(
+        key: _addFormKey,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                ),
+                Container(
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 40.0,
+                      vertical: 120.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        _icLogin(),
+                        SizedBox(height: 33.0),
+                        _buildEmail(),
+                        _buildPasswordTF(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildRememberMeCheckbox(),
+                            _buildLupaPasswordBtn(),
+                          ],
+                        ),
+                        _buildLoginBtn(),
+                        SizedBox(
+                          height: 50.0,
+                        ),
+                        _buildtextdaftar(),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        _buildDaftarBtn(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -103,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildUsername() {
+  Widget _buildEmail() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -112,7 +142,8 @@ class _LoginPageState extends State<LoginPage> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 50.0,
-          child: TextField(
+          child: TextFormField(
+            controller: _emailController,
             style: TextStyle(
               color: darkGrey,
               fontFamily: 'DMSans',
@@ -120,9 +151,16 @@ class _LoginPageState extends State<LoginPage> {
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.all(10),
-              hintText: 'Username',
+              hintText: 'Email',
               hintStyle: kHintTextStyle,
             ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Email Tidak Boleh Kosong';
+              }
+              return null;
+            },
+            onChanged: (value) {},
           ),
         ),
       ],
@@ -137,7 +175,8 @@ class _LoginPageState extends State<LoginPage> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 50.0,
-          child: TextField(
+          child: TextFormField(
+            controller: _passwordController,
             obscureText: _obsecureText,
             style: TextStyle(
               color: darkGrey,
@@ -160,6 +199,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Password Tidak Boleh Kosong';
+              }
+              return null;
+            },
+            onChanged: (value) {},
           ),
         ),
       ],
@@ -223,23 +269,33 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       width: double.infinity,
-      child: RaisedButton(
-        elevation: 4.0,
-        onPressed: () => {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return Home();
-              },
-            ),
-          ),
+      child: ElevatedButton(
+        onPressed: () async {
+          if (validate()) {
+            bool registStatus = await api.login(
+              _emailController.text,
+              _passwordController.text,
+            );
+
+            if (registStatus) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Home();
+                  },
+                ),
+              );
+            }
+          }
         },
-        padding: EdgeInsets.all(10.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(10.0),
+          primary: lightGreen,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
         ),
-        color: lightGreen,
         child: Text(
           'LOGIN',
           style: TextStyle(

@@ -23,18 +23,13 @@ class _UmkmState extends State<Umkm> {
         appBar: appBar(),
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
-          child: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40.0,
-                  // vertical: 120.0,
-                ),
-              ),
-              _headerPage(),
-              tabCon(),
-            ],
+          child: SingleChildScrollView(
+            child: Stack(
+              children: <Widget>[
+                _headerPage(),
+                tabCon(),
+              ],
+            ),
           ),
         ),
       ),

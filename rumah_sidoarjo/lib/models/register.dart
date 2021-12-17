@@ -1,45 +1,79 @@
-class Register {
-  final String NIK;
-  final String nama;
-  final String alamat;
-  final String email;
-  final String tanggal_lahir;
-  final String jenis_kelamin;
-  final String no_telepon;
-  final String password;
-  // final String foto_profil;
-  final String status;
+// To parse this JSON data, do
 
+import 'dart:convert';
+
+Register registerFromJson(String str) => Register.fromJson(json.decode(str));
+
+String registerToJson(Register data) => json.encode(data.toJson());
+
+class Register {
   Register({
-    this.NIK = '',
-    this.nama = '',
-    this.alamat = '',
-    this.email = '',
-    this.tanggal_lahir = '',
-    this.jenis_kelamin = '',
-    this.no_telepon = '',
-    this.password = '',
-    // this.foto_profil,
-    this.status = '',
+    required this.status,
+    required this.message,
+    required this.data,
   });
 
-  factory Register.fromJson(Map<String, dynamic> json) {
-    return Register(
-      NIK: json['NIK'] as String,
-      nama: json['nama'] as String,
-      alamat: json['alamat'] as String,
-      email: json['email'] as String,
-      tanggal_lahir: json['tanggal_lahir'] as String,
-      jenis_kelamin: json['jenis_kelamin'] as String,
-      no_telepon: json['no_telepon'] as String,
-      password: json['password'] as String,
-      // foto_profil: json['foto_profil'] as String,
-      // status: json['status'] as String,
-    );
-  }
+  bool status;
+  String message;
+  DataRegister data;
 
-  @override
-  String toString() {
-    return 'Register{NIK: $NIK, nama: $nama, alamat: $alamat, email: $email, tanggal_lahir: $tanggal_lahir, jenis_kelamin: $jenis_kelamin, no_telepon: $no_telepon,password: $password, status: $status}';
-  }
+  factory Register.fromJson(Map<String, dynamic> json) => Register(
+        status: json["status"],
+        message: json["message"],
+        data: DataRegister.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "message": message,
+        "data": data.toJson(),
+      };
+}
+
+class DataRegister {
+  DataRegister({
+    required this.nik,
+    required this.nama,
+    this.alamat,
+    required this.email,
+    this.tanggalLahir,
+    required this.jenisKelamin,
+    required this.noTelepon,
+    required this.password,
+    this.status,
+  });
+
+  String nik;
+  String nama;
+  String? alamat;
+  String email;
+  String? tanggalLahir;
+  String jenisKelamin;
+  String noTelepon;
+  String password;
+  int? status;
+
+  factory DataRegister.fromJson(Map<String, dynamic> json) => DataRegister(
+        nik: json["NIK"],
+        nama: json["nama"],
+        alamat: json["alamat"],
+        email: json["email"],
+        tanggalLahir: json["tanggal_lahir"],
+        jenisKelamin: json["jenis_kelamin"],
+        noTelepon: json["no_telepon"],
+        password: json["password"],
+        status: json["status"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "NIK": nik,
+        "nama": nama,
+        "alamat": alamat,
+        "email": email,
+        "tanggal_lahir": tanggalLahir,
+        "jenis_kelamin": jenisKelamin,
+        "no_telepon": noTelepon,
+        "password": password,
+        "status": status,
+      };
 }

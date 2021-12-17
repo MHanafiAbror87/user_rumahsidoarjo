@@ -1,103 +1,100 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
+import 'package:http/http.dart';
+import 'package:rumah_sidoarjo/home.dart';
+import 'package:rumah_sidoarjo/models/umkm.dart';
+import 'package:rumah_sidoarjo/pages/detail_umkm.dart';
+import 'package:rumah_sidoarjo/pages/pariwisata/detailpariwisata.dart';
+import 'package:rumah_sidoarjo/pages/umkm/DetailUmkm.dart';
+import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
+import 'package:rumah_sidoarjo/models/pariwisata.dart';
+import 'package:rumah_sidoarjo/services/Umkm.dart';
 
-class Kerajinan extends StatefulWidget {
-  @override
-  _KerajinanState createState() => _KerajinanState();
-}
+class Kerajinan extends StatelessWidget {
+  final ApiUmkm api = ApiUmkm();
 
-class _KerajinanState extends State<Kerajinan> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: ListView.builder(
-          itemCount: nama.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2),
-              child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        gambar[index],
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 30,
-                                width: 300,
-                                child: Text(
-                                  nama[index],
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
+          backgroundColor: Colors.transparent,
+          body: FutureBuilder(
+              future: api.getUmkm(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  List<Umkm> umkm = snapshot.data;
+                  return ListView(
+                    children: umkm
+                        .map(
+                          (Umkm kerajinan) => GestureDetector(
+                            onTap: () =>
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => DetailUmkm(
+                                          kerajinan: kerajinan,
+                                        ))),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    // Image.asset(
+                                    //   kerajinan.foto1,
+                                    //   width: 50,
+                                    //   height: 50,
+                                    // ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 30,
+                                            width: 300,
+                                            child: Text(
+                                              kerajinan.nama,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Container(
+                                              height: 30,
+                                              width: 300,
+                                              child: Text(
+                                                kerajinan.alamat,
+                                                style: TextStyle(fontSize: 12),
+                                              ))
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                  height: 30,
-                                  width: 300,
-                                  child: Text(
-                                    alamat[index],
-                                    style: TextStyle(fontSize: 12),
-                                  ))
-                            ],
+                              // child: ListTile(
+                              //   title: Text(kerajinan.nama),
+                              //   subtitle: Text(kerajinan.alamat),
+                              //   onTap: () =>
+                              //       Navigator.of(context).push(MaterialPageRoute(
+                              //           builder: (context) => DetailUmkm(
+                              //                 kerajinan: kerajinan,
+                              //               ))),
+                              // ),
+                            ),
                           ),
                         )
-                      ],
-                    ),
-                  )),
-            );
-          },
-        ),
-      ),
+                        .toList(),
+                  );
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              })),
     );
   }
 }
-
-final List nama = [
-  "Indah Bordir",
-  "Benang Raja",
-  "Indah Bordir",
-  "Benang Raja",
-  "Indah Bordir",
-  "Indah Bordir",
-  "Benang Raja",
-  "Indah Bordir",
-  "Benang Raja",
-  "Indah Bordir",
-];
-final List alamat = [
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-];
-
-final List gambar = [
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-];

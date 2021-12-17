@@ -235,6 +235,7 @@ class _PusatInformasiState extends State<PusatInformasi> {
                     context: context,
                     builder: (context) => AlertDialog(
                       content: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
                             children: [
