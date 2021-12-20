@@ -40,7 +40,7 @@ class _PusatInformasiState extends State<PusatInformasi> {
                 child: Container(
                     width: double.infinity,
                     height: 250,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
                             image: AssetImage('assets/images/IU.jpg')))),
@@ -62,14 +62,14 @@ class _PusatInformasiState extends State<PusatInformasi> {
                                 fontSize: 14, fontWeight: FontWeight.bold)),
                         Text('Pusat Informasi Pariwisata Sidoarjo',
                             style: GoogleFonts.dmSans(fontSize: 12)),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text('Alamat', style: GoogleFonts.dmSans(fontSize: 16)),
                         Text('Jl. Sultan Agung No. 34, Sidoarjo',
                             style: GoogleFonts.dmSans(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: darkGreen)),
-                        Divider(
+                        const Divider(
                           color: Colors.black,
                           height: 25,
                           thickness: 2,
@@ -82,7 +82,7 @@ class _PusatInformasiState extends State<PusatInformasi> {
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: darkGreen)),
-                        Divider(
+                        const Divider(
                           color: Colors.black,
                           height: 25,
                           thickness: 2,
@@ -103,18 +103,20 @@ class _PusatInformasiState extends State<PusatInformasi> {
                               ],
                             ),
                             Container(
-                                width: 100,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: darkGreen1,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Center(
-                                    child: Text(
+                              width: 100,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: darkGreen1,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Center(
+                                child: Text(
                                   'Panggil',
                                   style: GoogleFonts.poppins(
                                       fontSize: 14, color: White),
-                                ))),
+                                ),
+                              ),
+                            ),
                           ],
                         )
                       ],
@@ -167,69 +169,66 @@ class _PusatInformasiState extends State<PusatInformasi> {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 2),
-                        child: Container(
+                        child: SizedBox(
                           height: 130,
                           child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                    image:
-                                                        AssetImage(gambar[0]),
-                                                    fit: BoxFit.fill))),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                nama[index],
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                tanggal[index],
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily: "DMSans"),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      ulasan[index],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                  image: AssetImage(gambar[0]),
+                                                  fit: BoxFit.fill))),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              nama[index],
+                                              style: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              tanggal[index],
+                                              style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: "DMSans"),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(ulasan[index],
                                       maxLines: 2,
-                                      style: TextStyle(
-                                          fontSize: 14, fontFamily: "DMSans"),
-                                    )
-                                  ],
-                                ),
-                              )),
+                                      style: const TextStyle(
+                                          fontSize: 14, fontFamily: "DMSans"))
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     },
                   ),
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   showDialog(
                     context: context,
@@ -238,7 +237,7 @@ class _PusatInformasiState extends State<PusatInformasi> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
-                            children: [
+                            children: const [
                               Image(
                                 image:
                                     AssetImage('assets/images/Pengaduan.png'),
@@ -248,7 +247,7 @@ class _PusatInformasiState extends State<PusatInformasi> {
                               ),
                             ],
                           ),
-                          Text('Ulasan Layanan')
+                          const Text('Ulasan Layanan')
                         ],
                       ),
                       actions: <Widget>[
@@ -274,7 +273,7 @@ class _PusatInformasiState extends State<PusatInformasi> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Container(
                     height: 50,
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     width: double.infinity,
                     child: Text(
                       'Tambah Ulasan',

@@ -1,14 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:http/http.dart';
-import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/models/umkm.dart';
-import 'package:rumah_sidoarjo/pages/detail_umkm.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/detailpariwisata.dart';
 import 'package:rumah_sidoarjo/pages/umkm/DetailUmkm.dart';
-import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
-import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:rumah_sidoarjo/services/api_umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
@@ -28,50 +20,56 @@ class Kerajinan extends StatelessWidget {
                   children: umkm
                       .map(
                         (kerajinan) => GestureDetector(
-                          onTap: () => Navigator.of(context)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => DetailUmkm(
-                                        kerajinan: kerajinan,
-                                      ))),
+                          onTap: () => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => DetailUmkm(
+                                kerajinan: kerajinan,
+                              ),
+                            ),
+                          ),
                           child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    height: 150,
-                                    width: 50,
+                                  SizedBox(
+                                    height: 70,
+                                    width: 70,
                                     child: Image.network(
                                       "$fotoUrl/assets/img/${kerajinan.foto1}",
                                       fit: BoxFit.cover,
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
+                                    padding: const EdgeInsets.only(left: 20.0),
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          height: 30,
-                                          width: 300,
+                                        SizedBox(
+                                          width: 270,
                                           child: Text(
                                             kerajinan.nama,
-                                            style: TextStyle(
-                                                fontSize: 12,
+                                            style: const TextStyle(
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
-                                        Container(
-                                            height: 30,
-                                            width: 300,
-                                            child: Text(
-                                              kerajinan.alamat,
-                                              style: TextStyle(fontSize: 12),
-                                            ))
+                                        SizedBox(
+                                          width: 270,
+                                          child: Text(
+                                            kerajinan.alamat,
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        )
                                       ],
                                     ),
                                   )

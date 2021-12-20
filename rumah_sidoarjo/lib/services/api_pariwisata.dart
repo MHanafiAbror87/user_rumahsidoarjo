@@ -12,10 +12,56 @@ import 'package:fluttertoast/fluttertoast.dart';
 class ApiPariwisata {
   final String apiUlasan = "$apiurl/Api_Pariwisata/ulasan";
   final String apiUrl = "$apiurl/Api_Pariwisata";
+  final String apiUrlSejarah = "$apiurl/Api_Pariwisata/sejarah";
+  final String apiUrlKuliner = "$apiurl/Api_Pariwisata/kuliner";
 
   Future<List<PariwisataData>> getPariwisata() async {
     try {
       Response res = await get(Uri.parse(apiUrl));
+
+      if (res.statusCode == 200) {
+        final body = jsonDecode(res.body);
+
+        if (body['status']) {
+          final response = ListPariwisataModel.fromJson(body);
+
+          return response.data;
+        } else {
+          throw body['message'];
+        }
+      } else {
+        throw "Failed to load cases list";
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<List<PariwisataData>> getSejarah() async {
+    try {
+      Response res = await get(Uri.parse(apiUrlSejarah));
+
+      if (res.statusCode == 200) {
+        final body = jsonDecode(res.body);
+
+        if (body['status']) {
+          final response = ListPariwisataModel.fromJson(body);
+
+          return response.data;
+        } else {
+          throw body['message'];
+        }
+      } else {
+        throw "Failed to load cases list";
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<List<PariwisataData>> getKuliner() async {
+    try {
+      Response res = await get(Uri.parse(apiUrlKuliner));
 
       if (res.statusCode == 200) {
         final body = jsonDecode(res.body);
@@ -67,6 +113,26 @@ class ApiPariwisata {
     }
   }
 
+  Future<DetailPariwisataModel> getSejarahById(String id) async {
+    final response = await get(Uri.parse('$apiUrlSejarah?id_wisata=$id'));
+
+    if (response.statusCode == 200) {
+      return DetailPariwisataModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load a wisata');
+    }
+  }
+
+  Future<DetailPariwisataModel> getKulinerById(String id) async {
+    final response = await get(Uri.parse('$apiUrlKuliner?id_wisata=$id'));
+
+    if (response.statusCode == 200) {
+      return DetailPariwisataModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load a wisata');
+    }
+  }
+
   Future<bool> postUlasan(
       List<File?> foto, String idWisata, String ulasan) async {
     final nik = await SessionHelper.getNik();
@@ -77,8 +143,8 @@ class ApiPariwisata {
       'ulasan': ulasan,
     };
 
-    print("post: ${data.toString()}");
-    print("post url: ${Uri.parse(apiUrl).toString()}");
+    // print("post: ${data.toString()}");
+    // print("post url: ${Uri.parse(apiUrl).toString()}");
 
     try {
       var request = MultipartRequest('POST', Uri.parse(apiUrl));
@@ -87,7 +153,7 @@ class ApiPariwisata {
       };
 
       for (var i = 0; i < foto.length; i++) {
-        print(foto[i].toString());
+        // print(foto[i].toString());
 
         if (foto[i] == null) {
           continue;
@@ -112,7 +178,7 @@ class ApiPariwisata {
 
       final jsonResponse = json.decode(response.body);
 
-      print("respon ulasan: ${jsonResponse.toString()}");
+      // print("respon ulasan: ${jsonResponse.toString()}");
 
       if (jsonResponse['status'] as bool) {
         Fluttertoast.showToast(msg: 'Berhasil upload ulasan');
@@ -123,7 +189,7 @@ class ApiPariwisata {
       }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
-      print(e.toString());
+      // print(e.toString());
       return false;
     }
   }

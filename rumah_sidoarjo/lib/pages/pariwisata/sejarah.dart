@@ -1,105 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:rumah_sidoarjo/custom_template.dart';
+import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
+import 'package:rumah_sidoarjo/pages/pariwisata/detail_sejarah.dart';
+import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
+import 'package:rumah_sidoarjo/services/apiurl.dart';
 
-class Sejarah extends StatefulWidget {
-  @override
-  _SejarahState createState() => _SejarahState();
-}
+class Sejarah extends StatelessWidget {
+  final ApiPariwisata api = ApiPariwisata();
 
-class _SejarahState extends State<Sejarah> {
+  Sejarah({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: ListView.builder(
-          itemCount: nama.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-              child: Card(
-                  margin: const EdgeInsets.all(5),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: FutureBuilder<List<PariwisataData>>(
+        future: api.getSejarah(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            List<PariwisataData> pariwisata = snapshot.data;
+            return ListView(
+              children: pariwisata
+                  .map(
+                    (wisata) => Column(
                       children: [
-                        gambar[index],
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 30,
-                                width: 300,
-                                child: Text(
-                                  nama[index],
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                        Image.network(
+                          "$fotoUrl/assets/img/${wisata.foto1}",
+                          height: 200,
+                          fit: BoxFit.cover,
+                        ),
+                        ListTile(
+                          title: Text(wisata.namaWisata),
+                          subtitle: Text(wisata.alamat),
+                          onTap: () => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => Detail_Sejarah(
+                                wisata: wisata,
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                  height: 30,
-                                  width: 300,
-                                  child: Text(
-                                    alamat[index],
-                                    style: TextStyle(fontSize: 12),
-                                  ))
-                            ],
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
-                  )),
+                  )
+                  .toList(),
             );
-          },
-        ),
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }
 }
-
-final List nama = [
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-  "Museum Mpu Tantular",
-];
-
-final List alamat = [
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-  "Sidoarjo, Sidoarjo",
-];
-
-final List gambar = [
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-];

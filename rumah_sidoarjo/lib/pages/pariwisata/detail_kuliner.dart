@@ -1,12 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/models/pariwisata.dart';
@@ -14,22 +9,20 @@ import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/list_ulasan.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pariwisata.dart'
     as tabPariwisata;
-import 'package:rumah_sidoarjo/pages/pariwisata/pusatinformasi.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/widget/ulasan_dialog.dart';
 import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:path/path.dart' as pt;
 
-class Detail_pariwisata extends StatefulWidget {
+class Detail_Kuliner extends StatefulWidget {
   final PariwisataData wisata;
-  Detail_pariwisata({required this.wisata});
+  Detail_Kuliner({required this.wisata});
 
   @override
-  _Detail_pariwisataState createState() => _Detail_pariwisataState();
+  _Detail_KulinerState createState() => _Detail_KulinerState();
 }
 
-class _Detail_pariwisataState extends State<Detail_pariwisata> {
+class _Detail_KulinerState extends State<Detail_Kuliner> {
   final ApiPariwisata api = ApiPariwisata();
   final _addFormKey = GlobalKey<FormState>();
   final _ulasanController = TextEditingController();
@@ -39,46 +32,33 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
   File? fotoProfil;
   String profileUrl = '';
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   init();
-  //   super.initState();
-  // }
-
-  // void init() async {
-  //   profileUrl = await SessionHelper.getFotoProfil();
-
-  //   setState(() {
-  //     profileUrl = profileUrl;
-  //   });
-
-  //   print('profile: $profileUrl');
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: FlatButton(
+        leading: TextButton(
           child: Icon(
             Icons.arrow_back_ios,
             color: White,
           ),
-          onPressed: () => Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) {
-            return tabPariwisata.Pariwisata();
-          })),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return tabPariwisata.Pariwisata();
+              },
+            ),
+          ),
         ),
-        title: Text('Detail Wisata'),
+        title: const Text('Detail Wisata'),
         backgroundColor: darkGreen1,
       ),
       body: Form(
         key: _addFormKey,
         child: SingleChildScrollView(
           child: FutureBuilder<DetailPariwisataModel>(
-              future: api.getPariwisataById(widget.wisata.idWisata),
+              future: api.getKulinerById(widget.wisata.idWisata),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final detail = snapshot.data;
@@ -103,7 +83,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 10),
-                        child: Container(
+                        child: SizedBox(
                           width: double.infinity,
                           height: 210,
                           child: Image.network(
@@ -115,17 +95,17 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                         children: [
                           Text(
                             pariwisata.namaWisata,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: 'DMSans',
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Column(
                               children: [
-                                Align(
+                                const Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     'Alamat',
@@ -209,8 +189,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         const Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 27),
+                                          padding: EdgeInsets.only(right: 27),
                                           child: Align(
                                             alignment: Alignment.bottomLeft,
                                             child: Text(
@@ -238,19 +217,21 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                       onTap: () => launch(
                                           "tel://${pariwisata.noTelepon}"),
                                       child: Container(
-                                          width: 100,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: darkGreen1,
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          child: Center(
-                                              child: Text(
+                                        width: 100,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: darkGreen1,
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        ),
+                                        child: Center(
+                                          child: Text(
                                             'Panggil',
                                             style: GoogleFonts.poppins(
                                                 fontSize: 14, color: White),
-                                          ))),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -263,7 +244,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Padding(
-                                      padding: const EdgeInsets.only(right: 27),
+                                      padding: EdgeInsets.only(right: 27),
                                       child: Align(
                                         alignment: Alignment.bottomLeft,
                                         child: Text(
@@ -310,9 +291,9 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Align(
+                                    const Align(
                                       alignment: Alignment.centerLeft,
-                                      child: const Text(
+                                      child: Text(
                                         'Harga Tiket Masuk',
                                         style: TextStyle(
                                           fontFamily: 'DMSans',
@@ -458,7 +439,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                       (ulasan) => Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 20, vertical: 2),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 130,
                                           child: Card(
                                               shape: RoundedRectangleBorder(
@@ -474,7 +455,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Container(
+                                                        SizedBox(
                                                             width: 50,
                                                             height: 50,
                                                             child: Image.network(
@@ -491,7 +472,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                                             children: [
                                                               Text(
                                                                 ulasan.nama,
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     fontSize:
                                                                         14,
                                                                     fontWeight:
@@ -503,7 +484,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                                                         'dd MMMM yyyy')
                                                                     .format(ulasan
                                                                         .tanggalUpload),
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     fontSize:
                                                                         12,
                                                                     fontFamily:
@@ -514,11 +495,11 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                                         )
                                                       ],
                                                     ),
-                                                    SizedBox(height: 10),
+                                                    const SizedBox(height: 10),
                                                     Text(
                                                       ulasan.ulasan,
                                                       maxLines: 2,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           fontSize: 14,
                                                           fontFamily: "DMSans"),
                                                     )
@@ -530,10 +511,10 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                     )
                                     .toList()
                                 : [
-                                    Text("Ulasan Belum Tersedia"),
+                                    const Text("Ulasan Belum Tersedia"),
                                   ],
                           ),
-                          FlatButton(
+                          TextButton(
                             onPressed: () {
                               showDialog(
                                   context: context,
@@ -546,7 +527,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                                   horizontal: 20, vertical: 10),
                               child: Container(
                                 height: 50,
-                                padding: EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(12.0),
                                 width: double.infinity,
                                 child: Text(
                                   'Tambah Ulasan',
@@ -575,7 +556,7 @@ class _Detail_pariwisataState extends State<Detail_pariwisata> {
                   );
                 }
 
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }),
         ),
       ),

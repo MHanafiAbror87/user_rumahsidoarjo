@@ -59,13 +59,13 @@ class _PariwisataState extends State<Pariwisata> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 25),
+                          const SizedBox(height: 25),
                           Text('Pusat Informasi Wisata',
                               style: GoogleFonts.dmSans(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: darkGreen)),
-                          Container(
+                          SizedBox(
                             width: 200,
                             height: 40,
                             child: Text(
@@ -121,17 +121,17 @@ class _PariwisataState extends State<Pariwisata> {
                               begin: Alignment.centerLeft),
                           borderRadius: BorderRadius.circular(30)),
                       labelColor: White,
-                      labelStyle:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      labelStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 14),
                       unselectedLabelColor: darkGrey,
                       unselectedLabelStyle: TextStyle(fontSize: 14),
-                      tabs: [
+                      tabs: const [
                         Tab(child: Text('Pemancingan')),
                         Tab(child: Text('Sejarah')),
                         Tab(child: Text('Kuliner')),
                       ]),
-                  SizedBox(height: 10),
-                  Container(
+                  const SizedBox(height: 10),
+                  SizedBox(
                     height: 450,
                     width: double.infinity,
                     child: TabBarView(
@@ -159,18 +159,18 @@ class _PariwisataState extends State<Pariwisata> {
               colors: [lightGreen, darkGreen1],
               end: Alignment.centerRight,
               begin: Alignment.centerLeft),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30))),
       child: Column(
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             'Wisata Populer',
             style: headerTextStyle,
           ),
           Center(
-            child: Container(
+            child: SizedBox(
               width: 330,
               child: Text(
                 'Di Kabupaten Sidoarjo',
@@ -187,7 +187,7 @@ class _PariwisataState extends State<Pariwisata> {
   AppBar appBar() {
     return AppBar(
       elevation: 0,
-      leading: FlatButton(
+      leading: TextButton(
         child: Icon(
           Icons.arrow_back_ios,
           color: White,
@@ -203,7 +203,7 @@ class _PariwisataState extends State<Pariwisata> {
           ),
         },
       ),
-      title: Text('Pariwisata'),
+      title: const Text('Pariwisata'),
       backgroundColor: darkGreen1,
     );
   }
