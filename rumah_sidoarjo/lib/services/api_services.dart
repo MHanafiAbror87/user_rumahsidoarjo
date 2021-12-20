@@ -65,11 +65,13 @@ class ApiServices {
     }
   }
 
-  Future<bool> postUlasan(List<File> foto, int idUser, String ulasan) async {
+  Future<bool> postUlasan(
+      List<File> foto, String idWisata, String ulasan) async {
     final nik = await SessionHelper.getNik();
 
     Map<String, String> data = {
       'NIK': nik,
+      'id_wisata': idWisata,
     };
 
     print("post: ${data.toString()}");

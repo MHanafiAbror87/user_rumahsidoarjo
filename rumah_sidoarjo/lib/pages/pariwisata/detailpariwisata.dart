@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/models/pariwisata.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/list_pariwisata.dart';
+import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
 import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
 
 class DetailPariwisata extends StatefulWidget {

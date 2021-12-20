@@ -8,7 +8,7 @@ import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailUmkm extends StatelessWidget {
-  final Umkm kerajinan;
+  final UmkmModel kerajinan;
   DetailUmkm({required this.kerajinan});
 
   Widget build(BuildContext context) {
@@ -122,7 +122,7 @@ class DetailUmkm extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          kerajinan.penanggung_jawab,
+                          kerajinan.penanggungJawab,
                           style: TextStyle(
                               fontFamily: 'DMSans',
                               fontSize: 14,
@@ -154,7 +154,7 @@ class DetailUmkm extends StatelessWidget {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  kerajinan.no_telp,
+                                  kerajinan.noTelp,
                                   style: TextStyle(
                                       fontFamily: 'DMSans',
                                       fontSize: 14,

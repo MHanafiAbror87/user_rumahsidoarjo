@@ -1,17 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:rumah_sidoarjo/helper/session_helper.dart';
+import 'package:rumah_sidoarjo/models/list_ulasan.dart';
 import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:http/http.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/detailpariwisata.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/list_pariwisata.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ApiPariwisata {
+  final String apiUlasan = "$apiurl/Api_Pariwisata/ulasan";
   final String apiUrl = "$apiurl/Api_Pariwisata";
-
-  // Future<List<dynamic>> getWisata() async {
-  //   var result = await get(Uri.parse(apiUrl));
-  //   return jsonDecode(result.body);
-  // }
 
   Future<List<PariwisataData>> getPariwisata() async {
     try {
@@ -35,6 +35,28 @@ class ApiPariwisata {
     }
   }
 
+  Future<List<UlasanData>> getUlasan(String id) async {
+    try {
+      Response res = await get(Uri.parse('$apiUlasan?id_wisata=$id'));
+
+      if (res.statusCode == 200) {
+        final body = jsonDecode(res.body);
+
+        if (body['status']) {
+          final response = ListUlasanModel.fromJson(body);
+
+          return response.data;
+        } else {
+          throw body['message'];
+        }
+      } else {
+        throw "Failed to load cases list";
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
   Future<DetailPariwisataModel> getPariwisataById(String id) async {
     final response = await get(Uri.parse('$apiUrl?id_wisata=$id'));
 
@@ -45,69 +67,64 @@ class ApiPariwisata {
     }
   }
 
-  Future<Pariwisata> createRegister(Pariwisata wisata) async {
-    Map data = {
-      'id_kategori_wisata': wisata.idKategoriWisata,
-      'nama_wisata': wisata.namaWisata,
-      'alamat': wisata.alamat,
-      'pengelola': wisata.pengelola,
-      'no_telepon': wisata.noTelepon,
-      'jam_buka': wisata.jamBuka,
-      'jam_tutup': wisata.jamTutup,
-      'foto1': wisata.foto1,
-      'foto2': wisata.foto2,
-      'foto3': wisata.foto3
+  Future<bool> postUlasan(
+      List<File?> foto, String idWisata, String ulasan) async {
+    final nik = await SessionHelper.getNik();
+
+    Map<String, String> data = {
+      'nik': nik,
+      'id_wisata': idWisata,
+      'ulasan': ulasan,
     };
 
-    final Response response = await post(
-      Uri.parse(apiUrl),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(data),
-    );
-    if (response.statusCode == 200) {
-      return Pariwisata.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to post wisata');
-    }
-  }
+    print("post: ${data.toString()}");
+    print("post url: ${Uri.parse(apiUrl).toString()}");
 
-  Future<Pariwisata> updatePariwisata(String id, Pariwisata wisata) async {
-    Map data = {
-      'id_kategori_wisata': wisata.idKategoriWisata,
-      'nama_wisata': wisata.namaWisata,
-      'alamat': wisata.alamat,
-      'pengelola': wisata.pengelola,
-      'no_telepon': wisata.noTelepon,
-      'jam_buka': wisata.jamBuka,
-      'jam_tutup': wisata.jamTutup,
-      'foto1': wisata.foto1,
-      'foto2': wisata.foto2,
-      'foto3': wisata.foto3
-    };
+    try {
+      var request = MultipartRequest('POST', Uri.parse(apiUrl));
+      var header = <String, String>{
+        'Content-Type': 'multipart/form-data',
+      };
 
-    final Response response = await put(
-      Uri.parse('$apiUrl/$id'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(data),
-    );
-    if (response.statusCode == 200) {
-      return Pariwisata.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to update a wisata');
-    }
-  }
+      for (var i = 0; i < foto.length; i++) {
+        print(foto[i].toString());
 
-  Future<void> deleteCase(String id) async {
-    Response res = await delete(Uri.parse('$apiUrl/$id'));
+        if (foto[i] == null) {
+          continue;
+        }
 
-    if (res.statusCode == 200) {
-      print("Pariwisata deleted");
-    } else {
-      throw "Failed to delete a case.";
+        request.files.add(
+          MultipartFile(
+            'foto${i + 1}',
+            foto[i]!.readAsBytes().asStream(),
+            foto[i]!.lengthSync(),
+            filename: '$nik.jpeg',
+            contentType: MediaType('image', 'jpeg'),
+          ),
+        );
+      }
+
+      request.headers.addAll(header);
+      request.fields.addAll(data);
+
+      final res = await request.send();
+      final response = await Response.fromStream(res);
+
+      final jsonResponse = json.decode(response.body);
+
+      print("respon ulasan: ${jsonResponse.toString()}");
+
+      if (jsonResponse['status'] as bool) {
+        Fluttertoast.showToast(msg: 'Berhasil upload ulasan');
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: jsonResponse['message']);
+        return false;
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+      print(e.toString());
+      return false;
     }
   }
 }

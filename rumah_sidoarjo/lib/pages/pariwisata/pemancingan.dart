@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/pages/detail_pariwisata.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/detailpariwisata.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/list_pariwisata.dart';
+import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
 import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
 import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
@@ -24,7 +24,6 @@ class Pemancingan extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 List<PariwisataData> pariwisata = snapshot.data;
-
                 return ListView(
                   children: pariwisata
                       .map(
