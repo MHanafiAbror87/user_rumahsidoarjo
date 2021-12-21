@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
+import 'package:rumah_sidoarjo/models/kesehatan.dart';
+import 'package:rumah_sidoarjo/models/umkm.dart';
+import 'package:rumah_sidoarjo/pages/kesehatan/kesehatan.dart';
+import 'package:rumah_sidoarjo/pages/umkm/umkm.dart' as UmkmPage;
+import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
+import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:getwidget/getwidget.dart';
+import 'package:rumah_sidoarjo/services/apiurl.dart';
 
-class Detail_Kesehatan extends StatefulWidget {
-  @override
-  _Detail_KesehatanState createState() => _Detail_KesehatanState();
-}
+class DetailPkmu extends StatelessWidget {
+  final KesehatanData pkmu;
+  DetailPkmu({required this.pkmu});
 
-class _Detail_KesehatanState extends State<Detail_Kesehatan> {
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -24,10 +27,10 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
             ),
             onPressed: () => Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) {
-              return Home();
+              return Kesehatan();
             })),
           ),
-          title: Text('Detail Layanan Kesehatan'),
+          title: Text('Detail PKM Utama'),
           backgroundColor: darkGreen1,
         ),
         body: SingleChildScrollView(
@@ -39,15 +42,12 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                 child: Container(
                   width: double.infinity,
                   height: 200,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage('assets/images/no_image.png')),
-                  ),
+                  child: Image.network("$fotoUrl/assets/img/${pkmu.foto}",
+                      fit: BoxFit.cover),
                 ),
               ),
               Text(
-                'PUSKESMAS SIDOARJO',
+                pkmu.nama,
                 style: TextStyle(
                     fontFamily: 'DMSans',
                     fontSize: 16,
@@ -72,7 +72,7 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Jl. Diponegoro No. 139 Sidoarjo',
+                          pkmu.alamat,
                           style: TextStyle(
                               fontFamily: 'DMSans',
                               fontSize: 14,
@@ -80,11 +80,10 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                         ),
                       ),
                       Divider(
-                        color: Colors.black12,
-                        height: 5,
+                        color: Colors.grey,
+                        height: 25,
                         thickness: 2,
                       ),
-                      SizedBox(height: 10),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -98,7 +97,7 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Puskesmas Pembanatu',
+                          pkmu.kategori,
                           style: TextStyle(
                               fontFamily: 'DMSans',
                               fontSize: 14,
@@ -106,15 +105,14 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                         ),
                       ),
                       Divider(
-                        color: Colors.black12,
-                        height: 5,
+                        color: Colors.grey,
+                        height: 25,
                         thickness: 2,
                       ),
-                      SizedBox(height: 10),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Kepemilikan',
+                          'Pengelola',
                           style: TextStyle(
                             fontFamily: 'DMSans',
                             fontSize: 16,
@@ -124,7 +122,7 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Pemerintah',
+                          pkmu.penanggungJawab,
                           style: TextStyle(
                               fontFamily: 'DMSans',
                               fontSize: 14,
@@ -132,37 +130,10 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                         ),
                       ),
                       Divider(
-                        color: Colors.black12,
-                        height: 5,
+                        color: Colors.grey,
+                        height: 25,
                         thickness: 2,
                       ),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Penanggung Jawab',
-                          style: TextStyle(
-                            fontFamily: 'DMSans',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Bpk Sandikan Galih',
-                          style: TextStyle(
-                              fontFamily: 'DMSans',
-                              fontSize: 14,
-                              color: darkGreen),
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.black12,
-                        height: 5,
-                        thickness: 2,
-                      ),
-                      SizedBox(height: 10),
                       Row(
                         children: [
                           Column(
@@ -183,7 +154,7 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  '031-8941104',
+                                  pkmu.noTelepon,
                                   style: TextStyle(
                                       fontFamily: 'DMSans',
                                       fontSize: 14,
@@ -192,7 +163,7 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                               ),
                             ],
                           ),
-                          SizedBox(width: 200),
+                          SizedBox(width: 180),
                           Container(
                               width: 100,
                               height: 40,
@@ -209,66 +180,14 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                         ],
                       ),
                       Divider(
-                        color: Colors.black12,
-                        height: 5,
+                        color: Colors.grey,
+                        height: 25,
                         thickness: 2,
                       ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 60),
-                                child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Text(
-                                    'Fax',
-                                    style: TextStyle(
-                                      fontFamily: 'DMSans',
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '031-3153262',
-                                  style: TextStyle(
-                                      fontFamily: 'DMSans',
-                                      fontSize: 14,
-                                      color: darkGreen),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: 200),
-                          Container(
-                              width: 100,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: darkGreen1,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Center(
-                                  child: Text(
-                                'Panggil',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 14, color: White),
-                              ))),
-                        ],
-                      ),
-                      Divider(
-                        color: Colors.black12,
-                        height: 5,
-                        thickness: 2,
-                      ),
-                      SizedBox(height: 10),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Email',
+                          'Deskripsi',
                           style: TextStyle(
                             fontFamily: 'DMSans',
                             fontSize: 16,
@@ -278,7 +197,7 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'puskesmasSidoarjo21@gmail.com',
+                          pkmu.penanggungJawab,
                           style: TextStyle(
                               fontFamily: 'DMSans',
                               fontSize: 14,
@@ -286,15 +205,14 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                         ),
                       ),
                       Divider(
-                        color: Colors.black12,
-                        height: 5,
+                        color: Colors.grey,
+                        height: 25,
                         thickness: 2,
                       ),
-                      SizedBox(height: 20),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Webiste',
+                          'Media Sosial',
                           style: TextStyle(
                             fontFamily: 'DMSans',
                             fontSize: 16,
@@ -304,7 +222,7 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'www.sdBukitTujuh.com',
+                          pkmu.website,
                           style: TextStyle(
                               fontFamily: 'DMSans',
                               fontSize: 14,
@@ -312,8 +230,8 @@ class _Detail_KesehatanState extends State<Detail_Kesehatan> {
                         ),
                       ),
                       Divider(
-                        color: Colors.black12,
-                        height: 5,
+                        color: Colors.grey,
+                        height: 25,
                         thickness: 2,
                       ),
                       SizedBox(height: 20),

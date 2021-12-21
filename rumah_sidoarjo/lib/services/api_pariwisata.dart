@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:rumah_sidoarjo/helper/session_helper.dart';
 import 'package:rumah_sidoarjo/models/list_ulasan.dart';
+import 'package:rumah_sidoarjo/models/list_ulasan_umkm.dart';
 import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:http/http.dart';
 import 'package:http_parser/http_parser.dart';
@@ -138,7 +139,7 @@ class ApiPariwisata {
     final nik = await SessionHelper.getNik();
 
     Map<String, String> data = {
-      'nik': nik,
+      'NIK': nik,
       'id_wisata': idWisata,
       'ulasan': ulasan,
     };

@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-ListUlasanModel listUlasanDataFromJson(String str) =>
-    ListUlasanModel.fromJson(json.decode(str));
+ListUlasanUmkmModel listUlasanUmkmModelFromJson(String str) =>
+    ListUlasanUmkmModel.fromJson(json.decode(str));
 
-String listUlasanDataToJson(ListUlasanModel data) => json.encode(data.toJson());
+String listUlasanUmkmModelToJson(ListUlasanUmkmModel data) =>
+    json.encode(data.toJson());
 
-class ListUlasanModel {
-  ListUlasanModel({
+class ListUlasanUmkmModel {
+  ListUlasanUmkmModel({
     required this.status,
     required this.message,
     required this.data,
@@ -14,14 +15,14 @@ class ListUlasanModel {
 
   bool status;
   String message;
-  List<UlasanData> data;
+  List<UlasanDataUmkm> data;
 
-  factory ListUlasanModel.fromJson(Map<String, dynamic> json) =>
-      ListUlasanModel(
+  factory ListUlasanUmkmModel.fromJson(Map<String, dynamic> json) =>
+      ListUlasanUmkmModel(
         status: json["status"],
         message: json["message"],
-        data: List<UlasanData>.from(
-            json["data"].map((x) => UlasanData.fromJson(x))),
+        data: List<UlasanDataUmkm>.from(
+            json["data"].map((x) => UlasanDataUmkm.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,10 +32,10 @@ class ListUlasanModel {
       };
 }
 
-class UlasanData {
-  UlasanData({
+class UlasanDataUmkm {
+  UlasanDataUmkm({
     required this.idUlasan,
-    required this.idWisata,
+    required this.idUmkm,
     required this.nik,
     required this.ulasan,
     required this.tanggalUpload,
@@ -55,7 +56,7 @@ class UlasanData {
   });
 
   String idUlasan;
-  String idWisata;
+  String idUmkm;
   String nik;
   String ulasan;
   DateTime tanggalUpload;
@@ -74,9 +75,9 @@ class UlasanData {
   String selfieKtp;
   String status;
 
-  factory UlasanData.fromJson(Map<String, dynamic> json) => UlasanData(
+  factory UlasanDataUmkm.fromJson(Map<String, dynamic> json) => UlasanDataUmkm(
         idUlasan: json["id_ulasan"],
-        idWisata: json["id_wisata"],
+        idUmkm: json["id_umkm"],
         nik: json["NIK"],
         ulasan: json["ulasan"],
         tanggalUpload: DateTime.parse(json["tanggal_upload"]),
@@ -98,10 +99,11 @@ class UlasanData {
 
   Map<String, dynamic> toJson() => {
         "id_ulasan": idUlasan,
-        "id_wisata": idWisata,
+        "id_umkm": idUmkm,
         "NIK": nik,
         "ulasan": ulasan,
-        "tanggal_upload": tanggalUpload,
+        "tanggal_upload":
+            "${tanggalUpload.year.toString().padLeft(4, '0')}-${tanggalUpload.month.toString().padLeft(2, '0')}-${tanggalUpload.day.toString().padLeft(2, '0')}",
         "foto1": foto1,
         "foto2": foto2,
         "foto3": foto3,

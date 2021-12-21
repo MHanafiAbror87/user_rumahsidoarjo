@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rumah_sidoarjo/models/umkm.dart';
-import 'package:rumah_sidoarjo/pages/umkm/DetailUmkm.dart';
+import 'package:rumah_sidoarjo/models/list_umkm.dart';
+import 'package:rumah_sidoarjo/pages/umkm/detail_umkm.dart';
 import 'package:rumah_sidoarjo/services/api_umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
@@ -11,18 +11,18 @@ class Kerajinan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.transparent,
-        body: FutureBuilder<List<UmkmModel>>(
+        body: FutureBuilder<List<UmkmData>>(
             future: api.getUmkm(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
-                List<UmkmModel> umkm = snapshot.data;
+                List<UmkmData> umkm = snapshot.data;
                 return ListView(
                   children: umkm
                       .map(
                         (kerajinan) => GestureDetector(
                           onTap: () => Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => DetailUmkm(
+                              builder: (context) => DetailUmkm_Kerajinan(
                                 kerajinan: kerajinan,
                               ),
                             ),

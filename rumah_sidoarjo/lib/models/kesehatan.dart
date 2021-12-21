@@ -1,48 +1,112 @@
-class Kesehatan {
-  final String id_kecamatan;
-  final String nama;
-  final String alamat;
-  final String kepemilikan;
-  final String kategori;
-  final String no_telepon;
-  final String fax;
-  final String email;
-  final String website;
-  final String penanggung_jawab;
-  final String foto;
+// To parse this JSON data, do
+//
+//     final kesehatanModel = kesehatanModelFromJson(jsonString);
 
-  Kesehatan({
-    this.id_kecamatan = '',
-    this.nama = '',
-    this.alamat = '',
-    this.kepemilikan = '',
-    this.kategori = '',
-    this.no_telepon = '',
-    this.fax = '',
-    this.email = '',
-    this.website = '',
-    this.penanggung_jawab = '',
-    this.foto = '',
+import 'package:meta/meta.dart';
+import 'dart:convert';
+
+KesehatanModel kesehatanModelFromJson(String str) =>
+    KesehatanModel.fromJson(json.decode(str));
+
+String kesehatanModelToJson(KesehatanModel data) => json.encode(data.toJson());
+
+class KesehatanModel {
+  KesehatanModel({
+    required this.status,
+    required this.message,
+    required this.data,
   });
 
-  factory Kesehatan.fromJson(Map<String, dynamic> json) {
-    return Kesehatan(
-      id_kecamatan: json['id_kecamatan'] as String,
-      nama: json['nama'] as String,
-      alamat: json['alamat'] as String,
-      kepemilikan: json['kepemilikan'] as String,
-      kategori: json['kategori'] as String,
-      no_telepon: json['no_telepon'] as String,
-      fax: json['fax'] as String,
-      email: json['email'] as String,
-      website: json['website'] as String,
-      penanggung_jawab: json['penanggung_jawab'] as String,
-      foto: json['foto'] as String,
-    );
-  }
+  bool status;
+  String message;
+  List<KesehatanData> data;
 
-  @override
-  String toString() {
-    return 'Kesehatan{id_kecamatan: $id_kecamatan, nama: $nama, alamat: $alamat, kepemilikan: $kepemilikan, kategori: $kategori, no_telepon: $no_telepon, fax: $fax, email: $email, website: $website, penanggung_jawab: $penanggung_jawab, foto: $foto}';
-  }
+  factory KesehatanModel.fromJson(Map<String, dynamic> json) => KesehatanModel(
+        status: json["status"],
+        message: json["message"],
+        data: List<KesehatanData>.from(
+            json["data"].map((x) => KesehatanData.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "message": message,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
+}
+
+class KesehatanData {
+  KesehatanData({
+    required this.idKesehatan,
+    required this.idKecamatan,
+    required this.nama,
+    required this.alamat,
+    required this.kepemilikan,
+    required this.kategori,
+    required this.noTelepon,
+    required this.fax,
+    required this.email,
+    required this.website,
+    required this.penanggungJawab,
+    required this.foto,
+    required this.lat,
+    required this.long,
+    required this.link,
+    required this.kecamatan,
+  });
+
+  String idKesehatan;
+  String idKecamatan;
+  String nama;
+  String alamat;
+  String kepemilikan;
+  String kategori;
+  String noTelepon;
+  String fax;
+  String email;
+  String website;
+  String penanggungJawab;
+  String foto;
+  String lat;
+  String long;
+  String link;
+  String kecamatan;
+
+  factory KesehatanData.fromJson(Map<String, dynamic> json) => KesehatanData(
+        idKesehatan: json["id_kesehatan"],
+        idKecamatan: json["id_kecamatan"],
+        nama: json["nama"],
+        alamat: json["alamat"],
+        kepemilikan: json["kepemilikan"],
+        kategori: json["kategori"],
+        noTelepon: json["no_telepon"],
+        fax: json["fax"],
+        email: json["email"],
+        website: json["website"],
+        penanggungJawab: json["penanggung_jawab"],
+        foto: json["foto"],
+        lat: json["lat"],
+        long: json["long"],
+        link: json["link"],
+        kecamatan: json["kecamatan"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id_kesehatan": idKesehatan,
+        "id_kecamatan": idKecamatan,
+        "nama": nama,
+        "alamat": alamat,
+        "kepemilikan": kepemilikan,
+        "kategori": kategori,
+        "no_telepon": noTelepon,
+        "fax": fax,
+        "email": email,
+        "website": website,
+        "penanggung_jawab": penanggungJawab,
+        "foto": foto,
+        "lat": lat,
+        "long": long,
+        "link": link,
+        "kecamatan": kecamatan,
+      };
 }

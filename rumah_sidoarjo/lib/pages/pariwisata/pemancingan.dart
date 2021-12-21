@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
 import 'package:rumah_sidoarjo/models/umkm.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/detail_pemancingan.dart';
-import 'package:rumah_sidoarjo/pages/umkm/DetailUmkm.dart';
+import 'package:rumah_sidoarjo/pages/umkm/detail_umkm.dart';
 import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rumah_sidoarjo/addregister.dart';
+import 'package:rumah_sidoarjo/pages/kesehatan/detail_kesehatan.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pariwisata.dart';
 import 'package:rumah_sidoarjo/pages/umkm/umkm.dart';
 import 'package:rumah_sidoarjo/splash_screen.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      // home: addRegister(),
+      // home: DetailKesehatan(),
       // We use routeName so that we dont need to remember the name
       initialRoute: SplashScreen.routeName,
       routes: routes,
