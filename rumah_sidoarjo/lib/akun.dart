@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rumah_sidoarjo/helper/session_helper.dart';
-import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/pages/editakun.dart';
 import 'package:rumah_sidoarjo/services/api_services.dart';
@@ -78,27 +76,24 @@ class _AkunState extends State<Akun> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: White,
-        appBar: _appBar(),
-        body: ListView(
-          children: [
-            _akunimage(),
-            SizedBox(height: 50),
-            _buildInformasiAkun(),
-            SizedBox(height: 50),
-            _buildLogoutBtn(),
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: White,
+      appBar: _appBar(),
+      body: ListView(
+        children: [
+          _akunimage(),
+          const SizedBox(height: 50),
+          _buildInformasiAkun(),
+          const SizedBox(height: 50),
+          _buildLogoutBtn(),
+        ],
       ),
     );
   }
 
   AppBar _appBar() {
     return AppBar(
-      leading: FlatButton(
+      leading: TextButton(
           onPressed: () => {Navigator.pop(context)},
           child: Icon(
             Icons.arrow_back_ios,
@@ -119,89 +114,88 @@ class _AkunState extends State<Akun> {
           GestureDetector(
             onTap: () {
               showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    final defaultContext = context;
+                context: context,
+                builder: (context) {
+                  final defaultContext = context;
 
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          onTap: () async {
-                            final image = await pickImage(ImageSource.gallery);
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        onTap: () async {
+                          final image = await pickImage(ImageSource.gallery);
 
-                            if (image != null) {
-                              Get.dialog(
-                                const Center(
-                                    child: CircularProgressIndicator()),
-                                barrierDismissible: false,
-                              );
+                          if (image != null) {
+                            Get.dialog(
+                              const Center(child: CircularProgressIndicator()),
+                              barrierDismissible: false,
+                            );
 
-                              final status = await api.updateFoto(image);
+                            final status = await api.updateFoto(image);
 
-                              Get.back();
-                              Get.back();
+                            Get.back();
+                            Get.back();
 
-                              // Navigator.pop(defaultContext);
+                            // Navigator.pop(defaultContext);
 
-                              // Navigator.pop(defaultContext);
+                            // Navigator.pop(defaultContext);
 
-                              if (status) {
-                                setState(() {
-                                  fotoProfil = image;
-                                });
-                              } else {
-                                Fluttertoast.showToast(
-                                    msg: 'Gagal merubah foto profil');
-                              }
+                            if (status) {
+                              setState(() {
+                                fotoProfil = image;
+                              });
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: 'Gagal merubah foto profil');
                             }
-                          },
-                          title: const Text(
-                            'Ambil dari galeri',
-                            style: TextStyle(fontFamily: 'poppins'),
-                          ),
-                          leading: const Icon(Icons.image),
+                          }
+                        },
+                        title: const Text(
+                          'Ambil dari galeri',
+                          style: TextStyle(fontFamily: 'poppins'),
                         ),
-                        ListTile(
-                          onTap: () async {
-                            final image = await pickImage(ImageSource.camera);
+                        leading: const Icon(Icons.image),
+                      ),
+                      ListTile(
+                        onTap: () async {
+                          final image = await pickImage(ImageSource.camera);
 
-                            if (image != null) {
-                              Get.dialog(
-                                const Center(
-                                    child: CircularProgressIndicator()),
-                                barrierDismissible: false,
-                              );
+                          if (image != null) {
+                            Get.dialog(
+                              const Center(child: CircularProgressIndicator()),
+                              barrierDismissible: false,
+                            );
 
-                              final status = await api.updateFoto(image);
+                            final status = await api.updateFoto(image);
 
-                              Get.back();
-                              Get.back();
+                            Get.back();
+                            Get.back();
 
-                              // Navigator.pop(defaultContext);
+                            // Navigator.pop(defaultContext);
 
-                              // Navigator.pop(defaultContext);
+                            // Navigator.pop(defaultContext);
 
-                              if (status) {
-                                setState(() {
-                                  fotoProfil = image;
-                                });
-                              } else {
-                                Fluttertoast.showToast(
-                                    msg: 'Gagal merubah foto profil');
-                              }
+                            if (status) {
+                              setState(() {
+                                fotoProfil = image;
+                              });
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: 'Gagal merubah foto profil');
                             }
-                          },
-                          title: const Text(
-                            'Ambil dari kamera',
-                            style: TextStyle(fontFamily: 'poppins'),
-                          ),
-                          leading: const Icon(Icons.camera_alt),
+                          }
+                        },
+                        title: const Text(
+                          'Ambil dari kamera',
+                          style: TextStyle(fontFamily: 'poppins'),
                         ),
-                      ],
-                    );
-                  });
+                        leading: const Icon(Icons.camera_alt),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             child: SizedBox(
               height: 130,
@@ -250,23 +244,7 @@ class _AkunState extends State<Akun> {
               ),
             ),
           ),
-          _tbGantiFoto()
         ],
-      ),
-    );
-  }
-
-  TextButton _tbGantiFoto() {
-    return TextButton(
-      onPressed: () {},
-      child: Text(
-        'Ganti Foto',
-        style: TextStyle(
-          color: darkGreen1,
-          fontSize: 16,
-          fontFamily: 'DMSans',
-          fontWeight: FontWeight.bold,
-        ),
       ),
     );
   }
@@ -292,16 +270,16 @@ class _AkunState extends State<Akun> {
                   ),
                 ),
                 _space(),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 email(),
                 _space(),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 tanggalLahir(),
                 _space(),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 noTelp(),
                 _space(),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 nik(),
                 _space(),
               ],
@@ -403,28 +381,29 @@ class _AkunState extends State<Akun> {
           ),
         ),
         FutureBuilder<String>(
-            future: SessionHelper.getTanggalLahir(),
-            builder: (context, snapshot) {
-              String tanggallahir = '-';
+          future: SessionHelper.getTanggalLahir(),
+          builder: (context, snapshot) {
+            String tanggallahir = '-';
 
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                tanggallahir = '-';
-              }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              tanggallahir = '-';
+            }
 
-              if (snapshot.hasData) {
-                tanggallahir = snapshot.data!;
-              } else {
-                tanggallahir = '-';
-              }
-              return Text(
-                tanggallahir,
-                style: TextStyle(
-                  fontFamily: "DMSans",
-                  color: lightGrey,
-                  fontSize: 16,
-                ),
-              );
-            })
+            if (snapshot.hasData) {
+              tanggallahir = snapshot.data!;
+            } else {
+              tanggallahir = '-';
+            }
+            return Text(
+              tanggallahir,
+              style: TextStyle(
+                fontFamily: "DMSans",
+                color: lightGrey,
+                fontSize: 16,
+              ),
+            );
+          },
+        )
       ],
     );
   }
@@ -432,10 +411,14 @@ class _AkunState extends State<Akun> {
   TextButton tbUbah() {
     return TextButton(
       onPressed: () => {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) {
-          return const EditAkun();
-        }))
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const EditAkun();
+            },
+          ),
+        )
       },
       child: Text(
         'Ubah',
@@ -463,28 +446,29 @@ class _AkunState extends State<Akun> {
             ),
           ),
           FutureBuilder<String>(
-              future: SessionHelper.getNama(),
-              builder: (context, snapshot) {
-                String nama = '-';
+            future: SessionHelper.getNama(),
+            builder: (context, snapshot) {
+              String nama = '-';
 
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  nama = '-';
-                }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                nama = '-';
+              }
 
-                if (snapshot.hasData) {
-                  nama = snapshot.data!;
-                } else {
-                  nama = '-';
-                }
-                return Text(
-                  nama,
-                  style: TextStyle(
-                    fontFamily: "DMSans",
-                    color: lightGrey,
-                    fontSize: 16,
-                  ),
-                );
-              })
+              if (snapshot.hasData) {
+                nama = snapshot.data!;
+              } else {
+                nama = '-';
+              }
+              return Text(
+                nama,
+                style: TextStyle(
+                  fontFamily: "DMSans",
+                  color: lightGrey,
+                  fontSize: 16,
+                ),
+              );
+            },
+          )
         ],
       ),
     );
@@ -533,7 +517,7 @@ class _AkunState extends State<Akun> {
     return Container(
       height: 2,
       width: double.infinity,
-      color: Color(0xffeeeeee),
+      color: const Color(0xffeeeeee),
     );
   }
 

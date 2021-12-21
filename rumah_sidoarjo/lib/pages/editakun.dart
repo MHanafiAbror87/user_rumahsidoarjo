@@ -8,7 +8,6 @@ import 'package:rumah_sidoarjo/helper/session_helper.dart';
 import 'package:rumah_sidoarjo/models/register.dart';
 import 'package:rumah_sidoarjo/services/api_services.dart';
 import '../custom_template.dart';
-import '../home.dart';
 
 class EditAkun extends StatefulWidget {
   const EditAkun({Key? key}) : super(key: key);
@@ -83,152 +82,138 @@ class _EditAkunState extends State<EditAkun> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar(),
-        body: Form(
-          key: _addFormKey,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: ListView(
-              children: [
-                _buildTextField('Nama Lengkap', "Masukkan Nama Lengkap", false,
-                    _namaController),
-                GestureDetector(
-                  onTap: () async {
-                    DateTime? selected = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1900, 1),
-                      lastDate: DateTime.now(),
-                    );
+      appBar: appBar(),
+      body: Form(
+        key: _addFormKey,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: ListView(
+            children: [
+              _buildTextField('Nama Lengkap', "Masukkan Nama Lengkap", false,
+                  _namaController),
+              GestureDetector(
+                onTap: () async {
+                  DateTime? selected = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900, 1),
+                    lastDate: DateTime.now(),
+                  );
 
-                    print('selected date: ${selected.toString()}');
-                    print(
-                        'selected date: ${DateFormat("yyyy-MM-dd").format(selected!)}');
+                  print('selected date: ${selected.toString()}');
+                  print(
+                      'selected date: ${DateFormat("yyyy-MM-dd").format(selected!)}');
 
-                    if (selected != null) {
-                      setState(() {
-                        selectedTime = selected;
-                      });
+                  if (selected != null) {
+                    setState(() {
+                      selectedTime = selected;
+                    });
 
-                      _tanggallahirController.text =
-                          DateFormat('dd/MM/yyyy').format(selected);
-                    }
-                  },
-                  child: _buildTextField('Tanggal Lahir', "dd/mm/yyyy", false,
-                      _tanggallahirController, false),
-                ),
-                // _buildTextField('Jenis Kelamin', "Masukkan Jenis Kelamin",
-                //     false, _jeniskelaminController),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    value: selectedJk,
-                    onChanged: (selected) {
-                      setState(() {
-                        selectedJk = selected!;
-                      });
+                    _tanggallahirController.text =
+                        DateFormat('dd/MM/yyyy').format(selected);
+                  }
+                },
+                child: _buildTextField('Tanggal Lahir', "dd/mm/yyyy", false,
+                    _tanggallahirController, false),
+              ),
+              _pilihJenisKelamin(),
+              _buildTextField(
+                  'Telepon', "Masukkan No Telepon", false, _teleponController),
+              _buildTextField(
+                  'Alamat', "Masukkan Alamat", false, _alamatController),
+              _buildTextField('Password', "Kosongkan jika tidak ingin mengubah",
+                  true, _passwordController),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  OutlinedButton(
+                    onPressed: () => {
+                      Navigator.pop(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Akun();
+                          },
+                        ),
+                      )
                     },
-                    items: const [
-                      DropdownMenuItem(
-                        value: 'Laki-Laki',
-                        child: Text('Laki-Laki'),
+                    child: Text(
+                      'CANCEL',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 15,
+                        letterSpacing: 2,
+                        color: darkGreen1,
                       ),
-                      DropdownMenuItem(
-                        value: 'Perempuan',
-                        child: Text('Perempuan'),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                _buildTextField('Telepon', "Masukkan No Telepon", false,
-                    _teleponController),
-                _buildTextField(
-                    'Alamat', "Masukkan Alamat", false, _alamatController),
-                _buildTextField(
-                    'Password', "Masukkan Password", true, _passwordController),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    OutlinedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'CANCEL',
-                        style: GoogleFonts.dmSans(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: darkGreen1,
-                        ),
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 30),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (validate()) {
-                          bool registStatus = await api.updateAkun(DataRegister(
-                            nik: _nikController.text,
-                            nama: _namaController.text,
-                            tanggalLahir:
-                                DateFormat('yyyy-MM-dd').format(selectedTime),
-                            jenisKelamin: selectedJk,
-                            password: _passwordController.text,
-                            noTelepon: _teleponController.text,
-                            email: '',
-                            alamat: _alamatController.text,
-                          ));
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (validate()) {
+                        bool registStatus = await api.updateAkun(DataRegister(
+                          nik: _nikController.text,
+                          nama: _namaController.text,
+                          tanggalLahir:
+                              DateFormat('yyyy-MM-dd').format(selectedTime),
+                          jenisKelamin: selectedJk,
+                          password: _passwordController.text,
+                          noTelepon: _teleponController.text,
+                          email: '',
+                          alamat: _alamatController.text,
+                        ));
 
-                          if (registStatus) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return Akun();
-                                },
-                              ),
-                            );
-                          }
+                        if (registStatus) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Akun();
+                              },
+                            ),
+                          );
                         }
-                      },
-                      child: Text(
-                        'SIMPAN',
-                        style: GoogleFonts.dmSans(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: White,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: darkGreen1,
-                        padding: EdgeInsets.symmetric(horizontal: 30),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                      }
+                    },
+                    child: Text(
+                      'SIMPAN',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 15,
+                        letterSpacing: 2,
+                        color: White,
                       ),
                     ),
-                  ],
-                )
-              ],
-            ),
+                    style: ElevatedButton.styleFrom(
+                      primary: darkGreen1,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   AppBar appBar() {
     return AppBar(
-      leading: FlatButton(
+      leading: TextButton(
         child: Icon(
           Icons.arrow_back_ios,
           color: White,
         ),
         onPressed: () => {
-          Navigator.pushReplacement(
+          Navigator.pop(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -273,6 +258,40 @@ class _EditAkunState extends State<EditAkun> {
           hintText: placeholder,
           hintStyle: kHintTextStyle,
         ),
+      ),
+    );
+  }
+
+  Padding _pilihJenisKelamin() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Jenis Kelamin',
+            style: GoogleFonts.dmSans(color: darkGrey, fontSize: 12),
+          ),
+          DropdownButton<String>(
+            isExpanded: true,
+            value: selectedJk,
+            onChanged: (selected) {
+              setState(() {
+                selectedJk = selected!;
+              });
+            },
+            items: const [
+              DropdownMenuItem(
+                value: 'Laki-Laki',
+                child: Text('Laki-Laki'),
+              ),
+              DropdownMenuItem(
+                value: 'Perempuan',
+                child: Text('Perempuan'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
