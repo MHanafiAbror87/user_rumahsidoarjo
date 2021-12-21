@@ -129,7 +129,7 @@ class _addRegisterState extends State<addRegister> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      leading: FlatButton(
+      leading: TextButton(
         child: Icon(
           Icons.arrow_back_ios,
           color: White,

@@ -17,6 +17,8 @@ import 'package:path/path.dart' as pt;
 
 class Akun extends StatefulWidget {
   static String routeName = '/akun';
+
+  const Akun({Key? key}) : super(key: key);
   @override
   _AkunState createState() => _AkunState();
 }
@@ -45,7 +47,7 @@ class _AkunState extends State<Akun> {
 
       return imageTemp;
     } on PlatformException catch (e) {
-      print('failed pick image: ${e.toString()}');
+      // print('failed pick image: ${e.toString()}');
     }
   }
 
@@ -71,7 +73,7 @@ class _AkunState extends State<Akun> {
       profileUrl = profileUrl;
     });
 
-    print('profile: $profileUrl');
+    // print('profile: $profileUrl');
   }
 
   @override
@@ -99,7 +101,7 @@ class _AkunState extends State<Akun> {
             Icons.arrow_back_ios,
             color: White,
           )),
-      title: Text('Informasi Akun'),
+      title: const Text('Informasi Akun'),
       backgroundColor: darkGreen1,
     );
   }
@@ -214,7 +216,7 @@ class _AkunState extends State<Akun> {
                               fit: BoxFit.cover,
                             );
                           } else {
-                            print('image url: $apiurl/assets/img/$profileUrl');
+                            // print('image url: $apiurl/assets/img/$profileUrl');
 
                             if (fotoProfil != null) {
                               return Image.file(fotoProfil!, fit: BoxFit.cover);
@@ -274,14 +276,17 @@ class _AkunState extends State<Akun> {
                 email(),
                 _space(),
                 const SizedBox(height: 15),
+                nik(),
+                _space(),
+                const SizedBox(height: 15),
                 tanggalLahir(),
                 _space(),
                 const SizedBox(height: 15),
                 noTelp(),
                 _space(),
-                const SizedBox(height: 15),
-                nik(),
+                alamat(),
                 _space(),
+                const SizedBox(height: 15),
               ],
             ),
           ),
@@ -474,6 +479,49 @@ class _AkunState extends State<Akun> {
     );
   }
 
+  Padding alamat() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Alamat',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: "DMSans",
+              fontSize: 16,
+            ),
+          ),
+          FutureBuilder<String>(
+            future: SessionHelper.getAlamat(),
+            builder: (context, snapshot) {
+              String alamat = '-';
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                alamat = '-';
+              }
+
+              if (snapshot.hasData) {
+                alamat = snapshot.data!;
+              } else {
+                alamat = '-';
+              }
+              return Text(
+                alamat,
+                style: TextStyle(
+                  fontFamily: "DMSans",
+                  color: lightGrey,
+                  fontSize: 16,
+                ),
+              );
+            },
+          )
+        ],
+      ),
+    );
+  }
+
   Column email() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -524,7 +572,7 @@ class _AkunState extends State<Akun> {
   Widget _buildLogoutBtn() {
     return Padding(
       padding: const EdgeInsets.only(top: 50),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -541,7 +589,7 @@ class _AkunState extends State<Akun> {
                 ),
               );
             },
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             shape: RoundedRectangleBorder(
               side: BorderSide(width: 3, color: White),
               borderRadius: BorderRadius.circular(30.0),
