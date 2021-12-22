@@ -5,7 +5,6 @@ import 'package:rumah_sidoarjo/beritainformasi.dart';
 import 'package:rumah_sidoarjo/helper/session_helper.dart';
 import 'package:rumah_sidoarjo/layananpublik.dart';
 import 'package:rumah_sidoarjo/lowongankerja.dart';
-import 'package:rumah_sidoarjo/models/login.dart';
 import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
 import 'package:rumah_sidoarjo/pages/cctv.dart';
 import 'package:rumah_sidoarjo/pages/media_massa.dart';
