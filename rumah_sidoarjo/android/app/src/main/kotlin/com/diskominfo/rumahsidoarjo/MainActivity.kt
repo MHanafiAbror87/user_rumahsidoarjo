@@ -1,4 +1,4 @@
-package com.example.rumah_sidoarjo
+package com.diskominfo.rumahsidoarjo
 
 import io.flutter.embedding.android.FlutterActivity
 

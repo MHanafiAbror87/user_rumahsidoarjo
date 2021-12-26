@@ -1,7 +1,10 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rumah_sidoarjo/login.dart';
+import 'package:rumah_sidoarjo/services/api_services.dart';
 import 'custom_template.dart';
 
 class LupaPassword extends StatefulWidget {
@@ -11,13 +14,36 @@ class LupaPassword extends StatefulWidget {
 }
 
 class _LupaPasswordState extends State<LupaPassword> {
+  final ApiServices api = ApiServices();
+  final _addFormKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+
+  bool validate() {
+    bool status = false;
+    final form = _addFormKey.currentState;
+    form?.save();
+    if (form!.validate()) {
+      form.save();
+      status = true;
+    } else {
+      status = false;
+    }
+
+    if (!EmailValidator.validate(_emailController.text)) {
+      status = false;
+      Fluttertoast.showToast(msg: 'Masukkan email yang valid');
+      return false;
+    }
+    return status;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: _appBar(),
-        body: Container(
+    return Scaffold(
+      appBar: _appBar(),
+      body: Form(
+        key: _addFormKey,
+        child: Container(
           child: ListView(
             children: [
               Center(
@@ -121,7 +147,8 @@ class _LupaPasswordState extends State<LupaPassword> {
           child: Container(
             decoration: kBoxDecorationStyle,
             width: double.infinity,
-            child: TextField(
+            child: TextFormField(
+              controller: _emailController,
               style: TextStyle(
                 color: darkGrey,
                 letterSpacing: 2,
@@ -133,6 +160,13 @@ class _LupaPasswordState extends State<LupaPassword> {
                 hintText: 'Email',
                 hintStyle: kHintTextStyle,
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Email Tidak Boleh Kosong';
+                }
+                return null;
+              },
+              onChanged: (value) {},
             ),
           ),
         ),
@@ -142,28 +176,38 @@ class _LupaPasswordState extends State<LupaPassword> {
 
   Widget _buildKirimBtn(BuildContext context) {
     return TextButton(
-      onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('Sukses'),
-          content: const Text('Silahkan cek email Anda'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginPage();
+      onPressed: () async {
+        if (validate()) {
+          bool registStatus = await api.lupapassword(
+            _emailController.text,
+          );
+
+          if (registStatus) {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Sukses'),
+                content: const Text('Silahkan Cek Email Anda'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return LoginPage();
+                          },
+                        ),
+                      );
                     },
+                    child: const Text('Log In'),
                   ),
-                ),
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      ),
+                ],
+              ),
+            );
+          }
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Container(

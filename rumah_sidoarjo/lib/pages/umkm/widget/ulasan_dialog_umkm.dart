@@ -14,8 +14,11 @@ import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:path/path.dart' as pt;
 
 class UlasanDialogUmkm extends StatefulWidget {
-  UlasanDialogUmkm({Key? key, required this.kerajinan}) : super(key: key);
+  UlasanDialogUmkm(
+      {Key? key, required this.kerajinan, required this.onAddUlasanSuccess})
+      : super(key: key);
   Umkm kerajinan;
+  final Function onAddUlasanSuccess;
 
   @override
   _UlasanDialogUmkmState createState() => _UlasanDialogUmkmState();
@@ -354,13 +357,36 @@ class _UlasanDialogUmkmState extends State<UlasanDialogUmkm> {
               Fluttertoast.showToast(msg: 'Ulasan tidak boleh kosong');
               return;
             }
-            final api = ApiUmkm();
+            if (widget.kerajinan.kategori == 'Kerajinan') {
+              final api = ApiUmkm();
 
-            final status = await api.postUlasanUmkm(
-                listFoto, widget.kerajinan.idUmkm, _ulasanController.text);
+              final status = await api.postUlasanUmkm(
+                  listFoto, widget.kerajinan.idUmkm, _ulasanController.text);
 
-            if (status) {
-              Get.back();
+              if (status) {
+                Get.back();
+              }
+            }
+            if (widget.kerajinan.kategori == 'Makanan') {
+              final api = ApiUmkm();
+
+              final status = await api.postUlasanUmkm(
+                  listFoto, widget.kerajinan.idUmkm, _ulasanController.text);
+
+              if (status) {
+                Get.back();
+              }
+            }
+            if (widget.kerajinan.kategori == 'Pertanian') {
+              final api = ApiUmkm();
+
+              final status = await api.postUlasanUmkm(
+                  listFoto, widget.kerajinan.idUmkm, _ulasanController.text);
+
+              if (status) {
+                widget.onAddUlasanSuccess();
+                Get.back();
+              }
             }
           },
           child: const Text('Kirim'),

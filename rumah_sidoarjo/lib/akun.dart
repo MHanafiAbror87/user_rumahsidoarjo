@@ -416,7 +416,7 @@ class _AkunState extends State<Akun> {
   TextButton tbUbah() {
     return TextButton(
       onPressed: () => {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) {

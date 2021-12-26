@@ -120,14 +120,7 @@ class _ListUlasan_UmkmState extends State<ListUlasan_Umkm> {
           color: White,
         ),
         onPressed: () => {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return page.Umkm();
-              },
-            ),
-          ),
+          Navigator.pop(context),
         },
       ),
       title: const Text('Ulasan UMKM'),

@@ -4,14 +4,19 @@ import 'package:rumah_sidoarjo/akun.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
 import 'package:rumah_sidoarjo/helper/session_helper.dart';
 import 'package:rumah_sidoarjo/layananpublik.dart';
+import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/lowongankerja.dart';
+import 'package:rumah_sidoarjo/models/list_berita.dart';
 import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
+import 'package:rumah_sidoarjo/pages/berita/detail_berita.dart';
 import 'package:rumah_sidoarjo/pages/cctv.dart';
 import 'package:rumah_sidoarjo/pages/media_massa.dart';
 import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pariwisata.dart';
 import 'package:rumah_sidoarjo/pages/pendidikan/pendidikan.dart';
+import 'package:rumah_sidoarjo/pages/umkm/detail_umkm.dart';
 import 'package:rumah_sidoarjo/pages/umkm/umkm.dart';
+import 'package:rumah_sidoarjo/services/api_berita.dart';
 import 'package:rumah_sidoarjo/tagihan.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,6 +28,7 @@ class Home extends StatefulWidget {
 }
 
 class _homeState extends State<Home> {
+  final ApiBerita api = ApiBerita();
   @override
   void initState() {
     super.initState();
@@ -555,53 +561,78 @@ class _homeState extends State<Home> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15),
       height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 260,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  child: Row(
-                    children: [
-                      gambar[index],
-                      Column(
-                        children: [
-                          Container(
-                              padding: EdgeInsets.only(left: 10),
-                              height: 30,
-                              width: 180,
-                              child: Text(berita[index],
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold))),
-                          SizedBox(
-                            height: 5,
+      child: FutureBuilder<List<ListBeritaModel>>(
+          future: api.getBerita(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  final berita = snapshot.data![index];
+
+                  return GestureDetector(
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return DetailBerita(berita: berita);
+                    })),
+                    child: Container(
+                      width: 260,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Image.network(
+                                  "https://www.sidoarjokab.go.id/${berita.thumb}",
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          height: 30,
+                                          width: 180,
+                                          child: Text(berita.judul,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight:
+                                                      FontWeight.bold))),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          height: 30,
+                                          width: 180,
+                                          child: Text(berita.tgl,
+                                              maxLines: 2,
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                              )))
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Container(
-                              padding: EdgeInsets.only(left: 10),
-                              height: 30,
-                              width: 180,
-                              child: Text(berita[index],
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                  )))
-                        ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-        itemCount: berita.length,
-      ),
+                    ),
+                  );
+                },
+                itemCount: 5,
+              );
+            }
+
+            return Center(child: CircularProgressIndicator());
+          }),
     );
   }
 
@@ -740,64 +771,103 @@ class _homeState extends State<Home> {
         ),
       ),
       actions: [
-        IconButton(
-            onPressed: () => {
+        FutureBuilder<bool>(
+          future: SessionHelper.checkisLogin(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data!) {
+                return IconButton(
+                    onPressed: () => {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return Akun();
+                          }))
+                        },
+                    icon: Icon(
+                      Icons.account_circle,
+                      size: 30,
+                    ));
+              }
+
+              return TextButton(
+                onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Akun();
-                  }))
+                    return LoginPage();
+                  }));
                 },
-            icon: Icon(
-              Icons.account_circle,
-              size: 30,
-            )),
+                child:
+                    const Text('Login', style: TextStyle(color: Colors.white)),
+              );
+            }
+
+            return const SizedBox();
+          },
+        ),
       ],
     );
   }
 
   Widget _selamatDatang() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Container(
-        width: double.infinity,
-        height: 45.0,
-        decoration: BoxDecoration(
-            color: White,
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 5),
-              child: Text('Selamat Datang',
-                  style: GoogleFonts.poppins(
-                    fontSize: 10,
-                    color: Colors.black,
-                  )),
-            ),
-            FutureBuilder<String>(
-                future: SessionHelper.getNama(),
-                builder: (context, snapshot) {
-                  String nama = '---';
+    return FutureBuilder<bool>(
+        future: SessionHelper.checkisLogin(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data! == false) {
+              return const SizedBox();
+            }
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Container(
+                width: double.infinity,
+                height: 45.0,
+                decoration: BoxDecoration(
+                    color: White,
+                    borderRadius:
+                        BorderRadius.vertical(bottom: Radius.circular(20))),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text('Selamat Datang',
+                          style: GoogleFonts.poppins(
+                            fontSize: 10,
+                            color: Colors.black,
+                          )),
+                    ),
+                    FutureBuilder<String>(
+                        future: SessionHelper.getNama(),
+                        builder: (context, snapshot) {
+                          String nama = '---';
 
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    nama = '---';
-                  }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            nama = '---';
+                          }
 
-                  if (snapshot.hasData) {
-                    nama = snapshot.data!;
-                  } else {
-                    nama = '---';
-                  }
+                          if (snapshot.hasData) {
+                            if (snapshot.data!.isEmpty) {
+                              nama = 'Pengunjung';
+                            } else {
+                              nama = snapshot.data!;
+                            }
+                          } else {
+                            nama = '---';
+                          }
 
-                  return Text(nama,
-                      style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold));
-                })
-          ],
-        ),
-      ),
-    );
+                          return Text(nama,
+                              style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold));
+                        })
+                  ],
+                ),
+              ),
+            );
+          }
+
+          return const SizedBox();
+        });
   }
 }
 

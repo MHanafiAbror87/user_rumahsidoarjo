@@ -43,34 +43,31 @@ class Kerajinan extends StatelessWidget {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: 270,
-                                          child: Text(
+                                  Expanded(
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 20.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
                                             kerajinan.nama,
                                             style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        SizedBox(
-                                          width: 270,
-                                          child: Text(
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
                                             kerajinan.alamat,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                             textAlign: TextAlign.left,
-                                          ),
-                                        )
-                                      ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],

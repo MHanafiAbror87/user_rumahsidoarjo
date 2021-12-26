@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rumah_sidoarjo/helper/session_helper.dart';
+import 'package:rumah_sidoarjo/models/list_berita.dart';
 import 'package:rumah_sidoarjo/models/list_ulasan_umkm.dart';
 import 'package:rumah_sidoarjo/models/list_umkm.dart';
 import 'package:rumah_sidoarjo/models/umkm.dart';
@@ -9,26 +10,28 @@ import 'package:http/http.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:http_parser/http_parser.dart';
 
-class ApiUmkm {
+class ApiBerita {
   final String apiUrlMakanan = "$apiurl/Api_Umkm/makanan";
   final String apiUrlPertanian = "$apiurl/Api_Umkm/pertanian";
-  final String apiUrl = "$apiurl/Api_Umkm";
+  final String apiUrl =
+      "https://www.sidoarjokab.go.id/frontend/web/additionalComponent/apiSite/api_news.php";
   final String apiUlasan = "$apiurl/Api_Umkm/ulasan";
 
-  Future<List<UmkmData>> getUmkmPertanian() async {
+  Future<List<ListBeritaModel>> getBerita() async {
     try {
-      Response res = await get(Uri.parse(apiUrlPertanian));
+      Response res =
+          await get(Uri.parse(apiUrl)).timeout(Duration(seconds: 1000));
 
       if (res.statusCode == 200) {
-        final body = jsonDecode(res.body);
+        List<dynamic> body = jsonDecode(res.body);
 
-        if (body['status']) {
-          final response = ListUmkmModel.fromJson(body);
+        List<ListBeritaModel> berita = body
+            .map(
+              (dynamic item) => ListBeritaModel.fromJson(item),
+            )
+            .toList();
 
-          return response.data;
-        } else {
-          throw body['message'];
-        }
+        return berita;
       } else {
         throw "Failed to load cases list";
       }
@@ -142,8 +145,6 @@ class ApiUmkm {
       'id_umkm': idUmkm,
       'ulasan': ulasan,
     };
-
-    print(data.toString());
 
     try {
       var request = MultipartRequest('POST', Uri.parse(apiUrl));

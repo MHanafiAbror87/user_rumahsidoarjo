@@ -17,23 +17,23 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(milliseconds: 2000), () async {
-      final isLogin = await SessionHelper.checkisLogin();
+      // final isLogin = await SessionHelper.checkisLogin();
 
-      if (isLogin) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Home(),
-          ),
-        );
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginPage(),
-          ),
-        );
-      }
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Home(),
+        ),
+      );
+      // if (isLogin) {
+      // } else {
+      //   Navigator.pushReplacement(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => LoginPage(),
+      //     ),
+      //   );
+      // }
     });
   }
 

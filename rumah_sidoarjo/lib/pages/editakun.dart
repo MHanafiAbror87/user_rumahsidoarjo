@@ -83,122 +83,139 @@ class _EditAkunState extends State<EditAkun> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: Form(
-        key: _addFormKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: ListView(
-            children: [
-              _buildTextField('Nama Lengkap', "Masukkan Nama Lengkap", false,
-                  _namaController),
-              GestureDetector(
-                onTap: () async {
-                  DateTime? selected = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1900, 1),
-                    lastDate: DateTime.now(),
-                  );
+      body: WillPopScope(
+        onWillPop: () async {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return Akun();
+              },
+            ),
+          );
 
-                  print('selected date: ${selected.toString()}');
-                  print(
-                      'selected date: ${DateFormat("yyyy-MM-dd").format(selected!)}');
+          return false;
+        },
+        child: Form(
+          key: _addFormKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: ListView(
+              children: [
+                _buildTextField('Nama Lengkap', "Masukkan Nama Lengkap", false,
+                    _namaController),
+                GestureDetector(
+                  onTap: () async {
+                    DateTime? selected = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1900, 1),
+                      lastDate: DateTime.now(),
+                    );
 
-                  if (selected != null) {
-                    setState(() {
-                      selectedTime = selected;
-                    });
+                    if (selected != null) {
+                      // print('selected date: ${selected.toString()}');
+                      // print(
+                      //     'selected date: ${DateFormat("yyyy-MM-dd").format(selected!)}');
 
-                    _tanggallahirController.text =
-                        DateFormat('dd/MM/yyyy').format(selected);
-                  }
-                },
-                child: _buildTextField('Tanggal Lahir', "dd/mm/yyyy", false,
-                    _tanggallahirController, false),
-              ),
-              _pilihJenisKelamin(),
-              _buildTextField(
-                  'Telepon', "Masukkan No Telepon", false, _teleponController),
-              _buildTextField(
-                  'Alamat', "Masukkan Alamat", false, _alamatController),
-              _buildTextField('Password', "Kosongkan jika tidak ingin mengubah",
-                  true, _passwordController),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  OutlinedButton(
-                    onPressed: () => {
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Akun();
-                          },
+                      setState(() {
+                        selectedTime = selected;
+                      });
+
+                      _tanggallahirController.text =
+                          DateFormat('dd/MM/yyyy').format(selected);
+                    }
+                  },
+                  child: _buildTextField('Tanggal Lahir', "dd/mm/yyyy", false,
+                      _tanggallahirController, false),
+                ),
+                _pilihJenisKelamin(),
+                _buildTextField('Telepon', "Masukkan No Telepon", false,
+                    _teleponController),
+                _buildTextField(
+                    'Alamat', "Masukkan Alamat", false, _alamatController),
+                _buildTextField(
+                    'Password',
+                    "Kosongkan jika tidak ingin mengubah",
+                    true,
+                    _passwordController),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () => {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Akun();
+                            },
+                          ),
+                        )
+                      },
+                      child: Text(
+                        'CANCEL',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 15,
+                          letterSpacing: 2,
+                          color: darkGreen1,
                         ),
-                      )
-                    },
-                    child: Text(
-                      'CANCEL',
-                      style: GoogleFonts.dmSans(
-                        fontSize: 15,
-                        letterSpacing: 2,
-                        color: darkGreen1,
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
                     ),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (validate()) {
-                        bool registStatus = await api.updateAkun(DataRegister(
-                          nik: _nikController.text,
-                          nama: _namaController.text,
-                          tanggalLahir:
-                              DateFormat('yyyy-MM-dd').format(selectedTime),
-                          jenisKelamin: selectedJk,
-                          password: _passwordController.text,
-                          noTelepon: _teleponController.text,
-                          email: '',
-                          alamat: _alamatController.text,
-                        ));
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (validate()) {
+                          bool registStatus = await api.updateAkun(DataRegister(
+                            nik: _nikController.text,
+                            nama: _namaController.text,
+                            tanggalLahir:
+                                DateFormat('yyyy-MM-dd').format(selectedTime),
+                            jenisKelamin: selectedJk,
+                            password: _passwordController.text,
+                            noTelepon: _teleponController.text,
+                            email: '',
+                            alamat: _alamatController.text,
+                          ));
 
-                        if (registStatus) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Akun();
-                              },
-                            ),
-                          );
+                          if (registStatus) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return Akun();
+                                },
+                              ),
+                            );
+                          }
                         }
-                      }
-                    },
-                    child: Text(
-                      'SIMPAN',
-                      style: GoogleFonts.dmSans(
-                        fontSize: 15,
-                        letterSpacing: 2,
-                        color: White,
+                      },
+                      child: Text(
+                        'SIMPAN',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 15,
+                          letterSpacing: 2,
+                          color: White,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: darkGreen1,
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      primary: darkGreen1,
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -213,7 +230,7 @@ class _EditAkunState extends State<EditAkun> {
           color: White,
         ),
         onPressed: () => {
-          Navigator.pop(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) {

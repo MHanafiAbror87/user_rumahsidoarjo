@@ -1,104 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:rumah_sidoarjo/custom_template.dart';
+import 'package:rumah_sidoarjo/models/list_umkm.dart';
+import 'package:rumah_sidoarjo/pages/umkm/detail_pertanian.dart';
+import 'package:rumah_sidoarjo/pages/umkm/detail_umkm.dart';
+import 'package:rumah_sidoarjo/services/api_umkm.dart';
+import 'package:rumah_sidoarjo/services/apiurl.dart';
 
-class Pertanian extends StatefulWidget {
-  @override
-  _PertanianState createState() => _PertanianState();
-}
+class Pertanian extends StatelessWidget {
+  final ApiUmkm api = ApiUmkm();
 
-class _PertanianState extends State<Pertanian> {
+  Pertanian({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.transparent,
-        body: ListView.builder(
-          itemCount: nama.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2),
-              child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        gambar[index],
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 30,
-                                width: 300,
-                                child: Text(
-                                  nama[index],
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
+        body: FutureBuilder<List<UmkmData>>(
+            future: api.getUmkmPertanian(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                List<UmkmData> umkm = snapshot.data;
+                return ListView(
+                  children: umkm
+                      .map(
+                        (kerajinan) => GestureDetector(
+                          onTap: () => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => DetailUmkm_Pertanian(
+                                kerajinan: kerajinan,
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                  height: 30,
-                                  width: 300,
-                                  child: Text(
-                                    alamat[index],
-                                    style: TextStyle(fontSize: 12),
-                                  ))
-                            ],
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                  )),
-            );
-          },
-        ),
-      ),
-    );
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 70,
+                                    width: 70,
+                                    child: Image.network(
+                                      "$fotoUrl/assets/img/${kerajinan.foto1}",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 20.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            kerajinan.nama,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                            kerajinan.alamat,
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.left,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            }));
   }
 }
-
-final List nama = [
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-  "Keripik Gayam Sidoarjo",
-];
-
-final List alamat = [
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-  "Jl. Dr. Soetomo No.14 Sidoarjo",
-];
-
-final List gambar = [
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-];

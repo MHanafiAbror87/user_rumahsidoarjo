@@ -13,6 +13,7 @@ class ApiServices {
   final String apiUrl_edit = "$apiurl/Akun/edit";
   final String apiUrl = "$apiurl/Akun";
   final String apiUrl_login = "$apiurl/Akun/login";
+  final String apiUrl_lupapassword = "$apiurl/Akun/forgotPassword";
   final String apiUrl_foto = "$apiurl/Akun/foto";
 
   Future<bool> updateFoto(File foto) async {
@@ -152,6 +153,41 @@ class ApiServices {
         return false;
       }
     } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> lupapassword(String email) async {
+    Map data = {
+      'email': email,
+    };
+
+    print(Uri.parse(apiUrl_lupapassword));
+
+    try {
+      final Response response = await post(
+        Uri.parse(apiUrl_lupapassword),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      final jsonResponse = json.decode(response.body);
+
+      print("respon forgetPassword: ${jsonResponse.toString()}");
+
+      if (jsonResponse['status'] as bool) {
+        // Fluttertoast.showToast(msg: jsonResponse['message']);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: jsonResponse['message']);
+        return false;
+      }
+    } catch (e) {
+      print(e.toString());
       Fluttertoast.showToast(msg: e.toString());
       return false;
     }

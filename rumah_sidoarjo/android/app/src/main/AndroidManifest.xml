@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rumah_sidoarjo">
+    package="com.diskominfo.rumahsidoarjo">
    <application
         android:label="Rumah Sidoarjo"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyApVSLT_CwS3z1l8ZTvBT6D3XIa1Ozg-64"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -24,6 +24,23 @@ class Detail_Ulasan_Umkm extends StatefulWidget {
 }
 
 class _Detail_Ulasan_UmkmState extends State<Detail_Ulasan_Umkm> {
+  List<String> images = [];
+
+  @override
+  void initState() {
+    if (widget.kerajinan.foto1.isNotEmpty) {
+      images.add(widget.kerajinan.foto1);
+    }
+    if (widget.kerajinan.foto2.isNotEmpty) {
+      images.add(widget.kerajinan.foto2);
+    }
+    if (widget.kerajinan.foto3.isNotEmpty) {
+      images.add(widget.kerajinan.foto3);
+    }
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -71,23 +88,22 @@ class _Detail_Ulasan_UmkmState extends State<Detail_Ulasan_Umkm> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Image.network(
-                      "$fotoUrl/assets/img/${widget.kerajinan.foto1}")),
-              SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Image.network(
-                      "$fotoUrl/assets/img/${widget.kerajinan.foto2}")),
-              SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Image.network(
-                      "$fotoUrl/assets/img/${widget.kerajinan.foto3}")),
-            ],
+            children: images
+                .map((image) => GestureDetector(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                                  child: Image.network(
+                                      "$fotoUrl/assets/img/$image"),
+                                ));
+                      },
+                      child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.network("$fotoUrl/assets/img/$image")),
+                    ))
+                .toList(),
           ),
         ],
       ),
