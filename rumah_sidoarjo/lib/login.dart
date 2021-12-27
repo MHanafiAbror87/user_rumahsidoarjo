@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,7 +8,6 @@ import 'package:rumah_sidoarjo/services/api_services.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
-import 'package:getwidget/getwidget.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = "/login";

@@ -1,248 +1,476 @@
-import 'package:flutter/material.dart';
-import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:rumah_sidoarjo/home.dart';
-import 'package:rumah_sidoarjo/models/kesehatan.dart';
-import 'package:rumah_sidoarjo/models/umkm.dart';
-import 'package:rumah_sidoarjo/pages/kesehatan/kesehatan.dart';
-import 'package:rumah_sidoarjo/pages/umkm/umkm.dart' as UmkmPage;
-import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
-import 'package:rumah_sidoarjo/models/pariwisata.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:rumah_sidoarjo/services/apiurl.dart';
+// import 'dart:io';
+// import 'package:flutter/material.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:intl/intl.dart';
+// import 'package:rumah_sidoarjo/custom_template.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:rumah_sidoarjo/models/kesehatan.dart';
+// import 'package:rumah_sidoarjo/models/list_umkm.dart';
+// import 'package:rumah_sidoarjo/models/umkm.dart';
+// import 'package:rumah_sidoarjo/pages/kesehatan/kesehatan.dart';
+// import 'package:rumah_sidoarjo/pages/pariwisata/list_ulasan.dart';
+// import 'package:rumah_sidoarjo/pages/pariwisata/widget/ulasan_dialog.dart';
+// import 'package:rumah_sidoarjo/pages/umkm/list_ulasan_umkm.dart';
+// import 'package:rumah_sidoarjo/pages/umkm/umkm.dart' as page;
+// import 'package:rumah_sidoarjo/pages/umkm/widget/detail_ulasan.dart';
+// import 'package:rumah_sidoarjo/pages/umkm/widget/detail_ulasan_limit.dart';
+// import 'package:rumah_sidoarjo/pages/umkm/widget/ulasan_dialog_umkm.dart';
+// import 'package:rumah_sidoarjo/services/api_kesehatan.dart';
+// import 'package:rumah_sidoarjo/services/api_umkm.dart';
+// import 'package:rumah_sidoarjo/services/apiurl.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
-class DetailPkmu extends StatelessWidget {
-  final KesehatanData pkmu;
-  DetailPkmu({required this.pkmu});
+// class DetailKesehatan_Pkmu extends StatefulWidget {
+//   final KesehatanData kesehatan;
+//   DetailKesehatan_Pkmu({required this.kesehatan});
 
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: FlatButton(
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: White,
-            ),
-            onPressed: () => Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) {
-              return Kesehatan();
-            })),
-          ),
-          title: Text('Detail PKM Utama'),
-          backgroundColor: darkGreen1,
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                child: Container(
-                  width: double.infinity,
-                  height: 200,
-                  child: Image.network("$fotoUrl/assets/img/${pkmu.foto}",
-                      fit: BoxFit.cover),
-                ),
-              ),
-              Text(
-                pkmu.nama,
-                style: TextStyle(
-                    fontFamily: 'DMSans',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Alamat',
-                          style: TextStyle(
-                            fontFamily: 'DMSans',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          pkmu.alamat,
-                          style: TextStyle(
-                              fontFamily: 'DMSans',
-                              fontSize: 14,
-                              color: darkGreen),
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.grey,
-                        height: 25,
-                        thickness: 2,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Kategori',
-                          style: TextStyle(
-                            fontFamily: 'DMSans',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          pkmu.kategori,
-                          style: TextStyle(
-                              fontFamily: 'DMSans',
-                              fontSize: 14,
-                              color: darkGreen),
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.grey,
-                        height: 25,
-                        thickness: 2,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Pengelola',
-                          style: TextStyle(
-                            fontFamily: 'DMSans',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          pkmu.penanggungJawab,
-                          style: TextStyle(
-                              fontFamily: 'DMSans',
-                              fontSize: 14,
-                              color: darkGreen),
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.grey,
-                        height: 25,
-                        thickness: 2,
-                      ),
-                      Row(
-                        children: [
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 27),
-                                child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Text(
-                                    'Telepon',
-                                    style: TextStyle(
-                                      fontFamily: 'DMSans',
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  pkmu.noTelepon,
-                                  style: TextStyle(
-                                      fontFamily: 'DMSans',
-                                      fontSize: 14,
-                                      color: darkGreen),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: 180),
-                          Container(
-                              width: 100,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: darkGreen1,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Center(
-                                  child: Text(
-                                'Panggil',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 14, color: White),
-                              ))),
-                        ],
-                      ),
-                      Divider(
-                        color: Colors.grey,
-                        height: 25,
-                        thickness: 2,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Deskripsi',
-                          style: TextStyle(
-                            fontFamily: 'DMSans',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          pkmu.penanggungJawab,
-                          style: TextStyle(
-                              fontFamily: 'DMSans',
-                              fontSize: 14,
-                              color: darkGreen),
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.grey,
-                        height: 25,
-                        thickness: 2,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Media Sosial',
-                          style: TextStyle(
-                            fontFamily: 'DMSans',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          pkmu.website,
-                          style: TextStyle(
-                              fontFamily: 'DMSans',
-                              fontSize: 14,
-                              color: darkGreen),
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.grey,
-                        height: 25,
-                        thickness: 2,
-                      ),
-                      SizedBox(height: 20),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   _DetailKesehatan_PkmuState createState() => _DetailKesehatan_PkmuState();
+// }
+
+// class _DetailKesehatan_PkmuState extends State<DetailKesehatan_Pkmu> {
+//   final ApiKesehatan api = ApiKesehatan();
+//   final _addFormKey = GlobalKey<FormState>();
+//   final _ulasanController = TextEditingController();
+//   List<Ulasan> tampilUlasan = [];
+//   List<File> listFoto = [];
+
+//   File? fotoProfil;
+//   String profileUrl = '';
+
+//   late GoogleMapController mapController;
+
+//   late LatLng center;
+//   final Map<String, Marker> _markers = {};
+
+//   void _onMapCreated(GoogleMapController controller) {
+//     mapController = controller;
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       appBar: AppBar(
+//         leading: TextButton(
+//           child: Icon(
+//             Icons.arrow_back_ios,
+//             color: White,
+//           ),
+//           onPressed: () => Navigator.pushReplacement(
+//             context,
+//             MaterialPageRoute(
+//               builder: (context) {
+//                 return Kesehatan();
+//               },
+//             ),
+//           ),
+//         ),
+//         title: const Text('Detail Kesehatan'),
+//         backgroundColor: darkGreen1,
+//       ),
+//       body: Form(
+//         key: _addFormKey,
+//         child: SingleChildScrollView(
+//           child: FutureBuilder<KesehatanData>(
+//             future: api.getKesehatanById(widget.kesehatan.idKesehatan),
+//             builder: (context, snapshot) {
+//               if (snapshot.hasData) {
+//                 final detail = snapshot.data;
+
+//                 final umkm = detail!.umkm;
+//                 final semuaUlasan = detail.ulasan;
+
+//                 // add lat lng location & marker
+//                 center =
+//                     LatLng(double.parse(umkm.lat), double.parse(umkm.long));
+//                 _markers[umkm.nama] = Marker(
+//                   markerId: MarkerId(umkm.nama),
+//                   position:
+//                       LatLng(double.parse(umkm.lat), double.parse(umkm.long)),
+//                   infoWindow: InfoWindow(
+//                     title: umkm.nama,
+//                     snippet: umkm.alamat,
+//                   ),
+//                 );
+
+//                 tampilUlasan.clear();
+
+//                 if (semuaUlasan.length > 2) {
+//                   for (var i = 0; i < 2; i++) {
+//                     tampilUlasan.add(semuaUlasan[i]);
+//                   }
+//                 } else {
+//                   tampilUlasan.addAll(semuaUlasan);
+//                 }
+
+//                 return Column(
+//                   children: [
+//                     Padding(
+//                       padding: const EdgeInsets.symmetric(
+//                           horizontal: 10, vertical: 10),
+//                       child: Container(
+//                         width: double.infinity,
+//                         height: 210,
+//                         child: Image.network(
+//                             "$fotoUrl/assets/img/${umkm.foto1}",
+//                             fit: BoxFit.cover),
+//                       ),
+//                     ),
+//                     Column(
+//                       children: [
+//                         Text(
+//                           umkm.nama,
+//                           style: const TextStyle(
+//                               fontFamily: 'DMSans',
+//                               fontSize: 16,
+//                               fontWeight: FontWeight.bold),
+//                         ),
+//                         const SizedBox(height: 20),
+//                         Padding(
+//                           padding: const EdgeInsets.symmetric(horizontal: 10),
+//                           child: Column(
+//                             children: [
+//                               const Align(
+//                                 alignment: Alignment.centerLeft,
+//                                 child: Text(
+//                                   'Alamat',
+//                                   style: TextStyle(
+//                                     fontFamily: 'DMSans',
+//                                     fontSize: 16,
+//                                   ),
+//                                 ),
+//                               ),
+//                               Align(
+//                                 alignment: Alignment.centerLeft,
+//                                 child: Text(
+//                                   umkm.alamat,
+//                                   style: TextStyle(
+//                                       fontFamily: 'DMSans',
+//                                       fontSize: 14,
+//                                       color: darkGreen),
+//                                 ),
+//                               ),
+//                               const Divider(
+//                                 color: Colors.grey,
+//                                 height: 25,
+//                                 thickness: 2,
+//                               ),
+//                               const Align(
+//                                 alignment: Alignment.centerLeft,
+//                                 child: Text(
+//                                   'Kategori',
+//                                   style: TextStyle(
+//                                     fontFamily: 'DMSans',
+//                                     fontSize: 16,
+//                                   ),
+//                                 ),
+//                               ),
+//                               Align(
+//                                 alignment: Alignment.centerLeft,
+//                                 child: Text(
+//                                   umkm.kategori,
+//                                   style: TextStyle(
+//                                       fontFamily: 'DMSans',
+//                                       fontSize: 14,
+//                                       color: darkGreen),
+//                                 ),
+//                               ),
+//                               const Divider(
+//                                 color: Colors.grey,
+//                                 height: 25,
+//                                 thickness: 2,
+//                               ),
+//                               const Align(
+//                                 alignment: Alignment.centerLeft,
+//                                 child: Text(
+//                                   'Pengelola',
+//                                   style: TextStyle(
+//                                     fontFamily: 'DMSans',
+//                                     fontSize: 16,
+//                                   ),
+//                                 ),
+//                               ),
+//                               Align(
+//                                 alignment: Alignment.centerLeft,
+//                                 child: Text(
+//                                   umkm.penanggungJawab,
+//                                   style: TextStyle(
+//                                       fontFamily: 'DMSans',
+//                                       fontSize: 14,
+//                                       color: darkGreen),
+//                                 ),
+//                               ),
+//                               const Divider(
+//                                 color: Colors.grey,
+//                                 height: 25,
+//                                 thickness: 2,
+//                               ),
+//                               Row(
+//                                 mainAxisAlignment:
+//                                     MainAxisAlignment.spaceBetween,
+//                                 children: [
+//                                   Column(
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.start,
+//                                     children: [
+//                                       const Padding(
+//                                         padding: EdgeInsets.only(right: 27),
+//                                         child: Align(
+//                                           alignment: Alignment.bottomLeft,
+//                                           child: Text(
+//                                             'Telepon',
+//                                             style: TextStyle(
+//                                               fontFamily: 'DMSans',
+//                                               fontSize: 16,
+//                                             ),
+//                                           ),
+//                                         ),
+//                                       ),
+//                                       Align(
+//                                         alignment: Alignment.centerLeft,
+//                                         child: Text(
+//                                           umkm.noTelp,
+//                                           style: TextStyle(
+//                                               fontFamily: 'DMSans',
+//                                               fontSize: 14,
+//                                               color: darkGreen),
+//                                         ),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                   InkWell(
+//                                     onTap: () => launch("tel://${umkm.noTelp}"),
+//                                     child: Container(
+//                                         width: 100,
+//                                         height: 40,
+//                                         decoration: BoxDecoration(
+//                                           color: darkGreen1,
+//                                           borderRadius:
+//                                               BorderRadius.circular(30),
+//                                         ),
+//                                         child: Center(
+//                                             child: Text(
+//                                           'Panggil',
+//                                           style: GoogleFonts.poppins(
+//                                               fontSize: 14, color: White),
+//                                         ))),
+//                                   ),
+//                                 ],
+//                               ),
+//                               const Divider(
+//                                 color: Colors.grey,
+//                                 height: 25,
+//                                 thickness: 2,
+//                               ),
+//                               const Align(
+//                                 alignment: Alignment.centerLeft,
+//                                 child: Text(
+//                                   'Website',
+//                                   style: TextStyle(
+//                                     fontFamily: 'DMSans',
+//                                     fontSize: 16,
+//                                   ),
+//                                 ),
+//                               ),
+//                               Align(
+//                                 alignment: Alignment.centerLeft,
+//                                 child: Text(
+//                                   umkm.website,
+//                                   style: TextStyle(
+//                                       fontFamily: 'DMSans',
+//                                       fontSize: 14,
+//                                       color: darkGreen),
+//                                 ),
+//                               ),
+//                               const Divider(
+//                                 color: Colors.grey,
+//                                 height: 25,
+//                                 thickness: 2,
+//                               ),
+//                               SizedBox(
+//                                 height: 500,
+//                                 child: GoogleMap(
+//                                   onMapCreated: _onMapCreated,
+//                                   initialCameraPosition: CameraPosition(
+//                                     target: center,
+//                                     zoom: 15.0,
+//                                   ),
+//                                   markers: _markers.values.toSet(),
+//                                 ),
+//                               ),
+//                               Row(
+//                                 mainAxisAlignment:
+//                                     MainAxisAlignment.spaceBetween,
+//                                 children: [
+//                                   Text('Ulasan',
+//                                       style: GoogleFonts.dmSans(
+//                                           fontSize: 16,
+//                                           fontWeight: FontWeight.bold)),
+//                                   tampilUlasan.isNotEmpty
+//                                       ? TextButton(
+//                                           onPressed: () => {
+//                                             Navigator.of(context).push(
+//                                               MaterialPageRoute(
+//                                                 builder: (context) =>
+//                                                     ListUlasan_Umkm(
+//                                                   kerajinan: umkm,
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                           },
+//                                           child: Text('Lihat Semua',
+//                                               style: GoogleFonts.dmSans(
+//                                                   fontSize: 14,
+//                                                   color: darkGreen1)),
+//                                         )
+//                                       : const SizedBox(),
+//                                 ],
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                         Column(
+//                           children: tampilUlasan.length > 0
+//                               ? tampilUlasan
+//                                   .map(
+//                                     (ulasan) => Padding(
+//                                       padding: const EdgeInsets.symmetric(
+//                                           horizontal: 20, vertical: 2),
+//                                       child: Container(
+//                                         height: 130,
+//                                         child: GestureDetector(
+//                                           onTap: () {
+//                                             showDialog(
+//                                                 context: context,
+//                                                 builder: (context) =>
+//                                                     DetailUlasanLimit(
+//                                                         kerajinan: ulasan));
+//                                           },
+//                                           child: Card(
+//                                               shape: RoundedRectangleBorder(
+//                                                   borderRadius:
+//                                                       BorderRadius.circular(
+//                                                           20)),
+//                                               child: Padding(
+//                                                 padding:
+//                                                     const EdgeInsets.all(10.0),
+//                                                 child: Column(
+//                                                   crossAxisAlignment:
+//                                                       CrossAxisAlignment.start,
+//                                                   children: [
+//                                                     Row(
+//                                                       children: [
+//                                                         SizedBox(
+//                                                             width: 50,
+//                                                             height: 50,
+//                                                             child: Image.network(
+//                                                                 "$fotoUrl/assets/img/${ulasan.fotoProfil}")),
+//                                                         Padding(
+//                                                           padding:
+//                                                               const EdgeInsets
+//                                                                       .only(
+//                                                                   left: 10),
+//                                                           child: Column(
+//                                                             crossAxisAlignment:
+//                                                                 CrossAxisAlignment
+//                                                                     .start,
+//                                                             children: [
+//                                                               Text(
+//                                                                 ulasan.nama,
+//                                                                 style: const TextStyle(
+//                                                                     fontSize:
+//                                                                         14,
+//                                                                     fontWeight:
+//                                                                         FontWeight
+//                                                                             .bold),
+//                                                               ),
+//                                                               Text(
+//                                                                 DateFormat(
+//                                                                         'dd MMMM yyyy')
+//                                                                     .format(ulasan
+//                                                                         .tanggalUpload),
+//                                                                 style: const TextStyle(
+//                                                                     fontSize:
+//                                                                         12,
+//                                                                     fontFamily:
+//                                                                         "DMSans"),
+//                                                               ),
+//                                                             ],
+//                                                           ),
+//                                                         )
+//                                                       ],
+//                                                     ),
+//                                                     const SizedBox(height: 10),
+//                                                     Text(
+//                                                       ulasan.ulasan,
+//                                                       maxLines: 2,
+//                                                       style: const TextStyle(
+//                                                           fontSize: 14,
+//                                                           fontFamily: "DMSans"),
+//                                                     )
+//                                                   ],
+//                                                 ),
+//                                               )),
+//                                         ),
+//                                       ),
+//                                     ),
+//                                   )
+//                                   .toList()
+//                               : [
+//                                   const Text("Ulasan Belum Tersedia"),
+//                                 ],
+//                         ),
+//                         TextButton(
+//                           onPressed: () {
+//                             showDialog(
+//                                 context: context,
+//                                 builder: (context) => UlasanDialogUmkm(
+//                                       kerajinan: umkm,
+//                                       onAddUlasanSuccess: () {
+//                                         setState(() {});
+//                                       },
+//                                     ));
+//                           },
+//                           child: Padding(
+//                             padding: const EdgeInsets.symmetric(
+//                                 horizontal: 20, vertical: 10),
+//                             child: Container(
+//                               height: 50,
+//                               padding: const EdgeInsets.all(12.0),
+//                               width: double.infinity,
+//                               child: Text(
+//                                 'Tambah Ulasan',
+//                                 textAlign: TextAlign.center,
+//                                 style: TextStyle(
+//                                   color: White,
+//                                   letterSpacing: 2,
+//                                   fontSize: 18.0,
+//                                   fontWeight: FontWeight.bold,
+//                                   fontFamily: 'DMSans',
+//                                 ),
+//                               ),
+//                               decoration: BoxDecoration(
+//                                 gradient: LinearGradient(
+//                                     colors: [lightGreen, darkGreen1],
+//                                     end: Alignment.centerRight,
+//                                     begin: Alignment.centerLeft),
+//                                 borderRadius: BorderRadius.circular(30.0),
+//                               ),
+//                             ),
+//                           ),
+//                         ),
+//                       ],
+//                     )
+//                   ],
+//                 );
+//               }
+
+//               return const Center(child: CircularProgressIndicator());
+//             },
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

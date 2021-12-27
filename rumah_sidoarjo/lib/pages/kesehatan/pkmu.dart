@@ -1,17 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:http/http.dart';
-import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/models/kesehatan.dart';
-import 'package:rumah_sidoarjo/models/umkm.dart';
-import 'package:rumah_sidoarjo/pages/detail_umkm.dart';
+import 'package:rumah_sidoarjo/models/list_umkm.dart';
 import 'package:rumah_sidoarjo/pages/kesehatan/detail_kesehatan.dart';
-import 'package:rumah_sidoarjo/pages/umkm/detail_umkm.dart';
 import 'package:rumah_sidoarjo/services/api_kesehatan.dart';
-import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
-import 'package:rumah_sidoarjo/models/pariwisata.dart';
-import 'package:rumah_sidoarjo/services/api_umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
 class Pkmu extends StatelessWidget {
@@ -20,66 +11,67 @@ class Pkmu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.transparent,
         body: FutureBuilder<List<KesehatanData>>(
             future: api.getKesehatan(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
-                List<KesehatanData> pkmu = snapshot.data;
+                List<KesehatanData> kesehatan = snapshot.data;
                 return ListView(
-                  children: pkmu
+                  children: kesehatan
                       .map(
                         (pkmu) => GestureDetector(
-                          onTap: () => Navigator.of(context)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => DetailPkmu(
-                                        pkmu: pkmu,
-                                      ))),
-                          child: SingleChildScrollView(
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 100,
-                                      width: 50,
-                                      child: Image.network(
-                                        "$fotoUrl/assets/img/${pkmu.foto}",
-                                        fit: BoxFit.cover,
-                                      ),
+                          onTap: () => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => DetailKesehatan_Pkmu(
+                                kesehatan: pkmu,
+                              ),
+                            ),
+                          ),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 70,
+                                    width: 70,
+                                    child: Image.network(
+                                      "$fotoUrl/assets/img/${pkmu.foto}",
+                                      fit: BoxFit.cover,
                                     ),
-                                    Padding(
+                                  ),
+                                  Expanded(
+                                    child: Padding(
                                       padding:
-                                          const EdgeInsets.only(left: 10.0),
+                                          const EdgeInsets.only(left: 20.0),
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            height: 30,
-                                            width: 300,
-                                            child: Text(
-                                              pkmu.nama,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                          Text(
+                                            pkmu.nama,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
-                                          Container(
-                                              height: 30,
-                                              width: 300,
-                                              child: Text(
-                                                ('${pkmu.alamat}, ${pkmu.kecamatan}'),
-                                                style: TextStyle(fontSize: 12),
-                                              ))
+                                          Text(
+                                            pkmu.alamat,
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.left,
+                                          )
                                         ],
                                       ),
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                           ),

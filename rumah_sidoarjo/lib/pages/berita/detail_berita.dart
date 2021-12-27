@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:rumah_sidoarjo/models/list_berita.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

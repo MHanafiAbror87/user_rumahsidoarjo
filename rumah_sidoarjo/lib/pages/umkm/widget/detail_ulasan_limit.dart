@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:rumah_sidoarjo/models/list_ulasan_umkm.dart';
+import 'package:rumah_sidoarjo/models/umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
-class Detail_Ulasan_Umkm extends StatefulWidget {
-  Detail_Ulasan_Umkm({Key? key, required this.kerajinan}) : super(key: key);
-  UlasanDataUmkm kerajinan;
+class DetailUlasanLimit extends StatefulWidget {
+  DetailUlasanLimit({Key? key, required this.kerajinan}) : super(key: key);
+  Ulasan kerajinan;
 
   @override
-  _Detail_Ulasan_UmkmState createState() => _Detail_Ulasan_UmkmState();
+  _DetailUlasanLimitState createState() => _DetailUlasanLimitState();
 }
 
-class _Detail_Ulasan_UmkmState extends State<Detail_Ulasan_Umkm> {
+class _DetailUlasanLimitState extends State<DetailUlasanLimit> {
   List<String> images = [];
 
   @override

@@ -132,7 +132,7 @@ class _homeState extends State<Home> {
                 ],
               ),
             ),
-            _ListViewWisata(),
+            // _ListViewWisata(),
             Padding(
               padding: EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Row(

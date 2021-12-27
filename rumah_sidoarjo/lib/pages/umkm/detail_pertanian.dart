@@ -6,10 +6,9 @@ import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_sidoarjo/models/list_umkm.dart';
 import 'package:rumah_sidoarjo/models/umkm.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/list_ulasan.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/widget/ulasan_dialog.dart';
 import 'package:rumah_sidoarjo/pages/umkm/list_ulasan_umkm.dart';
 import 'package:rumah_sidoarjo/pages/umkm/umkm.dart' as page;
+import 'package:rumah_sidoarjo/pages/umkm/widget/detail_ulasan_limit.dart';
 import 'package:rumah_sidoarjo/pages/umkm/widget/ulasan_dialog_umkm.dart';
 import 'package:rumah_sidoarjo/services/api_umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
@@ -334,67 +333,80 @@ class _DetailUmkm_PertanianState extends State<DetailUmkm_Pertanian> {
                                           horizontal: 20, vertical: 2),
                                       child: Container(
                                         height: 130,
-                                        child: Card(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      SizedBox(
-                                                          width: 50,
-                                                          height: 50,
-                                                          child: Image.network(
-                                                              "$fotoUrl/assets/img/${ulasan.fotoProfil}")),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 10),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              ulasan.nama,
-                                                              style: const TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Text(
-                                                              DateFormat(
-                                                                      'dd MMMM yyyy')
-                                                                  .format(ulasan
-                                                                      .tanggalUpload),
-                                                              style: const TextStyle(
-                                                                  fontSize: 12,
-                                                                  fontFamily:
-                                                                      "DMSans"),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  const SizedBox(height: 10),
-                                                  Text(
-                                                    ulasan.ulasan,
-                                                    maxLines: 2,
-                                                    style: const TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: "DMSans"),
-                                                  )
-                                                ],
-                                              ),
-                                            )),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    DetailUlasanLimit(
+                                                        kerajinan: ulasan));
+                                          },
+                                          child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        SizedBox(
+                                                            width: 50,
+                                                            height: 50,
+                                                            child: Image.network(
+                                                                "$fotoUrl/assets/img/${ulasan.fotoProfil}")),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 10),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                ulasan.nama,
+                                                                style: const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              Text(
+                                                                DateFormat(
+                                                                        'dd MMMM yyyy')
+                                                                    .format(ulasan
+                                                                        .tanggalUpload),
+                                                                style: const TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        "DMSans"),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    const SizedBox(height: 10),
+                                                    Text(
+                                                      ulasan.ulasan,
+                                                      maxLines: 2,
+                                                      style: const TextStyle(
+                                                          fontSize: 14,
+                                                          fontFamily: "DMSans"),
+                                                    )
+                                                  ],
+                                                ),
+                                              )),
+                                        ),
                                       ),
                                     ),
                                   )
