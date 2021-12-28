@@ -14,8 +14,11 @@ import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:path/path.dart' as pt;
 
 class UlasanDialog extends StatefulWidget {
-  UlasanDialog({Key? key, required this.pariwisata}) : super(key: key);
+  UlasanDialog(
+      {Key? key, required this.pariwisata, required this.onAddUlasanSucces})
+      : super(key: key);
   Pariwisata pariwisata;
+  final Function onAddUlasanSucces;
 
   @override
   _UlasanDialogState createState() => _UlasanDialogState();

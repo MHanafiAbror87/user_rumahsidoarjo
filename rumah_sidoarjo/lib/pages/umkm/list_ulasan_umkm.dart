@@ -23,6 +23,7 @@ class _ListUlasan_UmkmState extends State<ListUlasan_Umkm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgColor,
       appBar: appBar(),
       // backgroundColor: Colors.transparent,
       body: FutureBuilder<List<UlasanDataUmkm>>(
@@ -47,56 +48,61 @@ class _ListUlasan_UmkmState extends State<ListUlasan_Umkm> {
                                     ));
                           },
                           child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: Image.network(
-                                                "$fotoUrl/assets/img/${list.fotoProfil}")),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                list.nama,
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                DateFormat('dd MMMM yyyy')
-                                                    .format(list.tanggalUpload),
-                                                style: const TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily: "DMSans"),
-                                              ),
-                                            ],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      ClipOval(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: Image.network(
+                                            "$fotoUrl/assets/img/${list.fotoProfil}",
+                                            fit: BoxFit.cover,
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Text(
-                                      list.ulasan,
-                                      maxLines: 2,
-                                      style: const TextStyle(
-                                          fontSize: 14, fontFamily: "DMSans"),
-                                    )
-                                  ],
-                                ),
-                              )),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              list.nama,
+                                              style: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              DateFormat('dd MMMM yyyy')
+                                                  .format(list.tanggalUpload),
+                                              style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: "DMSans"),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    list.ulasan,
+                                    maxLines: 2,
+                                    style: const TextStyle(
+                                        fontSize: 14, fontFamily: "DMSans"),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),

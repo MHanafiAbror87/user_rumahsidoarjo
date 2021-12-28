@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:intl/intl.dart';
 import 'package:rumah_sidoarjo/akun.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
 import 'package:rumah_sidoarjo/helper/session_helper.dart';
@@ -14,7 +15,6 @@ import 'package:rumah_sidoarjo/pages/media_massa.dart';
 import 'package:rumah_sidoarjo/pages/panik_menu/panik_menu.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pariwisata.dart';
 import 'package:rumah_sidoarjo/pages/pendidikan/pendidikan.dart';
-import 'package:rumah_sidoarjo/pages/umkm/detail_umkm.dart';
 import 'package:rumah_sidoarjo/pages/umkm/umkm.dart';
 import 'package:rumah_sidoarjo/services/api_berita.dart';
 import 'package:rumah_sidoarjo/tagihan.dart';
@@ -132,7 +132,7 @@ class _homeState extends State<Home> {
                 ],
               ),
             ),
-            // _ListViewWisata(),
+            _ListViewWisata(),
             Padding(
               padding: EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Row(
@@ -557,9 +557,9 @@ class _homeState extends State<Home> {
     );
   }
 
-  Container _ListViewWisata() {
+  Container _ListViewBerita() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       height: 100,
       child: FutureBuilder<List<ListBeritaModel>>(
           future: api.getBerita(),
@@ -571,10 +571,14 @@ class _homeState extends State<Home> {
                   final berita = snapshot.data![index];
 
                   return GestureDetector(
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return DetailBerita(berita: berita);
-                    })),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return DetailBerita(berita: berita);
+                        },
+                      ),
+                    ),
                     child: Container(
                       width: 260,
                       child: Card(
@@ -594,28 +598,35 @@ class _homeState extends State<Home> {
                                   child: Column(
                                     children: [
                                       Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          height: 30,
-                                          width: 180,
-                                          child: Text(berita.judul,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 2,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold))),
-                                      SizedBox(
+                                        padding: EdgeInsets.only(left: 10),
+                                        height: 30,
+                                        width: 180,
+                                        child: Text(
+                                          berita.judul,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          height: 30,
-                                          width: 180,
-                                          child: Text(berita.tgl,
-                                              maxLines: 2,
-                                              style: TextStyle(
-                                                fontSize: 10,
-                                              )))
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        height: 30,
+                                        width: 180,
+                                        child: Text(
+                                          DateFormat('dd MMMM')
+                                              .format(berita.tgl),
+                                          maxLines: 2,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -636,7 +647,7 @@ class _homeState extends State<Home> {
     );
   }
 
-  Container _ListViewBerita() {
+  Container _ListViewWisata() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15),
       height: 100,

@@ -12,6 +12,7 @@ Color lightGreen = Color(0XFF7ED957);
 Color darkOrange = Color(0XFFFF914D);
 Color lightGrey = Color(0XFFA6A6A6);
 Color darkGrey = Color(0XFF4D4C4C);
+Color bgColor = Color(0xffe7e7e7);
 Color White = Color(0XFFFFFFFF);
 Color red = Color(0XFFDE0404);
 Color Black = Color(0XFF000000);

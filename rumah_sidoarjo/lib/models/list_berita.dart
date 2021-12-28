@@ -25,7 +25,7 @@ class ListBeritaModel {
   String id;
   String slug;
   String thumb;
-  String tgl;
+  DateTime tgl;
   String judul;
   String isiberita;
 
@@ -34,7 +34,7 @@ class ListBeritaModel {
         id: json["id"],
         slug: json["slug"],
         thumb: json["thumb"],
-        tgl: json["tgl"],
+        tgl: DateTime.parse(json["tgl"]),
         judul: json["judul"],
         isiberita: json["isiberita"],
       );

@@ -4,27 +4,26 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rumah_sidoarjo/models/pariwisata.dart';
-import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/list_ulasan.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/pariwisata.dart'
-    as tabPariwisata;
-import 'package:rumah_sidoarjo/pages/pariwisata/widget/detail_ulasan_limit.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/widget/ulasan_dialog.dart';
-import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
+import 'package:rumah_sidoarjo/models/list_umkm.dart';
+import 'package:rumah_sidoarjo/models/umkm.dart';
+import 'package:rumah_sidoarjo/pages/umkm/list_ulasan_umkm.dart';
+import 'package:rumah_sidoarjo/pages/umkm/umkm.dart' as page;
+import 'package:rumah_sidoarjo/pages/umkm/widget/detail_ulasan_limit.dart';
+import 'package:rumah_sidoarjo/pages/umkm/widget/ulasan_dialog_umkm.dart';
+import 'package:rumah_sidoarjo/services/api_umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Detail_Kuliner extends StatefulWidget {
-  final PariwisataData wisata;
-  Detail_Kuliner({required this.wisata});
+class DetailUmkm_Kerajinan extends StatefulWidget {
+  final UmkmData kerajinan;
+  DetailUmkm_Kerajinan({required this.kerajinan});
 
   @override
-  _Detail_KulinerState createState() => _Detail_KulinerState();
+  _DetailUmkm_KerajinanState createState() => _DetailUmkm_KerajinanState();
 }
 
-class _Detail_KulinerState extends State<Detail_Kuliner> {
-  final ApiPariwisata api = ApiPariwisata();
+class _DetailUmkm_KerajinanState extends State<DetailUmkm_Kerajinan> {
+  final ApiUmkm api = ApiUmkm();
   final _addFormKey = GlobalKey<FormState>();
   final _ulasanController = TextEditingController();
   List<Ulasan> tampilUlasan = [];
@@ -56,38 +55,36 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return tabPariwisata.Pariwisata();
+                return page.Umkm();
               },
             ),
           ),
         ),
-        title: const Text('Detail Wisata'),
+        title: const Text('Detail Umkm'),
         backgroundColor: darkGreen1,
       ),
       body: Form(
         key: _addFormKey,
         child: SingleChildScrollView(
-          child: FutureBuilder<DetailPariwisataModel>(
-            future: api.getKulinerById(widget.wisata.idWisata),
+          child: FutureBuilder<DetailUmkmModel>(
+            future: api.getUmkmById(widget.kerajinan.idUmkm),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final detail = snapshot.data;
 
-                final pariwisata = detail!.pariwisata;
-                final tarif = detail.tarif;
-                final menu = detail.menu;
+                final umkm = detail!.umkm;
                 final semuaUlasan = detail.ulasan;
 
                 // add lat lng location & marker
-                center = LatLng(double.parse(pariwisata.lat),
-                    double.parse(pariwisata.long));
-                _markers[pariwisata.namaWisata] = Marker(
-                  markerId: MarkerId(pariwisata.namaWisata),
-                  position: LatLng(double.parse(pariwisata.lat),
-                      double.parse(pariwisata.long)),
+                center =
+                    LatLng(double.parse(umkm.lat), double.parse(umkm.long));
+                _markers[umkm.nama] = Marker(
+                  markerId: MarkerId(umkm.nama),
+                  position:
+                      LatLng(double.parse(umkm.lat), double.parse(umkm.long)),
                   infoWindow: InfoWindow(
-                    title: pariwisata.namaWisata,
-                    snippet: pariwisata.alamat,
+                    title: umkm.nama,
+                    snippet: umkm.alamat,
                   ),
                 );
 
@@ -108,11 +105,11 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 10),
-                        child: Container(
+                        child: SizedBox(
                           width: double.infinity,
                           height: 210,
                           child: Image.network(
-                              "$fotoUrl/assets/img/${pariwisata.foto1}",
+                              "$fotoUrl/assets/img/${umkm.foto1}",
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -127,7 +124,7 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                           child: Column(
                             children: [
                               Text(
-                                pariwisata.namaWisata,
+                                umkm.nama,
                                 style: const TextStyle(
                                     fontFamily: 'DMSans',
                                     fontSize: 16,
@@ -148,7 +145,7 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                       ),
                                     ),
                                     Text(
-                                      pariwisata.alamat,
+                                      umkm.alamat,
                                       style: TextStyle(
                                           fontFamily: 'DMSans',
                                           fontSize: 14,
@@ -156,7 +153,7 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                     ),
                                     const Divider(
                                       color: Colors.grey,
-                                      height: 25,
+                                      height: 20,
                                       thickness: 2,
                                     ),
                                     const Text(
@@ -167,7 +164,7 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                       ),
                                     ),
                                     Text(
-                                      pariwisata.kategori,
+                                      umkm.kategori,
                                       style: TextStyle(
                                           fontFamily: 'DMSans',
                                           fontSize: 14,
@@ -186,7 +183,7 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                       ),
                                     ),
                                     Text(
-                                      pariwisata.pengelola,
+                                      umkm.penanggungJawab,
                                       style: TextStyle(
                                           fontFamily: 'DMSans',
                                           fontSize: 14,
@@ -208,19 +205,16 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                             const Padding(
                                               padding:
                                                   EdgeInsets.only(right: 27),
-                                              child: Align(
-                                                alignment: Alignment.bottomLeft,
-                                                child: Text(
-                                                  'Telepon',
-                                                  style: TextStyle(
-                                                    fontFamily: 'DMSans',
-                                                    fontSize: 16,
-                                                  ),
+                                              child: Text(
+                                                'Telepon',
+                                                style: TextStyle(
+                                                  fontFamily: 'DMSans',
+                                                  fontSize: 16,
                                                 ),
                                               ),
                                             ),
                                             Text(
-                                              pariwisata.noTelepon,
+                                              umkm.noTelp,
                                               style: TextStyle(
                                                   fontFamily: 'DMSans',
                                                   fontSize: 14,
@@ -229,8 +223,8 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                           ],
                                         ),
                                         InkWell(
-                                          onTap: () => launch(
-                                              "tel://${pariwisata.noTelepon}"),
+                                          onTap: () =>
+                                              launch("tel://${umkm.noTelp}"),
                                           child: Container(
                                             width: 100,
                                             height: 40,
@@ -255,176 +249,27 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                       height: 25,
                                       thickness: 2,
                                     ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(right: 27),
-                                          child: Text(
-                                            'Jam Operasional',
-                                            style: TextStyle(
-                                              fontFamily: 'DMSans',
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              pariwisata.jamBuka,
-                                              style: TextStyle(
-                                                  fontFamily: 'DMSans',
-                                                  fontSize: 14,
-                                                  color: darkGreen),
-                                            ),
-                                            Text(
-                                              ' - ',
-                                              style: TextStyle(
-                                                  fontFamily: 'DMSans',
-                                                  fontSize: 14,
-                                                  color: darkGreen),
-                                            ),
-                                            Text(
-                                              pariwisata.jamTutup,
-                                              style: TextStyle(
-                                                  fontFamily: 'DMSans',
-                                                  fontSize: 14,
-                                                  color: darkGreen),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    const Divider(
-                                      color: Colors.grey,
-                                      height: 25,
-                                      thickness: 2,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          'Harga Tiket Masuk',
-                                          style: TextStyle(
-                                            fontFamily: 'DMSans',
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: tarif.length > 0
-                                              ? tarif
-                                                  .map(
-                                                    (tarif) => Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Text(
-                                                              tarif.namaTiket,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'DMSans',
-                                                                  fontSize: 14,
-                                                                  color:
-                                                                      darkGreen),
-                                                            ),
-                                                            Text(
-                                                              'Rp ${tarif.tarif}',
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'DMSans',
-                                                                  fontSize: 14,
-                                                                  color:
-                                                                      darkGreen),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                  .toList()
-                                              : [
-                                                  Text(
-                                                    "Daftar HTM Tidak Tersedia",
-                                                    style: TextStyle(
-                                                        fontFamily: 'DMSans',
-                                                        fontSize: 14,
-                                                        color: darkGreen),
-                                                  ),
-                                                ],
-                                        ),
-                                      ],
-                                    ),
-                                    const Divider(
-                                      color: Colors.grey,
-                                      height: 25,
-                                      thickness: 2,
-                                    ),
-                                    Column(
-                                      children: menu.length > 0
-                                          ? menu
-                                              .map(
-                                                (menu) => Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const Text(
-                                                      'MENU MAKANAN',
-                                                      style: TextStyle(
-                                                        fontFamily: 'DMSans',
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          menu.nama,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'DMSans',
-                                                              fontSize: 14,
-                                                              color: darkGreen),
-                                                        ),
-                                                        Text(
-                                                          'Rp ${menu.harga}',
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'DMSans',
-                                                              fontSize: 14,
-                                                              color: darkGreen),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const Divider(
-                                                      color: Colors.grey,
-                                                      height: 25,
-                                                      thickness: 2,
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                              .toList()
-                                          : [],
+                                    const Text(
+                                      'Website',
+                                      style: TextStyle(
+                                        fontFamily: 'DMSans',
+                                        fontSize: 16,
+                                      ),
                                     ),
                                     Text(
-                                      'Lokasi ${pariwisata.namaWisata}',
+                                      umkm.website,
+                                      style: TextStyle(
+                                          fontFamily: 'DMSans',
+                                          fontSize: 14,
+                                          color: darkGreen),
+                                    ),
+                                    const Divider(
+                                      color: Colors.grey,
+                                      height: 25,
+                                      thickness: 2,
+                                    ),
+                                    Text(
+                                      'Lokasi ${umkm.nama}',
                                       style: GoogleFonts.dmSans(fontSize: 16),
                                     ),
                                     const SizedBox(height: 5),
@@ -457,19 +302,17 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                             tampilUlasan.isNotEmpty
                                 ? TextButton(
                                     onPressed: () => {
-                                      Navigator.of(context).pushReplacement(
+                                      Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (context) => ListUlasan(
-                                            pariwisata: pariwisata,
+                                          builder: (context) => ListUlasan_Umkm(
+                                            kerajinan: umkm,
                                           ),
                                         ),
                                       ),
                                     },
-                                    child: Text(
-                                      'Lihat Semua',
-                                      style: GoogleFonts.dmSans(
-                                          fontSize: 14, color: darkGreen1),
-                                    ),
+                                    child: Text('Lihat Semua',
+                                        style: GoogleFonts.dmSans(
+                                            fontSize: 14, color: darkGreen1)),
                                   )
                                 : const SizedBox(),
                           ],
@@ -489,8 +332,8 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                           showDialog(
                                             context: context,
                                             builder: (context) =>
-                                                DetailUlasanWisataLimit(
-                                                    pemancingan: ulasan),
+                                                DetailUlasanLimit(
+                                                    kerajinan: ulasan),
                                           );
                                         },
                                         child: Card(
@@ -572,9 +415,9 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                         onPressed: () {
                           showDialog(
                             context: context,
-                            builder: (context) => UlasanDialog(
-                              pariwisata: pariwisata,
-                              onAddUlasanSucces: () {
+                            builder: (context) => UlasanDialogUmkm(
+                              kerajinan: umkm,
+                              onAddUlasanSuccess: () {
                                 setState(() {});
                               },
                             ),

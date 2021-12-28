@@ -2,30 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:rumah_sidoarjo/models/umkm.dart';
+import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
-class DetailUlasanLimit extends StatefulWidget {
-  DetailUlasanLimit({Key? key, required this.kerajinan}) : super(key: key);
-  Ulasan kerajinan;
+class DetailUlasanWisataLimit extends StatefulWidget {
+  DetailUlasanWisataLimit({Key? key, required this.pemancingan})
+      : super(key: key);
+  Ulasan pemancingan;
 
   @override
-  _DetailUlasanLimitState createState() => _DetailUlasanLimitState();
+  _DetailUlasanWisataLimitState createState() =>
+      _DetailUlasanWisataLimitState();
 }
 
-class _DetailUlasanLimitState extends State<DetailUlasanLimit> {
+class _DetailUlasanWisataLimitState extends State<DetailUlasanWisataLimit> {
   List<String> images = [];
 
   @override
   void initState() {
-    if (widget.kerajinan.foto1.isNotEmpty) {
-      images.add(widget.kerajinan.foto1);
+    if (widget.pemancingan.foto1.isNotEmpty) {
+      images.add(widget.pemancingan.foto1);
     }
-    if (widget.kerajinan.foto2.isNotEmpty) {
-      images.add(widget.kerajinan.foto2);
+    if (widget.pemancingan.foto2.isNotEmpty) {
+      images.add(widget.pemancingan.foto2);
     }
-    if (widget.kerajinan.foto3.isNotEmpty) {
-      images.add(widget.kerajinan.foto3);
+    if (widget.pemancingan.foto3.isNotEmpty) {
+      images.add(widget.pemancingan.foto3);
     }
 
     super.initState();
@@ -47,7 +49,7 @@ class _DetailUlasanLimitState extends State<DetailUlasanLimit> {
                     width: 50,
                     height: 50,
                     child: Image.network(
-                      "$fotoUrl/assets/img/${widget.kerajinan.fotoProfil}",
+                      "$fotoUrl/assets/img/${widget.pemancingan.fotoProfil}",
                       fit: BoxFit.cover,
                     )),
               ),
@@ -58,13 +60,13 @@ class _DetailUlasanLimitState extends State<DetailUlasanLimit> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      widget.kerajinan.nama,
+                      widget.pemancingan.nama,
                       style: GoogleFonts.dmSans(
                           fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       DateFormat('dd MMMM yyyy')
-                          .format(widget.kerajinan.tanggalUpload),
+                          .format(widget.pemancingan.tanggalUpload),
                       style: GoogleFonts.dmSans(fontSize: 14, color: darkGrey),
                     ),
                   ],
@@ -74,7 +76,7 @@ class _DetailUlasanLimitState extends State<DetailUlasanLimit> {
           ),
           const SizedBox(height: 20),
           Text(
-            widget.kerajinan.ulasan,
+            widget.pemancingan.ulasan,
             style: GoogleFonts.dmSans(fontSize: 14),
           ),
           Container(

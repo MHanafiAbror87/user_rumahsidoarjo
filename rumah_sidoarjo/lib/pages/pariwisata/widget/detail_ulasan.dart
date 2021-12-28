@@ -2,30 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:rumah_sidoarjo/models/list_ulasan_umkm.dart';
+import 'package:rumah_sidoarjo/models/list_ulasan.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
-class Detail_Ulasan_Umkm extends StatefulWidget {
-  Detail_Ulasan_Umkm({Key? key, required this.kerajinan}) : super(key: key);
-  UlasanDataUmkm kerajinan;
+class Detail_Ulasan_Wisata extends StatefulWidget {
+  Detail_Ulasan_Wisata({Key? key, required this.pemancingan}) : super(key: key);
+  UlasanData pemancingan;
 
   @override
-  _Detail_Ulasan_UmkmState createState() => _Detail_Ulasan_UmkmState();
+  _Detail_Ulasan_WisataState createState() => _Detail_Ulasan_WisataState();
 }
 
-class _Detail_Ulasan_UmkmState extends State<Detail_Ulasan_Umkm> {
+class _Detail_Ulasan_WisataState extends State<Detail_Ulasan_Wisata> {
   List<String> images = [];
 
   @override
   void initState() {
-    if (widget.kerajinan.foto1.isNotEmpty) {
-      images.add(widget.kerajinan.foto1);
+    if (widget.pemancingan.foto1.isNotEmpty) {
+      images.add(widget.pemancingan.foto1);
     }
-    if (widget.kerajinan.foto2.isNotEmpty) {
-      images.add(widget.kerajinan.foto2);
+    if (widget.pemancingan.foto2.isNotEmpty) {
+      images.add(widget.pemancingan.foto2);
     }
-    if (widget.kerajinan.foto3.isNotEmpty) {
-      images.add(widget.kerajinan.foto3);
+    if (widget.pemancingan.foto3.isNotEmpty) {
+      images.add(widget.pemancingan.foto3);
     }
 
     super.initState();
@@ -47,7 +47,7 @@ class _Detail_Ulasan_UmkmState extends State<Detail_Ulasan_Umkm> {
                     width: 50,
                     height: 50,
                     child: Image.network(
-                        "$fotoUrl/assets/img/${widget.kerajinan.fotoProfil}",
+                        "$fotoUrl/assets/img/${widget.pemancingan.fotoProfil}",
                         fit: BoxFit.cover)),
               ),
               const Padding(padding: EdgeInsets.only(left: 20)),
@@ -55,13 +55,13 @@ class _Detail_Ulasan_UmkmState extends State<Detail_Ulasan_Umkm> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.kerajinan.nama,
+                    widget.pemancingan.nama,
                     style: GoogleFonts.dmSans(
                         fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     DateFormat('dd MMMM yyyy')
-                        .format(widget.kerajinan.tanggalUpload),
+                        .format(widget.pemancingan.tanggalUpload),
                     style: GoogleFonts.dmSans(fontSize: 14, color: darkGrey),
                   ),
                 ],
@@ -70,7 +70,7 @@ class _Detail_Ulasan_UmkmState extends State<Detail_Ulasan_Umkm> {
           ),
           const SizedBox(height: 20),
           Text(
-            widget.kerajinan.ulasan,
+            widget.pemancingan.ulasan,
             style: GoogleFonts.dmSans(fontSize: 14),
           ),
           const SizedBox(height: 5),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/models/list_umkm.dart';
-import 'package:rumah_sidoarjo/pages/umkm/detail_umkm.dart';
+import 'package:rumah_sidoarjo/pages/umkm/detail_kerajinan.dart';
 import 'package:rumah_sidoarjo/services/api_umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
