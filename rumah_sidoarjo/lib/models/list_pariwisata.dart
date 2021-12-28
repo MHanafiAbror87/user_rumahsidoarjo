@@ -1,8 +1,3 @@
-// To parse this JSON data, do
-//
-//     final listPariwisataModel = listPariwisataModelFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ListPariwisataModel listPariwisataModelFromJson(String str) =>

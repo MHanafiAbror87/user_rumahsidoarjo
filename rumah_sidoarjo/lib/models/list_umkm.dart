@@ -1,8 +1,3 @@
-// To parse this JSON data, do
-//
-//     final listUmkmModel = listUmkmModelFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ListUmkmModel listUmkmModelFromJson(String str) =>

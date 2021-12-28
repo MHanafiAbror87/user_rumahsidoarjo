@@ -22,7 +22,7 @@ class Pemancingan extends StatelessWidget {
               children: pariwisata
                   .map(
                     (wisata) => GestureDetector(
-                      onTap: () => Navigator.of(context).pushReplacement(
+                      onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => Detail_Pemancingan(
                             wisata: wisata,

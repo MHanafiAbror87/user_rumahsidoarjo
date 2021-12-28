@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -6,16 +8,16 @@ import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // kode warna hex
-Color darkGreen = Color(0XFF019A4B);
-Color darkGreen1 = Color(0XFF22AC44);
-Color lightGreen = Color(0XFF7ED957);
-Color darkOrange = Color(0XFFFF914D);
-Color lightGrey = Color(0XFFA6A6A6);
-Color darkGrey = Color(0XFF4D4C4C);
-Color bgColor = Color(0xffe7e7e7);
-Color White = Color(0XFFFFFFFF);
-Color red = Color(0XFFDE0404);
-Color Black = Color(0XFF000000);
+Color darkGreen = const Color(0XFF019A4B);
+Color darkGreen1 = const Color(0XFF22AC44);
+Color lightGreen = const Color(0XFF7ED957);
+Color darkOrange = const Color(0XFFFF914D);
+Color lightGrey = const Color(0XFFA6A6A6);
+Color darkGrey = const Color(0XFF4D4C4C);
+Color bgColor = const Color(0xffe7e7e7);
+Color White = const Color(0XFFFFFFFF);
+Color red = const Color(0XFFDE0404);
+Color Black = const Color(0XFF000000);
 
 final kHintTextStyle = GoogleFonts.dmSans(
   color: lightGrey,
@@ -29,7 +31,7 @@ final kLabelStyle = GoogleFonts.dmSans(
 final kBoxDecorationStyle = BoxDecoration(
   color: White,
   borderRadius: BorderRadius.circular(10.0),
-  boxShadow: [
+  boxShadow: const [
     BoxShadow(
       color: Colors.black12,
       blurRadius: 4.0,
@@ -43,7 +45,7 @@ final headerDecoration = BoxDecoration(
       colors: [lightGreen, darkGreen1],
       end: Alignment.centerRight,
       begin: Alignment.centerLeft),
-  borderRadius: BorderRadius.only(
+  borderRadius: const BorderRadius.only(
     bottomLeft: Radius.circular(30),
     bottomRight: Radius.circular(30),
   ),
@@ -62,7 +64,7 @@ final headerSubTextStyle = GoogleFonts.dmSans(
 );
 
 final iconText = GoogleFonts.bebasNeue(
-    fontSize: 14, color: Color(0xff626262), letterSpacing: 1);
+    fontSize: 14, color: const Color(0xff626262), letterSpacing: 1);
 
 final uploadText = GoogleFonts.dmSans(
   fontSize: 16,
@@ -89,7 +91,7 @@ final textKategori = GoogleFonts.poppins(
 
 final textSubKategori = GoogleFonts.dmSans(
   fontSize: 12,
-  color: Color(0xffc4c4c4),
+  color: const Color(0xffc4c4c4),
 );
 
 //font Tagihan

@@ -4,10 +4,12 @@ import 'package:intl/intl.dart';
 import 'package:rumah_sidoarjo/akun.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
 import 'package:rumah_sidoarjo/helper/session_helper.dart';
-import 'package:rumah_sidoarjo/layananpublik.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/lowongankerja.dart';
 import 'package:rumah_sidoarjo/models/list_berita.dart';
+import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
+import 'package:rumah_sidoarjo/models/list_umkm.dart';
+import 'package:rumah_sidoarjo/pages/LayananPublik/layananpublik.dart';
 import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
 import 'package:rumah_sidoarjo/pages/berita/detail_berita.dart';
 import 'package:rumah_sidoarjo/pages/cctv.dart';
@@ -17,18 +19,25 @@ import 'package:rumah_sidoarjo/pages/pariwisata/pariwisata.dart';
 import 'package:rumah_sidoarjo/pages/pendidikan/pendidikan.dart';
 import 'package:rumah_sidoarjo/pages/umkm/umkm.dart';
 import 'package:rumah_sidoarjo/services/api_berita.dart';
+import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
+import 'package:rumah_sidoarjo/services/api_umkm.dart';
+import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:rumah_sidoarjo/tagihan.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'pages/kesehatan/kesehatan.dart';
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
-  _homeState createState() => _homeState();
+  HomeState createState() => HomeState();
 }
 
-class _homeState extends State<Home> {
-  final ApiBerita api = ApiBerita();
+class HomeState extends State<Home> {
+  final ApiBerita apiBerita = ApiBerita();
+  final ApiPariwisata apiWisata = ApiPariwisata();
+  final ApiUmkm apiUmkm = ApiUmkm();
   @override
   void initState() {
     super.initState();
@@ -44,12 +53,10 @@ class _homeState extends State<Home> {
         body: ListView(
           children: [
             _selamatDatang(),
-            SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             _menu(),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text('Agenda & Komunitas',
@@ -57,115 +64,63 @@ class _homeState extends State<Home> {
                     style: GoogleFonts.openSans(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black)),
+                        color: Black)),
               ),
             ),
-            _TrophyMasks(),
+            trophyMasks(),
             Padding(
-              padding: EdgeInsets.only(top: 15, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Berita Terbaru',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.openSans(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () => {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return Beritainformasi();
-                            },
-                          ),
+                  Text('Berita Terbaru',
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.openSans(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Black)),
+                  GestureDetector(
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Beritainformasi();
+                          },
                         ),
-                      },
-                      child: Text(
-                        'Lihat Semua',
-                        // textAlign: TextAlign.right,
-                        style: GoogleFonts.openSans(
-                            fontSize: 12, color: darkGreen),
                       ),
+                    },
+                    child: Text(
+                      'Lihat Semua',
+                      // textAlign: TextAlign.right,
+                      style:
+                          GoogleFonts.openSans(fontSize: 12, color: darkGreen),
                     ),
                   ),
                 ],
               ),
             ),
-            _ListViewBerita(),
+            listViewBerita(),
             Padding(
-              padding: EdgeInsets.only(top: 15, left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Wisata Populer',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.openSans(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () => {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) {
-                          return Beritainformasi();
-                        }))
-                      },
-                      child: Text('Lihat Semua',
-                          textAlign: TextAlign.right,
-                          style: GoogleFonts.openSans(
-                              fontSize: 12, color: darkGreen)),
-                    ),
-                  ),
-                ],
+              padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+              child: Text(
+                'Wisata Populer',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.openSans(
+                    fontSize: 12, fontWeight: FontWeight.bold, color: Black),
               ),
             ),
-            _ListViewWisata(),
+            listViewWisata(),
             Padding(
-              padding: EdgeInsets.only(top: 15, left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('UMKM (Usaha Mikro Kecil Menengah)',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.openSans(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () => {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) {
-                          return Beritainformasi();
-                        }))
-                      },
-                      child: Text('Lihat Semua',
-                          textAlign: TextAlign.right,
-                          style: GoogleFonts.openSans(
-                              fontSize: 12, color: darkGreen)),
-                    ),
-                  ),
-                ],
+              padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+              child: Text(
+                'UMKM (Usaha Mikro Kecil Menengah)',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.openSans(
+                    fontSize: 12, fontWeight: FontWeight.bold, color: Black),
               ),
             ),
-            _ListViewUMKM(),
+            listViewUMKM(),
           ],
         ),
       ),
@@ -174,14 +129,14 @@ class _homeState extends State<Home> {
 
   Widget _menu() {
     return Container(
-      padding: EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.only(top: 15),
       width: double.infinity,
       height: 180,
       color: White,
       child: ListView(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            FlatButton(
+            TextButton(
               onPressed: () => {
                 Navigator.pushReplacement(
                   context,
@@ -199,12 +154,12 @@ class _homeState extends State<Home> {
                     width: 45,
                     height: 45,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('PANIC MENU', style: iconText)
                 ],
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () => {
                 Navigator.pushReplacement(
                   context,
@@ -222,12 +177,12 @@ class _homeState extends State<Home> {
                     width: 45,
                     height: 45,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('PENGADUAN', style: iconText)
                 ],
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () => {
                 Navigator.pushReplacement(
                   context,
@@ -245,17 +200,17 @@ class _homeState extends State<Home> {
                     width: 45,
                     height: 45,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('KESEHATAN', style: iconText)
                 ],
               ),
             ),
           ]),
-          Padding(padding: EdgeInsets.only(top: 15)),
+          const Padding(padding: EdgeInsets.only(top: 15)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              FlatButton(
+              TextButton(
                 onPressed: () => {
                   Navigator.pushReplacement(
                     context,
@@ -273,14 +228,14 @@ class _homeState extends State<Home> {
                       width: 45,
                       height: 45,
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text('PENDIDIKAN', style: iconText)
                   ],
                 ),
               ),
               Column(
                 children: [
-                  FlatButton(
+                  TextButton(
                     onPressed: () => {
                       Navigator.pushReplacement(
                         context,
@@ -297,14 +252,14 @@ class _homeState extends State<Home> {
                       height: 45,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     'PARIWISATA',
                     style: iconText,
                   )
                 ],
               ),
-              FlatButton(
+              TextButton(
                 onPressed: _showDialog,
                 child: Column(
                   children: [
@@ -313,7 +268,7 @@ class _homeState extends State<Home> {
                       width: 45,
                       height: 45,
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text('Lainnya', style: iconText)
                   ],
                 ),
@@ -330,239 +285,257 @@ class _homeState extends State<Home> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         context: this.context,
         builder: (context) {
-          return Container(
-            child: ListView(
-              children: [
-                Padding(padding: EdgeInsets.only(top: 20)),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, bottom: 20),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Fitur Lainnya',
-                          style: GoogleFonts.poppins(
-                              fontSize: 14, fontWeight: FontWeight.w500),
-                        ),
+          return ListView(
+            children: [
+              const Padding(padding: EdgeInsets.only(top: 20)),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 20),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Fitur Lainnya',
+                        style: GoogleFonts.poppins(
+                            fontSize: 14, fontWeight: FontWeight.w500),
                       ),
-                    )
-                  ],
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    ),
+                  )
+                ],
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                TextButton(
+                  onPressed: () => {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return Cctv();
+                        },
+                      ),
+                    ),
+                  },
+                  child: Column(
                     children: [
-                      FlatButton(
-                        onPressed: () => {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Cctv();
-                              },
-                            ),
-                          ),
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/cctv.png',
-                              width: 45,
-                              height: 45,
-                            ),
-                            SizedBox(height: 5),
-                            Text('CCTV', style: iconText)
-                          ],
-                        ),
+                      Image.asset(
+                        'assets/images/cctv.png',
+                        width: 45,
+                        height: 45,
                       ),
-                      FlatButton(
-                        onPressed: () => {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return LayananPublik();
-                              },
-                            ),
-                          ),
+                      const SizedBox(height: 5),
+                      Text('CCTV', style: iconText)
+                    ],
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const LayananPublik();
                         },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/layanan_publik.png',
-                              width: 45,
-                              height: 45,
-                            ),
-                            SizedBox(height: 5),
-                            Text('LAYANAN PUBLIK', style: iconText)
-                          ],
-                        ),
-                      ),
-                      FlatButton(
-                        onPressed: () => {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Tagihan();
-                              },
-                            ),
-                          ),
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/Tagihan.png',
-                              width: 45,
-                              height: 45,
-                            ),
-                            SizedBox(height: 5),
-                            Text('TAGIHAN', style: iconText)
-                          ],
-                        ),
-                      ),
-                    ]),
-                Padding(padding: EdgeInsets.only(top: 20)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    FlatButton(
-                      onPressed: () => {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return MediaMassa();
-                            },
-                          ),
-                        ),
-                      },
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/media_massa.png',
-                            width: 45,
-                            height: 45,
-                          ),
-                          SizedBox(height: 5),
-                          Text('MEDIA MASSA', style: iconText)
-                        ],
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () => {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return Umkm();
-                            },
-                          ),
-                        ),
-                      },
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/umkm.png',
-                            width: 45,
-                            height: 45,
-                          ),
-                          SizedBox(height: 5),
-                          Text('UMKM', style: iconText)
-                        ],
+                  },
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/layanan_publik.png',
+                        width: 45,
+                        height: 45,
+                      ),
+                      const SizedBox(height: 5),
+                      Text('LAYANAN PUBLIK', style: iconText)
+                    ],
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return Tagihan();
+                        },
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () => {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return Lowongankerja();
-                            },
-                          ),
-                        ),
-                      },
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/job.png',
-                            width: 45,
-                            height: 45,
-                          ),
-                          SizedBox(height: 5),
-                          Text('PEKERJAAN', style: iconText)
-                        ],
+                  },
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/Tagihan.png',
+                        width: 45,
+                        height: 45,
                       ),
+                      const SizedBox(height: 5),
+                      Text('TAGIHAN', style: iconText)
+                    ],
+                  ),
+                ),
+              ]),
+              const Padding(padding: EdgeInsets.only(top: 20)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    onPressed: () => {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const MediaMassa();
+                          },
+                        ),
+                      ),
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/media_massa.png',
+                          width: 45,
+                          height: 45,
+                        ),
+                        const SizedBox(height: 5),
+                        Text('MEDIA MASSA', style: iconText)
+                      ],
                     ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                  TextButton(
+                    onPressed: () => {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Umkm();
+                          },
+                        ),
+                      ),
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/umkm.png',
+                          width: 45,
+                          height: 45,
+                        ),
+                        const SizedBox(height: 5),
+                        Text('UMKM', style: iconText)
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Lowongankerja();
+                          },
+                        ),
+                      ),
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/job.png',
+                          width: 45,
+                          height: 45,
+                        ),
+                        const SizedBox(height: 5),
+                        Text('PEKERJAAN', style: iconText)
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
           );
         });
   }
 
-  Container _ListViewUMKM() {
+  Container listViewUMKM() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 260,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  child: Row(
-                    children: [
-                      gambar[index],
-                      Column(
-                        children: [
-                          Container(
-                              padding: EdgeInsets.only(left: 10),
-                              height: 30,
-                              width: 180,
-                              child: Text(berita[index],
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold))),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                              padding: EdgeInsets.only(left: 10),
-                              height: 30,
-                              width: 180,
-                              child: Text(berita[index],
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                  )))
-                        ],
+      child: FutureBuilder<List<UmkmData>>(
+          future: apiUmkm.getUmkm(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  final umkm = snapshot.data![index];
+                  return GestureDetector(
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Umkm();
+                          },
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-        itemCount: berita.length,
-      ),
+                    },
+                    child: SizedBox(
+                      width: 300,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              Image.network("$fotoUrl/assets/img/${umkm.foto1}",
+                                  width: 90, fit: BoxFit.fill),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      umkm.nama,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      umkm.alamat,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                itemCount: 2,
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          }),
     );
   }
 
-  Container _ListViewBerita() {
+  Container listViewBerita() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       height: 100,
       child: FutureBuilder<List<ListBeritaModel>>(
-          future: api.getBerita(),
+          future: apiBerita.getBerita(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
@@ -579,59 +552,46 @@ class _homeState extends State<Home> {
                         },
                       ),
                     ),
-                    child: Container(
-                      width: 260,
+                    child: SizedBox(
+                      width: 300,
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Container(
-                            child: Row(
-                              children: [
-                                Image.network(
-                                  "https://www.sidoarjokab.go.id/${berita.thumb}",
-                                  width: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        height: 30,
-                                        width: 180,
-                                        child: Text(
-                                          berita.judul,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                          style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                          child: Row(
+                            children: [
+                              Image.network(
+                                "https://www.sidoarjokab.go.id/${berita.thumb}",
+                                width: 100,
+                                fit: BoxFit.fill,
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      berita.judul,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      DateFormat('dd MMMM').format(berita.tgl),
+                                      style: const TextStyle(
+                                        fontSize: 10,
                                       ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        height: 30,
-                                        width: 180,
-                                        child: Text(
-                                          DateFormat('dd MMMM')
-                                              .format(berita.tgl),
-                                          maxLines: 2,
-                                          style: const TextStyle(
-                                            fontSize: 10,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -642,95 +602,91 @@ class _homeState extends State<Home> {
               );
             }
 
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }),
     );
   }
 
-  Container _ListViewWisata() {
+  Container listViewWisata() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 260,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: GestureDetector(
-                  onTap: () => {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) {
-                      return Beritainformasi();
-                    }))
-                  },
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Row(
-                          children: [
-                            gambar[index],
-                            Column(
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(left: 10),
-                                    height: 30,
-                                    width: 180,
-                                    child: Text(berita[index],
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold))),
-                                SizedBox(
-                                  height: 5,
+      child: FutureBuilder<List<PariwisataData>>(
+          future: apiWisata.getPariwisata(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  final wisata = snapshot.data![index];
+                  return GestureDetector(
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Pariwisata();
+                          },
+                        ),
+                      ),
+                    },
+                    child: SizedBox(
+                      width: 300,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              Image.network(
+                                  "$fotoUrl/assets/img/${wisata.foto1}",
+                                  width: 90,
+                                  fit: BoxFit.fill),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      wisata.namaWisata,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      wisata.alamat,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Container(
-                                    padding: EdgeInsets.only(left: 10),
-                                    height: 30,
-                                    width: 180,
-                                    child: Text(berita[index],
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                        )))
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-        itemCount: berita.length,
-      ),
+                  );
+                },
+                itemCount: 3,
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          }),
     );
   }
 
-  final List berita = [
-    "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-    "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-    "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-    "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-    "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  ];
-
-  final List gambar = [
-    Image.asset('assets/images/no_image.png', width: 50),
-    Image.asset('assets/images/no_image.png', width: 50),
-    Image.asset('assets/images/no_image.png', width: 50),
-    Image.asset('assets/images/no_image.png', width: 50),
-    Image.asset('assets/images/no_image.png', width: 50),
-  ];
-
-  FlatButton _TrophyMasks() {
-    return FlatButton(
+  TextButton trophyMasks() {
+    return TextButton(
       onPressed: () => {},
       child: Container(
         width: double.infinity,
@@ -740,13 +696,13 @@ class _homeState extends State<Home> {
                 colors: [lightGreen, darkGreen1],
                 end: Alignment.centerRight,
                 begin: Alignment.centerLeft),
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+            borderRadius: const BorderRadius.all(Radius.circular(20))),
         child: Padding(
           padding: const EdgeInsets.only(right: 30, left: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              SizedBox(
                   width: 200,
                   child: Text('Ayo cari tau agenda yang akan dilaksanakan',
                       textAlign: TextAlign.center,
@@ -768,13 +724,13 @@ class _homeState extends State<Home> {
 
   AppBar appBar() {
     return AppBar(
-      title: Text(
+      title: const Text(
         'Rumah Sidoarjo',
         style: TextStyle(fontFamily: 'DMSans', color: Colors.white),
       ),
       backgroundColor: darkGreen1,
       leading: Padding(
-        padding: EdgeInsets.only(left: 10.0),
+        padding: const EdgeInsets.only(left: 10.0),
         child: Image.asset(
           'assets/images/logo_sidoarjo.png',
           width: 10.0,
@@ -791,10 +747,10 @@ class _homeState extends State<Home> {
                     onPressed: () => {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return Akun();
+                            return const Akun();
                           }))
                         },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.account_circle,
                       size: 30,
                     ));
@@ -833,16 +789,16 @@ class _homeState extends State<Home> {
                 height: 45.0,
                 decoration: BoxDecoration(
                     color: White,
-                    borderRadius:
-                        BorderRadius.vertical(bottom: Radius.circular(20))),
+                    borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(20))),
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 5),
+                      padding: const EdgeInsets.only(top: 5),
                       child: Text('Selamat Datang',
                           style: GoogleFonts.poppins(
                             fontSize: 10,
-                            color: Colors.black,
+                            color: Black,
                           )),
                     ),
                     FutureBuilder<String>(
@@ -868,7 +824,7 @@ class _homeState extends State<Home> {
                           return Text(nama,
                               style: GoogleFonts.poppins(
                                   fontSize: 14,
-                                  color: Colors.black,
+                                  color: Black,
                                   fontWeight: FontWeight.bold));
                         })
                   ],
@@ -881,15 +837,3 @@ class _homeState extends State<Home> {
         });
   }
 }
-
-
-
-
-
-// void _showDialog() {
-//   showModalBottomSheet(context: context, builder: (context) {
-
-//   });
-// }
-
- 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
@@ -16,20 +17,17 @@ class Umkm extends StatefulWidget {
 class _UmkmState extends State<Umkm> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.grey.shade300,
-        appBar: appBar(),
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.light,
-          child: SingleChildScrollView(
-            child: Stack(
-              children: <Widget>[
-                _headerPage(),
-                tabCon(),
-              ],
-            ),
+    return Scaffold(
+      backgroundColor: bgColor,
+      appBar: appBar(),
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              _headerPage(),
+              const TabCon(),
+            ],
           ),
         ),
       ),
@@ -38,7 +36,7 @@ class _UmkmState extends State<Umkm> {
 
   AppBar appBar() {
     return AppBar(
-      leading: FlatButton(
+      leading: TextButton(
         child: Icon(
           Icons.arrow_back_ios,
           color: White,
@@ -54,7 +52,7 @@ class _UmkmState extends State<Umkm> {
           ),
         },
       ),
-      title: Text('UMKM'),
+      title: const Text('UMKM'),
       backgroundColor: darkGreen1,
     );
   }
@@ -65,17 +63,14 @@ class _UmkmState extends State<Umkm> {
       decoration: headerDecoration,
       child: Column(
         children: [
-          SizedBox(height: 30),
           Text(
             'UMKM',
             style: headerTextStyle,
           ),
-          SizedBox(height: 10),
-          Center(
-            child: Container(
-              width: 330,
+          Expanded(
+            child: Center(
               child: Text(
-                '(Usaha Mikro Kecil Menengah)\n di Kabupaten Sidoarjo',
+                '(Usaha Mikro Kecil Menengah) \n di Kabupaten Sidoarjo',
                 textAlign: TextAlign.center,
                 style: headerSubTextStyle,
               ),
@@ -87,8 +82,8 @@ class _UmkmState extends State<Umkm> {
   }
 }
 
-class tabCon extends StatelessWidget {
-  const tabCon({
+class TabCon extends StatelessWidget {
+  const TabCon({
     Key? key,
   }) : super(key: key);
 
@@ -111,17 +106,17 @@ class tabCon extends StatelessWidget {
                           begin: Alignment.centerLeft),
                       borderRadius: BorderRadius.circular(30)),
                   labelColor: White,
-                  labelStyle:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  labelStyle: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 14),
                   unselectedLabelColor: darkGrey,
                   unselectedLabelStyle: TextStyle(fontSize: 14),
-                  tabs: [
+                  tabs: const [
                     Tab(child: Text('KERAJINAN')),
                     Tab(child: Text('MAKANAN')),
                     Tab(child: Text('PERTANIAN')),
                   ]),
               SizedBox(height: 10),
-              Container(
+              SizedBox(
                 height: 595,
                 width: double.infinity,
                 child: TabBarView(

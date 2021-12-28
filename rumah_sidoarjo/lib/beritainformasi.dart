@@ -1,122 +1,118 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:rumah_sidoarjo/lowongankerja.dart';
+import 'package:rumah_sidoarjo/models/list_berita.dart';
+import 'package:rumah_sidoarjo/pages/berita/detail_berita.dart';
+import 'package:rumah_sidoarjo/services/api_berita.dart';
 import 'custom_template.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:rumah_sidoarjo/home.dart';
 
 class Beritainformasi extends StatefulWidget {
+  const Beritainformasi({Key? key}) : super(key: key);
+
   @override
-  _beritainformasiState createState() => _beritainformasiState();
+  BeritaInformasiState createState() => BeritaInformasiState();
 }
 
-class _beritainformasiState extends State<Beritainformasi> {
+class BeritaInformasiState extends State<Beritainformasi> {
+  final ApiBerita api = ApiBerita();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.grey.shade100,
-        appBar: AppBar(
-          leading: FlatButton(
-            onPressed: () => {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                return Home();
-              }))
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: White,
-            ),
-          ),
-          title: Text('Berita & informasi', style: TextStyle(color: White)),
-          backgroundColor: darkGreen1,
-        ),
-        body: ListView.builder(
-          itemCount: berita.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-              child: Container(
-                height: 100,
-                child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          gambar[index],
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Container(
-                                  height: 30,
-                                  width: 300,
-                                  child: Text(
-                                    berita[index],
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Container(
-                                    height: 30,
-                                    width: 300,
-                                    child: Text(
-                                      berita[index],
-                                      style: TextStyle(fontSize: 12),
-                                    )),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
-              ),
-            );
+    return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        leading: TextButton(
+          onPressed: () => {
+            Navigator.pop(
+              context,
+            )
           },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: White,
+          ),
         ),
+        title: Text('Berita & informasi', style: TextStyle(color: White)),
+        backgroundColor: darkGreen1,
       ),
+      body: FutureBuilder<List<ListBeritaModel>>(
+          future: api.getBerita(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: berita.length,
+                itemBuilder: (context, index) {
+                  final berita = snapshot.data![index];
+
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (contex) {
+                            return DetailBerita(berita: berita);
+                          },
+                        ),
+                      ),
+                      child: SizedBox(
+                        height: 100,
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  Image.network(
+                                    "https://www.sidoarjokab.go.id/${berita.thumb}",
+                                    width: 100,
+                                    fit: BoxFit.fill,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Text(
+                                            berita.judul,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Text(
+                                            DateFormat('dd MMMM yyyy')
+                                                .format(berita.tgl),
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )),
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          }),
     );
   }
 }
-
-final List berita = [
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-  "Wabup Subandi Meninjau Vaksinasi Massal yang Digelar DPC PKB Sidoarjo",
-];
-
-final List tglberita = [
-  "27 Oktober 2021",
-  "27 Oktober 2021",
-  "27 Oktober 2021",
-  "27 Oktober 2021",
-  "27 Oktober 2021",
-];
-
-final List gambar = [
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-  Image.asset('assets/images/Pengaduan.png', width: 50),
-];
