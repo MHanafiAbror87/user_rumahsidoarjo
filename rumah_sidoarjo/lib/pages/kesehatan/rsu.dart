@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/models/kesehatan.dart';
-import 'package:rumah_sidoarjo/models/list_umkm.dart';
-import 'package:rumah_sidoarjo/pages/kesehatan/detail_kesehatan.dart';
+import 'package:rumah_sidoarjo/pages/kesehatan/detail_kesehatan_rsu.dart';
 import 'package:rumah_sidoarjo/services/api_kesehatan.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
-class Pkmu extends StatelessWidget {
+class Rsu extends StatelessWidget {
   final ApiKesehatan api = ApiKesehatan();
 
   @override
@@ -13,18 +12,18 @@ class Pkmu extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: FutureBuilder<List<KesehatanData>>(
-            future: api.getKesehatan(),
+            future: api.getKesehatanRsu(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 List<KesehatanData> kesehatan = snapshot.data;
                 return ListView(
                   children: kesehatan
                       .map(
-                        (pkmu) => GestureDetector(
+                        (rsu) => GestureDetector(
                           onTap: () => Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => DetailKesehatanPkmu(
-                                kesehatan: pkmu,
+                              builder: (context) => DetailKesehatanRsu(
+                                kesehatan: rsu,
                               ),
                             ),
                           ),
@@ -40,7 +39,7 @@ class Pkmu extends StatelessWidget {
                                     height: 70,
                                     width: 70,
                                     child: Image.network(
-                                      "$fotoUrl/assets/img/${pkmu.foto}",
+                                      "$fotoUrl/assets/img/${rsu.foto}",
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -53,7 +52,7 @@ class Pkmu extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            pkmu.nama,
+                                            rsu.nama,
                                             style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold),
@@ -62,7 +61,7 @@ class Pkmu extends StatelessWidget {
                                             height: 5,
                                           ),
                                           Text(
-                                            pkmu.alamat,
+                                            rsu.alamat,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                             textAlign: TextAlign.left,

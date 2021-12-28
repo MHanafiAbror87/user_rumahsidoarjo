@@ -1,24 +1,71 @@
-class LayananPublik {
-  final String id_kategorilayanan;
-  final String nama;
-  final String deskripsi;
+// To parse this JSON data, do
+//
+//     final layananPublikModel = layananPublikModelFromJson(jsonString);
 
-  LayananPublik({
-    this.id_kategorilayanan = '',
-    this.nama = '',
-    this.deskripsi = '',
+import 'package:meta/meta.dart';
+import 'dart:convert';
+
+LayananPublikModel layananPublikModelFromJson(String str) =>
+    LayananPublikModel.fromJson(json.decode(str));
+
+String layananPublikModelToJson(LayananPublikModel data) =>
+    json.encode(data.toJson());
+
+class LayananPublikModel {
+  LayananPublikModel({
+    required this.status,
+    required this.message,
+    required this.data,
   });
 
-  factory LayananPublik.fromJson(Map<String, dynamic> json) {
-    return LayananPublik(
-      id_kategorilayanan: json['id_kategorilayanan'] as String,
-      nama: json['nama'] as String,
-      deskripsi: json['deskripsi'] as String,
-    );
-  }
+  bool status;
+  String message;
+  List<LayananPublikData> data;
 
-  @override
-  String toString() {
-    return 'LayananPublik{id_kategorilayanan: $id_kategorilayanan, nama: $nama, deskripsi: $deskripsi}';
-  }
+  factory LayananPublikModel.fromJson(Map<String, dynamic> json) =>
+      LayananPublikModel(
+        status: json["status"],
+        message: json["message"],
+        data: List<LayananPublikData>.from(
+            json["data"].map((x) => LayananPublikData.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "message": message,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
+}
+
+class LayananPublikData {
+  LayananPublikData({
+    required this.idLayanan,
+    required this.idKategorilayanan,
+    required this.nama,
+    required this.deskripsi,
+    required this.namaKategori,
+  });
+
+  String idLayanan;
+  String idKategorilayanan;
+  String nama;
+  String deskripsi;
+  String namaKategori;
+
+  factory LayananPublikData.fromJson(Map<String, dynamic> json) =>
+      LayananPublikData(
+        idLayanan: json["id_layanan"],
+        idKategorilayanan: json["id_kategorilayanan"],
+        nama: json["nama"],
+        deskripsi: json["deskripsi"],
+        namaKategori: json["nama_kategori"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id_layanan": idLayanan,
+        "id_kategorilayanan": idKategorilayanan,
+        "nama": nama,
+        "deskripsi": deskripsi,
+        "nama_kategori": namaKategori,
+      };
 }

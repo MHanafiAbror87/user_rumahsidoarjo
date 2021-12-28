@@ -7,15 +7,15 @@ import 'package:rumah_sidoarjo/pages/kesehatan/kesehatan.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DetailKesehatanPkmu extends StatefulWidget {
+class DetailKesehatanPkmp extends StatefulWidget {
   final KesehatanData kesehatan;
-  DetailKesehatanPkmu({required this.kesehatan});
+  DetailKesehatanPkmp({required this.kesehatan});
 
   @override
-  _DetailKesehatanPkmuState createState() => _DetailKesehatanPkmuState();
+  _DetailKesehatanPkmpState createState() => _DetailKesehatanPkmpState();
 }
 
-class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
+class _DetailKesehatanPkmpState extends State<DetailKesehatanPkmp> {
   late GoogleMapController mapController;
 
   late LatLng center;

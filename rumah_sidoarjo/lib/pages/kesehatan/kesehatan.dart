@@ -4,7 +4,7 @@ import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/pages/kesehatan/pkmp.dart';
 import 'package:rumah_sidoarjo/pages/kesehatan/pkmu.dart';
-import 'package:rumah_sidoarjo/pages/kesehatan/rs.dart';
+import 'package:rumah_sidoarjo/pages/kesehatan/rsu.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/pemancingan.dart';
 
 class Kesehatan extends StatefulWidget {
@@ -24,18 +24,13 @@ class _KesehatanState extends State<Kesehatan> {
         appBar: appBar(),
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
-          child: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40.0,
-                  // vertical: 120.0,
-                ),
-              ),
-              _headerPage(),
-              tabCon(),
-            ],
+          child: SingleChildScrollView(
+            child: Stack(
+              children: <Widget>[
+                _headerPage(),
+                tabCon(),
+              ],
+            ),
           ),
         ),
       ),
@@ -140,7 +135,7 @@ class tabCon extends StatelessWidget {
                   children: [
                     Pkmu(),
                     Pkmp(),
-                    RumahSakit(),
+                    Rsu(),
                   ],
                 ),
               )
