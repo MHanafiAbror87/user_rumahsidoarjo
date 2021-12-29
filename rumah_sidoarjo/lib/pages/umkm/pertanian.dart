@@ -56,6 +56,8 @@ class Pertanian extends StatelessWidget {
                                         children: [
                                           Text(
                                             kerajinan.nama,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
                                             style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold),
@@ -65,6 +67,8 @@ class Pertanian extends StatelessWidget {
                                           ),
                                           Text(
                                             kerajinan.alamat,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                             textAlign: TextAlign.left,

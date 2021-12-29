@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
-import 'package:rumah_sidoarjo/pages/pariwisata/pemancingan.dart';
 import 'package:rumah_sidoarjo/pages/pendidikan/sd.dart';
 import 'package:rumah_sidoarjo/pages/pendidikan/slb.dart';
 import 'package:rumah_sidoarjo/pages/pendidikan/smp.dart';
 
 class Pendidikan extends StatefulWidget {
-  Pendidikan({Key? key}) : super(key: key);
+  const Pendidikan({Key? key}) : super(key: key);
 
   @override
   _PendidikanState createState() => _PendidikanState();
@@ -17,26 +16,23 @@ class Pendidikan extends StatefulWidget {
 class _PendidikanState extends State<Pendidikan> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.grey.shade300,
-        appBar: appBar(),
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.light,
-          child: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40.0,
-                  // vertical: 120.0,
-                ),
+    return Scaffold(
+      backgroundColor: bgColor,
+      appBar: appBar(),
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: Stack(
+          children: <Widget>[
+            const SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(
+                horizontal: 40.0,
+                // vertical: 120.0,
               ),
-              _headerPage(),
-              tabCon(),
-            ],
-          ),
+            ),
+            _headerPage(),
+            const TabCon(),
+          ],
         ),
       ),
     );
@@ -44,23 +40,23 @@ class _PendidikanState extends State<Pendidikan> {
 
   AppBar appBar() {
     return AppBar(
-      leading: FlatButton(
+      leading: InkWell(
         child: Icon(
           Icons.arrow_back_ios,
           color: White,
         ),
-        onPressed: () => {
+        onTap: () => {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Home();
+                return const Home();
               },
             ),
           ),
         },
       ),
-      title: Text('Pendidikan'),
+      title: const Text('Pendidikan'),
       backgroundColor: darkGreen1,
     );
   }
@@ -71,16 +67,16 @@ class _PendidikanState extends State<Pendidikan> {
       decoration: headerDecoration,
       child: Column(
         children: [
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             'Data Sekolah',
             style: headerTextStyle,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Center(
-            child: Container(
+            child: SizedBox(
               width: 330,
               child: Text(
                 'Informasi Sekolah di Seluruh Kabupaten Sidoarjo',
@@ -95,8 +91,8 @@ class _PendidikanState extends State<Pendidikan> {
   }
 }
 
-class tabCon extends StatelessWidget {
-  const tabCon({
+class TabCon extends StatelessWidget {
+  const TabCon({
     Key? key,
   }) : super(key: key);
 
@@ -119,18 +115,18 @@ class tabCon extends StatelessWidget {
                           begin: Alignment.centerLeft),
                       borderRadius: BorderRadius.circular(30)),
                   labelColor: White,
-                  labelStyle:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  labelStyle: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 14),
                   unselectedLabelColor: darkGrey,
-                  unselectedLabelStyle: TextStyle(fontSize: 14),
-                  tabs: [
+                  unselectedLabelStyle: const TextStyle(fontSize: 14),
+                  tabs: const [
                     Tab(child: Text('SD')),
                     Tab(child: Text('SLB')),
                     Tab(child: Text('SMP')),
                   ]),
-              SizedBox(height: 10),
-              Container(
-                height: 595,
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 570,
                 width: double.infinity,
                 child: TabBarView(
                   children: [

@@ -1,103 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:rumah_sidoarjo/custom_template.dart';
+import 'package:rumah_sidoarjo/models/list_sekolah.dart';
+import 'package:rumah_sidoarjo/pages/pendidikan/detail_sd.dart';
+import 'package:rumah_sidoarjo/services/api_pendidikan.dart';
+import 'package:rumah_sidoarjo/services/apiurl.dart';
 
-class SD extends StatefulWidget {
-  @override
-  _SDState createState() => _SDState();
-}
+class SD extends StatelessWidget {
+  final ApiSekolah api = ApiSekolah();
 
-class _SDState extends State<SD> {
+  SD({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: ListView.builder(
-          itemCount: nama.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2),
-              child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        gambar[index],
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Column(
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: FutureBuilder<List<SekolahData>>(
+        future: api.getSekolah(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            List<SekolahData> sekolah = snapshot.data;
+            return ListView(
+              children: sekolah
+                  .map(
+                    (sd) => GestureDetector(
+                      onTap: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => Detail_Sd(
+                            sekolah: sd,
+                          ),
+                        ),
+                      ),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                height: 30,
-                                width: 300,
-                                child: Text(
-                                  nama[index],
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
+                              SizedBox(
+                                height: 70,
+                                width: 70,
+                                child: Image.network(
+                                  "$fotoUrl/assets/img/${sd.foto}",
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                  height: 30,
-                                  width: 300,
-                                  child: Text(
-                                    alamat[index],
-                                    style: TextStyle(fontSize: 12),
-                                  ))
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        sd.namaSekolah,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        sd.alamat,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        style: const TextStyle(fontSize: 14),
+                                        textAlign: TextAlign.left,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
                             ],
                           ),
-                        )
-                      ],
+                        ),
+                      ),
                     ),
-                  )),
+                  )
+                  .toList(),
             );
-          },
-        ),
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }
 }
-
-final List nama = [
-  "SD Negeri Sidokare I",
-  "SD Negeri Sidokare II",
-  "SD Negeri Sidokare III",
-  "SD Negeri Sidokare IV",
-  "SD Negeri Sidokare I",
-  "SD Negeri Sidokare II",
-  "SD Negeri Sidokare III",
-  "SD Negeri Sidokare IV",
-  "SD Negeri Sidokare I",
-  "SD Negeri Sidokare II",
-];
-final List alamat = [
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-  "Sidokare Sidoarjo",
-];
-
-final List gambar = [
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-  Image.asset('assets/images/no_image.png', width: 50),
-];

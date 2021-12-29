@@ -58,6 +58,8 @@ class Pemancingan extends StatelessWidget {
                                         width: 270,
                                         child: Text(
                                           wisata.namaWisata,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
@@ -70,6 +72,8 @@ class Pemancingan extends StatelessWidget {
                                         width: 270,
                                         child: Text(
                                           wisata.alamat,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
                                           style: const TextStyle(fontSize: 14),
                                           textAlign: TextAlign.left,
                                         ),

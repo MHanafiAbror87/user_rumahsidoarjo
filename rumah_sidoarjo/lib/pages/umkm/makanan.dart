@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/models/list_umkm.dart';
 import 'package:rumah_sidoarjo/pages/umkm/detail_makanan.dart';
-import 'package:rumah_sidoarjo/pages/umkm/detail_kerajinan.dart';
 import 'package:rumah_sidoarjo/services/api_umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
@@ -54,6 +53,8 @@ class Makanan extends StatelessWidget {
                                         children: [
                                           Text(
                                             kerajinan.nama,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
                                             style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold),
@@ -63,6 +64,8 @@ class Makanan extends StatelessWidget {
                                           ),
                                           Text(
                                             kerajinan.alamat,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                             textAlign: TextAlign.left,

@@ -1,96 +1,44 @@
+// To parse this JSON data, do
+//
+//     final listSekolahModel = listSekolahModelFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
-DetailSekolahModel detailSekolahModelFromJson(String str) =>
-    DetailSekolahModel.fromJson(json.decode(str));
+ListSekolahModel listSekolahModelFromJson(String str) =>
+    ListSekolahModel.fromJson(json.decode(str));
 
-String detailSekolahModelToJson(DetailSekolahModel data) =>
+String listSekolahModelToJson(ListSekolahModel data) =>
     json.encode(data.toJson());
 
-class DetailSekolahModel {
-  DetailSekolahModel({
+class ListSekolahModel {
+  ListSekolahModel({
     required this.status,
     required this.message,
-    required this.sekolah,
-    required this.ekskul,
-    required this.fasilitas,
+    required this.data,
   });
 
   bool status;
   String message;
-  Sekolah sekolah;
-  List<Ekskul> ekskul;
-  List<Fasilitas> fasilitas;
+  List<SekolahData> data;
 
-  factory DetailSekolahModel.fromJson(Map<String, dynamic> json) =>
-      DetailSekolahModel(
+  factory ListSekolahModel.fromJson(Map<String, dynamic> json) =>
+      ListSekolahModel(
         status: json["status"],
         message: json["message"],
-        sekolah: Sekolah.fromJson(json["sekolah"]),
-        ekskul:
-            List<Ekskul>.from(json["ekskul"].map((x) => Ekskul.fromJson(x))),
-        fasilitas: List<Fasilitas>.from(
-            json["fasilitas"].map((x) => Fasilitas.fromJson(x))),
+        data: List<SekolahData>.from(
+            json["data"].map((x) => SekolahData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "sekolah": sekolah.toJson(),
-        "ekskul": List<dynamic>.from(ekskul.map((x) => x.toJson())),
-        "fasilitas": List<dynamic>.from(fasilitas.map((x) => x.toJson())),
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 }
 
-class Ekskul {
-  Ekskul({
-    required this.idEkskul,
-    required this.idSekolah,
-    required this.nama,
-  });
-
-  String idEkskul;
-  String idSekolah;
-  String nama;
-
-  factory Ekskul.fromJson(Map<String, dynamic> json) => Ekskul(
-        idEkskul: json["id_ekskul"],
-        idSekolah: json["id_sekolah"],
-        nama: json["nama"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id_ekskul": idEkskul,
-        "id_sekolah": idSekolah,
-        "nama": nama,
-      };
-}
-
-class Fasilitas {
-  Fasilitas({
-    required this.idFasilitas,
-    required this.idSekolah,
-    required this.nama,
-  });
-
-  String idFasilitas;
-  String idSekolah;
-  String nama;
-
-  factory Fasilitas.fromJson(Map<String, dynamic> json) => Fasilitas(
-        idFasilitas: json["id_fasilitas"],
-        idSekolah: json["id_sekolah"],
-        nama: json["nama"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id_fasilitas": idFasilitas,
-        "id_sekolah": idSekolah,
-        "nama": nama,
-      };
-}
-
-class Sekolah {
-  Sekolah({
+class SekolahData {
+  SekolahData({
     required this.idSekolah,
     required this.idKelurahan,
     required this.namaSekolah,
@@ -126,7 +74,7 @@ class Sekolah {
   String nama;
   String kecamatan;
 
-  factory Sekolah.fromJson(Map<String, dynamic> json) => Sekolah(
+  factory SekolahData.fromJson(Map<String, dynamic> json) => SekolahData(
         idSekolah: json["id_sekolah"],
         idKelurahan: json["id_kelurahan"],
         namaSekolah: json["nama_sekolah"],

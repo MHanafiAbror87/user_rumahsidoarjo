@@ -1,96 +1,113 @@
 import 'dart:convert';
-import 'package:rumah_sidoarjo/services/api_pendidikan.dart';
-import 'package:rumah_sidoarjo/models/pendidikan.dart';
+import 'dart:io';
+import 'package:rumah_sidoarjo/helper/session_helper.dart';
+import 'package:rumah_sidoarjo/models/list_sekolah.dart';
+import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:http/http.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
+import 'package:rumah_sidoarjo/models/pendidikan.dart';
+import 'package:rumah_sidoarjo/services/apiurl.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class ApiServices {
-  final String apiUrl =
-      "http://192.168.128.135/RumahSidoarjoAdmin/rest_ci/index.php/Akun";
+class ApiSekolah {
+  final String apiUrl = "$apiurl/Api_Sekolah";
+  final String apiUrlSlb = "$apiurl/Api_Sekolah/slb";
+  final String apiUrlSmp = "$apiurl/Api_Sekolah/smp";
 
-  Future<List<Pendidikan>> getPendidikan() async {
-    Response res = await get(Uri.parse(apiUrl));
+  Future<List<SekolahData>> getSekolah() async {
+    try {
+      Response res = await get(Uri.parse(apiUrl));
 
-    if (res.statusCode == 200) {
-      List<dynamic> body = jsonDecode(res.body);
-      List<Pendidikan> sekolah =
-          body.map((dynamic item) => Pendidikan.fromJson(item)).toList();
-      return sekolah;
-    } else {
-      throw "Failed to load cases list";
+      if (res.statusCode == 200) {
+        final body = jsonDecode(res.body);
+
+        if (body['status']) {
+          final response = ListSekolahModel.fromJson(body);
+
+          return response.data;
+        } else {
+          throw body['message'];
+        }
+      } else {
+        throw "Failed to load cases list";
+      }
+    } catch (e) {
+      throw e.toString();
     }
   }
 
-  Future<Pendidikan> getPendidikanById(String id) async {
-    final response = await get(Uri.parse('$apiUrl/$id'));
+  Future<List<SekolahData>> getSlb() async {
+    try {
+      Response res = await get(Uri.parse(apiUrlSlb));
+
+      if (res.statusCode == 200) {
+        final body = jsonDecode(res.body);
+
+        if (body['status']) {
+          final response = ListSekolahModel.fromJson(body);
+
+          return response.data;
+        } else {
+          throw body['message'];
+        }
+      } else {
+        throw "Failed to load cases list";
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<List<SekolahData>> getSmp() async {
+    try {
+      Response res = await get(Uri.parse(apiUrlSmp));
+
+      if (res.statusCode == 200) {
+        final body = jsonDecode(res.body);
+
+        if (body['status']) {
+          final response = ListSekolahModel.fromJson(body);
+
+          return response.data;
+        } else {
+          throw body['message'];
+        }
+      } else {
+        throw "Failed to load cases list";
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<DetailSekolahModel> getSdById(String id) async {
+    final response = await get(Uri.parse('$apiUrl?id_sekolah=$id'));
 
     if (response.statusCode == 200) {
-      return Pendidikan.fromJson(json.decode(response.body));
+      return DetailSekolahModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load a sekolah');
     }
   }
 
-  Future<Pendidikan> createPendidikan(Pendidikan sekolah) async {
-    Map data = {
-      'id_kelurahan': sekolah.id_kelurahan,
-      'nama_sekolah': sekolah.nama_sekolah,
-      'alamat': sekolah.alamat,
-      'akreditasi': sekolah.akreditasi,
-      'NPSN': sekolah.NPSN,
-      'no_telepon': sekolah.no_telepon,
-      'jenjang': sekolah.jenjang,
-      'status': sekolah.status,
-      'website': sekolah.website
-    };
+  Future<DetailSekolahModel> getSlbById(String id) async {
+    final response = await get(Uri.parse('$apiUrlSlb?id_sekolah=$id'));
 
-    final Response response = await post(
-      Uri.parse(apiUrl),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(data),
-    );
     if (response.statusCode == 200) {
-      return Pendidikan.fromJson(json.decode(response.body));
+      return DetailSekolahModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to post sekolah');
+      throw Exception('Failed to load a sekolah');
     }
   }
 
-  Future<Pendidikan> updatePendidikan(String id, Pendidikan sekolah) async {
-    Map data = {
-      'id_kelurahan': sekolah.id_kelurahan,
-      'nama_sekolah': sekolah.nama_sekolah,
-      'alamat': sekolah.alamat,
-      'akreditasi': sekolah.akreditasi,
-      'NPSN': sekolah.NPSN,
-      'no_telepon': sekolah.no_telepon,
-      'jenjang': sekolah.jenjang,
-      'status': sekolah.status,
-      'website': sekolah.website
-    };
+  Future<DetailSekolahModel> getSmpById(String id) async {
+    final response = await get(Uri.parse('$apiUrlSmp?id_sekolah=$id'));
 
-    final Response response = await put(
-      Uri.parse('$apiUrl/$id'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(data),
-    );
     if (response.statusCode == 200) {
-      return Pendidikan.fromJson(json.decode(response.body));
+      return DetailSekolahModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to update a sekolah');
-    }
-  }
-
-  Future<void> deleteCase(String id) async {
-    Response res = await delete(Uri.parse('$apiUrl/$id'));
-
-    if (res.statusCode == 200) {
-      print("Pendidikan deleted");
-    } else {
-      throw "Failed to delete a case.";
+      throw Exception('Failed to load a sekolah');
     }
   }
 }
