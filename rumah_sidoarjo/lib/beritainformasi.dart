@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:rumah_sidoarjo/lowongankerja.dart';
 import 'package:rumah_sidoarjo/models/list_berita.dart';
 import 'package:rumah_sidoarjo/pages/berita/detail_berita.dart';
+import 'package:rumah_sidoarjo/pages/cctv.dart';
 import 'package:rumah_sidoarjo/services/api_berita.dart';
 import 'custom_template.dart';
 

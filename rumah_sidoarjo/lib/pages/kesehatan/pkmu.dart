@@ -54,6 +54,8 @@ class Pkmu extends StatelessWidget {
                                         children: [
                                           Text(
                                             pkmu.nama,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
                                             style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold),
@@ -63,6 +65,8 @@ class Pkmu extends StatelessWidget {
                                           ),
                                           Text(
                                             pkmu.alamat,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                             textAlign: TextAlign.left,

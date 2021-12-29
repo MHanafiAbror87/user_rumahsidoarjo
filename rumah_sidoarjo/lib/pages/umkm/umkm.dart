@@ -60,20 +60,23 @@ class _UmkmState extends State<Umkm> {
   Widget _headerPage() {
     return Container(
       height: 158,
+      width: double.infinity,
       decoration: headerDecoration,
       child: Column(
         children: [
-          Text(
-            'UMKM',
-            style: headerTextStyle,
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Text(
+              'UMKM',
+              style: headerTextStyle,
+            ),
           ),
+          const SizedBox(height: 10),
           Expanded(
-            child: Center(
-              child: Text(
-                '(Usaha Mikro Kecil Menengah) \n di Kabupaten Sidoarjo',
-                textAlign: TextAlign.center,
-                style: headerSubTextStyle,
-              ),
+            child: Text(
+              '(Usaha Mikro Kecil Menengah) \n di Kabupaten Sidoarjo',
+              textAlign: TextAlign.center,
+              style: headerSubTextStyle,
             ),
           ),
         ],

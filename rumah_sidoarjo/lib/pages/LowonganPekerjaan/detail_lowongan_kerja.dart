@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rumah_sidoarjo/models/kesehatan.dart';
-import 'package:rumah_sidoarjo/pages/kesehatan/kesehatan.dart';
+import 'package:rumah_sidoarjo/models/lowongan_pekerjaan.dart';
+import 'package:rumah_sidoarjo/pages/LowonganPekerjaan/lowongan_kerja.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DetailKesehatanPkmu extends StatefulWidget {
-  final KesehatanData kesehatan;
-  DetailKesehatanPkmu({required this.kesehatan});
+class DetailLowonganPekerjaan extends StatefulWidget {
+  final LowonganPekerjaanData lowongan;
+  DetailLowonganPekerjaan({required this.lowongan});
 
   @override
-  _DetailKesehatanPkmuState createState() => _DetailKesehatanPkmuState();
+  _DetailLowonganPekerjaanState createState() =>
+      _DetailLowonganPekerjaanState();
 }
 
-class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
+class _DetailLowonganPekerjaanState extends State<DetailLowonganPekerjaan> {
   late GoogleMapController mapController;
 
   late LatLng center;
@@ -33,15 +34,15 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
 
   void googlemaps() {
     // add lat lng location & marker
-    center = LatLng(double.parse(widget.kesehatan.lat),
-        double.parse(widget.kesehatan.long));
-    _markers[widget.kesehatan.nama] = Marker(
-      markerId: MarkerId(widget.kesehatan.nama),
-      position: LatLng(double.parse(widget.kesehatan.lat),
-          double.parse(widget.kesehatan.long)),
+    center = LatLng(
+        double.parse(widget.lowongan.lat), double.parse(widget.lowongan.long));
+    _markers[widget.lowongan.namaPerusahaan] = Marker(
+      markerId: MarkerId(widget.lowongan.namaPerusahaan),
+      position: LatLng(double.parse(widget.lowongan.lat),
+          double.parse(widget.lowongan.long)),
       infoWindow: InfoWindow(
-        title: widget.kesehatan.nama,
-        snippet: widget.kesehatan.alamat,
+        title: widget.lowongan.namaPerusahaan,
+        snippet: widget.lowongan.alamat,
       ),
     );
 
@@ -64,12 +65,12 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Kesehatan();
+                return const LowonganPekerjaan();
               },
             ),
           ),
         ),
-        title: const Text('Detail Kesehatan'),
+        title: const Text('Detail Lowongan Pekerjaan'),
         backgroundColor: darkGreen1,
       ),
       body: SingleChildScrollView(
@@ -79,11 +80,11 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   height: 210,
                   child: Image.network(
-                      "$fotoUrl/assets/img/${widget.kesehatan.foto}",
+                      "$fotoUrl/assets/img/${widget.lowongan.fotoLowongan}",
                       fit: BoxFit.cover),
                 ),
               ),
@@ -99,7 +100,7 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                     child: Column(
                       children: [
                         Text(
-                          widget.kesehatan.nama,
+                          widget.lowongan.namaPerusahaan,
                           style: const TextStyle(
                               fontFamily: 'DMSans',
                               fontSize: 16,
@@ -112,6 +113,25 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
+                                'Posisi',
+                                style: TextStyle(
+                                  fontFamily: 'DMSans',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                widget.lowongan.judulLowongan,
+                                style: TextStyle(
+                                    fontFamily: 'DMSans',
+                                    fontSize: 14,
+                                    color: darkGreen),
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              const Text(
                                 'Alamat',
                                 style: TextStyle(
                                   fontFamily: 'DMSans',
@@ -119,64 +139,7 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                                 ),
                               ),
                               Text(
-                                widget.kesehatan.alamat,
-                                style: TextStyle(
-                                    fontFamily: 'DMSans',
-                                    fontSize: 14,
-                                    color: darkGreen),
-                              ),
-                              const Divider(
-                                color: Colors.grey,
-                                height: 25,
-                                thickness: 2,
-                              ),
-                              const Text(
-                                'Kecamatan',
-                                style: TextStyle(
-                                  fontFamily: 'DMSans',
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                widget.kesehatan.kecamatan,
-                                style: TextStyle(
-                                    fontFamily: 'DMSans',
-                                    fontSize: 14,
-                                    color: darkGreen),
-                              ),
-                              const Divider(
-                                color: Colors.grey,
-                                height: 25,
-                                thickness: 2,
-                              ),
-                              const Text(
-                                'Kategori',
-                                style: TextStyle(
-                                  fontFamily: 'DMSans',
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                widget.kesehatan.kategori,
-                                style: TextStyle(
-                                    fontFamily: 'DMSans',
-                                    fontSize: 14,
-                                    color: darkGreen),
-                              ),
-                              const Divider(
-                                color: Colors.grey,
-                                height: 25,
-                                thickness: 2,
-                              ),
-                              const Text(
-                                'Pengelola',
-                                style: TextStyle(
-                                  fontFamily: 'DMSans',
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                widget.kesehatan.kepemilikan,
+                                widget.lowongan.alamat,
                                 style: TextStyle(
                                     fontFamily: 'DMSans',
                                     fontSize: 14,
@@ -203,7 +166,7 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                                         ),
                                       ),
                                       Text(
-                                        widget.kesehatan.noTelepon,
+                                        widget.lowongan.noTlp,
                                         style: TextStyle(
                                             fontFamily: 'DMSans',
                                             fontSize: 14,
@@ -213,7 +176,7 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                                   ),
                                   InkWell(
                                     onTap: () => launch(
-                                        "tel://${widget.kesehatan.noTelepon}"),
+                                        "tel://${widget.lowongan.noTlp}"),
                                     child: Container(
                                         width: 100,
                                         height: 40,
@@ -236,40 +199,34 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                                 height: 25,
                                 thickness: 2,
                               ),
-                              widget.kesehatan.website.isNotEmpty
+                              widget.lowongan.website.isNotEmpty
                                   ? Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 15),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const Text(
-                                                  'Website',
-                                                  style: TextStyle(
-                                                    fontFamily: 'DMSans',
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  widget.kesehatan.website,
-                                                  style: TextStyle(
-                                                      fontFamily: 'DMSans',
-                                                      fontSize: 14,
-                                                      color: darkGreen),
-                                                ),
-                                              ],
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              'Website',
+                                              style: TextStyle(
+                                                fontFamily: 'DMSans',
+                                                fontSize: 16,
+                                              ),
                                             ),
-                                          ),
+                                            Text(
+                                              widget.lowongan.website,
+                                              style: TextStyle(
+                                                  fontFamily: 'DMSans',
+                                                  fontSize: 14,
+                                                  color: darkGreen),
+                                            ),
+                                          ],
                                         ),
                                         InkWell(
                                           onTap: () => launch(
-                                              "http://${widget.kesehatan.website}"),
+                                              "http://${widget.lowongan.website}"),
                                           child: Container(
                                               width: 100,
                                               height: 40,
@@ -320,7 +277,26 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                                 ),
                               ),
                               Text(
-                                widget.kesehatan.email,
+                                widget.lowongan.email,
+                                style: TextStyle(
+                                    fontFamily: 'DMSans',
+                                    fontSize: 14,
+                                    color: darkGreen),
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                                height: 25,
+                                thickness: 2,
+                              ),
+                              const Text(
+                                'Detail Pekerjaan',
+                                style: TextStyle(
+                                  fontFamily: 'DMSans',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                widget.lowongan.deskripsiPekerjaan,
                                 style: TextStyle(
                                     fontFamily: 'DMSans',
                                     fontSize: 14,
@@ -332,7 +308,7 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                                 thickness: 2,
                               ),
                               Text(
-                                'Lokasi ${widget.kesehatan.nama}',
+                                'Lokasi ${widget.lowongan.namaPerusahaan}',
                                 style: const TextStyle(
                                   fontFamily: 'DMSans',
                                   fontSize: 16,

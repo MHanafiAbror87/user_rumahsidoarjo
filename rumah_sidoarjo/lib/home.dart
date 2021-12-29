@@ -5,11 +5,11 @@ import 'package:rumah_sidoarjo/akun.dart';
 import 'package:rumah_sidoarjo/beritainformasi.dart';
 import 'package:rumah_sidoarjo/helper/session_helper.dart';
 import 'package:rumah_sidoarjo/login.dart';
-import 'package:rumah_sidoarjo/lowongankerja.dart';
 import 'package:rumah_sidoarjo/models/list_berita.dart';
 import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
 import 'package:rumah_sidoarjo/models/list_umkm.dart';
 import 'package:rumah_sidoarjo/pages/LayananPublik/layananpublik.dart';
+import 'package:rumah_sidoarjo/pages/LowonganPekerjaan/lowongan_kerja.dart';
 import 'package:rumah_sidoarjo/pages/Pengaduan/pengaduan.dart';
 import 'package:rumah_sidoarjo/pages/berita/detail_berita.dart';
 import 'package:rumah_sidoarjo/pages/cctv.dart';
@@ -136,8 +136,8 @@ class HomeState extends State<Home> {
       child: ListView(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            TextButton(
-              onPressed: () => {
+            GestureDetector(
+              onTap: () => {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -159,8 +159,8 @@ class HomeState extends State<Home> {
                 ],
               ),
             ),
-            TextButton(
-              onPressed: () => {
+            GestureDetector(
+              onTap: () => {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -182,8 +182,8 @@ class HomeState extends State<Home> {
                 ],
               ),
             ),
-            TextButton(
-              onPressed: () => {
+            GestureDetector(
+              onTap: () => {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -210,8 +210,8 @@ class HomeState extends State<Home> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TextButton(
-                onPressed: () => {
+              GestureDetector(
+                onTap: () => {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -235,8 +235,8 @@ class HomeState extends State<Home> {
               ),
               Column(
                 children: [
-                  TextButton(
-                    onPressed: () => {
+                  GestureDetector(
+                    onTap: () => {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -259,8 +259,8 @@ class HomeState extends State<Home> {
                   )
                 ],
               ),
-              TextButton(
-                onPressed: _showDialog,
+              GestureDetector(
+                onTap: _showDialog,
                 child: Column(
                   children: [
                     Image.asset(
@@ -274,7 +274,7 @@ class HomeState extends State<Home> {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -283,7 +283,7 @@ class HomeState extends State<Home> {
   void _showDialog() {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        context: this.context,
+        context: context,
         builder: (context) {
           return ListView(
             children: [
@@ -304,8 +304,8 @@ class HomeState extends State<Home> {
                 ],
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                TextButton(
-                  onPressed: () => {
+                GestureDetector(
+                  onTap: () => {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -327,8 +327,8 @@ class HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                TextButton(
-                  onPressed: () => {
+                GestureDetector(
+                  onTap: () => {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -350,8 +350,8 @@ class HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                TextButton(
-                  onPressed: () => {
+                GestureDetector(
+                  onTap: () => {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -378,8 +378,8 @@ class HomeState extends State<Home> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  TextButton(
-                    onPressed: () => {
+                  GestureDetector(
+                    onTap: () => {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -401,8 +401,8 @@ class HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  TextButton(
-                    onPressed: () => {
+                  GestureDetector(
+                    onTap: () => {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -424,13 +424,13 @@ class HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  TextButton(
-                    onPressed: () => {
+                  GestureDetector(
+                    onTap: () => {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return Lowongankerja();
+                            return const LowonganPekerjaan();
                           },
                         ),
                       ),
@@ -487,7 +487,7 @@ class HomeState extends State<Home> {
                           child: Row(
                             children: [
                               Image.network("$fotoUrl/assets/img/${umkm.foto1}",
-                                  width: 90, fit: BoxFit.fill),
+                                  width: 90, fit: BoxFit.cover),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Column(
@@ -564,7 +564,7 @@ class HomeState extends State<Home> {
                               Image.network(
                                 "https://www.sidoarjokab.go.id/${berita.thumb}",
                                 width: 100,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                               const SizedBox(width: 10),
                               Expanded(
@@ -642,7 +642,7 @@ class HomeState extends State<Home> {
                               Image.network(
                                   "$fotoUrl/assets/img/${wisata.foto1}",
                                   width: 90,
-                                  fit: BoxFit.fill),
+                                  fit: BoxFit.cover),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Column(

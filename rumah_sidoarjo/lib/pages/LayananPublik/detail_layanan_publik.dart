@@ -68,11 +68,14 @@ class _DetailLayananPublik extends State<DetailLayananPublik> {
     return AppBar(
       elevation: 0,
       leading: GestureDetector(
-        //  onTap: () => Navigator.pushReplacement(
-        //                           context,
-        //                           MaterialPageRoute(
-        //                               builder: (context) => KategoriLayananPublik(
-        //                                   kategori: layanan))),
+        onTap: () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return LayananPublik();
+            },
+          ),
+        ),
         child: Icon(
           Icons.arrow_back_ios,
           color: White,
@@ -83,61 +86,3 @@ class _DetailLayananPublik extends State<DetailLayananPublik> {
     );
   }
 }
-
-// class listKategori extends StatelessWidget {
-//   const listKategori({
-//     Key? key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemCount: kategori.length,
-//       itemBuilder: (context, index) {
-//         return Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-//           child: Container(
-//             height: 65,
-//             child: GestureDetector(
-//               onTap: () {},
-//               child: Card(
-//                 elevation: 4,
-//                 shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(20)),
-//                 child: Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-//                   child: Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         kategori[index],
-//                         style: textKategori,
-//                       ),
-//                       Image.asset(
-//                         'assets/images/arrow_forward.png',
-//                         width: 20,
-//                         height: 20,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
-
-final List kategori = [
-  "Pelatihan Untuk Masyarakat",
-  "Beasiswa Pendidikan",
-  "KTP",
-  "SIM",
-  "SKCK",
-  "Kartu Keluarga",
-  "Akta Kelahiran",
-  "Akta Kematian",
-  "Kartu Pencari Kerja",
-];

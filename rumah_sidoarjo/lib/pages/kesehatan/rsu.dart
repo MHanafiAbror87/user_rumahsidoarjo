@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/models/kesehatan.dart';
-import 'package:rumah_sidoarjo/pages/kesehatan/detail_kesehatan_rsu.dart';
+import 'package:rumah_sidoarjo/pages/kesehatan/detail_kesehatan.dart';
 import 'package:rumah_sidoarjo/services/api_kesehatan.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
@@ -22,7 +22,7 @@ class Rsu extends StatelessWidget {
                         (rsu) => GestureDetector(
                           onTap: () => Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => DetailKesehatanRsu(
+                              builder: (context) => DetailKesehatanPkmu(
                                 kesehatan: rsu,
                               ),
                             ),
@@ -53,6 +53,8 @@ class Rsu extends StatelessWidget {
                                         children: [
                                           Text(
                                             rsu.nama,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
                                             style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold),
@@ -62,6 +64,8 @@ class Rsu extends StatelessWidget {
                                           ),
                                           Text(
                                             rsu.alamat,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                             textAlign: TextAlign.left,
