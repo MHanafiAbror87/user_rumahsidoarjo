@@ -40,7 +40,7 @@ class DataLogin {
     required this.nama,
     required this.alamat,
     required this.email,
-    this.tanggalLahir,
+    required this.tanggalLahir,
     required this.jenisKelamin,
     required this.noTelepon,
     required this.password,
@@ -51,7 +51,7 @@ class DataLogin {
   String nama;
   String alamat;
   String email;
-  DateTime? tanggalLahir;
+  String tanggalLahir;
   String jenisKelamin;
   String noTelepon;
   String password;
@@ -77,7 +77,7 @@ class DataLogin {
         nama: json["nama"],
         alamat: json["alamat"] ?? "-",
         email: json["email"],
-        tanggalLahir: DateTime.parse(json["tanggal_lahir"]),
+        tanggalLahir: json["tanggal_lahir"],
         jenisKelamin: json["jenis_kelamin"] ?? "-",
         noTelepon: json["no_telepon"],
         password: json["password"],

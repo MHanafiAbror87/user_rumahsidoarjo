@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/pages/kesehatan/pkmp.dart';
@@ -7,7 +6,7 @@ import 'package:rumah_sidoarjo/pages/kesehatan/pkmu.dart';
 import 'package:rumah_sidoarjo/pages/kesehatan/rsu.dart';
 
 class Kesehatan extends StatefulWidget {
-  Kesehatan({Key? key}) : super(key: key);
+  const Kesehatan({Key? key}) : super(key: key);
 
   @override
   _KesehatanState createState() => _KesehatanState();
@@ -16,40 +15,37 @@ class Kesehatan extends StatefulWidget {
 class _KesehatanState extends State<Kesehatan> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.grey.shade300,
-        appBar: appBar(),
-        body: Column(
-          children: <Widget>[
-            _headerPage(),
-            tabCon(),
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: Colors.grey.shade300,
+      appBar: appBar(),
+      body: Column(
+        children: <Widget>[
+          _headerPage(),
+          const TapCon(),
+        ],
       ),
     );
   }
 
   AppBar appBar() {
     return AppBar(
-      leading: FlatButton(
+      leading: InkWell(
         child: Icon(
           Icons.arrow_back_ios,
           color: White,
         ),
-        onPressed: () => {
+        onTap: () => {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Home();
+                return const Home();
               },
             ),
           ),
         },
       ),
-      title: Text('Kesehatan'),
+      title: const Text('Kesehatan'),
       backgroundColor: darkGreen1,
     );
   }
@@ -60,16 +56,16 @@ class _KesehatanState extends State<Kesehatan> {
       decoration: headerDecoration,
       child: Column(
         children: [
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             'Layanan Kesehatan',
             style: headerTextStyle,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Center(
-            child: Container(
+            child: SizedBox(
               width: 330,
               child: Text(
                 'Ayo Cari Layanan Kesehatan Terdekat',
@@ -84,8 +80,8 @@ class _KesehatanState extends State<Kesehatan> {
   }
 }
 
-class tabCon extends StatelessWidget {
-  const tabCon({
+class TapCon extends StatelessWidget {
+  const TapCon({
     Key? key,
   }) : super(key: key);
 
@@ -108,10 +104,10 @@ class tabCon extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30)),
                 labelColor: White,
                 labelStyle:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                 unselectedLabelColor: darkGrey,
-                unselectedLabelStyle: TextStyle(fontSize: 14),
-                tabs: [
+                unselectedLabelStyle: const TextStyle(fontSize: 14),
+                tabs: const [
                   Tab(child: Text('PKM Utama')),
                   Tab(
                       child: Text(
@@ -120,8 +116,8 @@ class tabCon extends StatelessWidget {
                   )),
                   Tab(child: Text('Rumah Sakit')),
                 ]),
-            SizedBox(height: 10),
-            Container(
+            const SizedBox(height: 10),
+            SizedBox(
               height: 540,
               width: double.infinity,
               child: TabBarView(

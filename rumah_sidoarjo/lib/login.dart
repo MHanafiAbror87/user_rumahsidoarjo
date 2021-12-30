@@ -11,6 +11,8 @@ import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = "/login";
+
+  const LoginPage({Key? key}) : super(key: key);
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -56,15 +58,15 @@ class _LoginPageState extends State<LoginPage> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Stack(
               children: <Widget>[
-                Container(
+                const SizedBox(
                   height: double.infinity,
                   width: double.infinity,
                 ),
-                Container(
+                SizedBox(
                   height: double.infinity,
                   child: SingleChildScrollView(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    padding: EdgeInsets.symmetric(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 40.0,
                       vertical: 120.0,
                     ),
@@ -72,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         _icLogin(),
-                        SizedBox(height: 33.0),
+                        const SizedBox(height: 33.0),
                         _buildEmail(),
                         _buildPasswordTF(),
                         Row(
@@ -83,11 +85,11 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         _buildLoginBtn(),
-                        SizedBox(
+                        const SizedBox(
                           height: 50.0,
                         ),
                         _buildtextdaftar(),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         _buildDaftarBtn(),
@@ -123,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
           'Informasi Seputar Kabupaten Sidoarjo',
           style: GoogleFonts.aBeeZee(
             fontSize: 12,
-            color: Color(0xff8F8E8E),
+            color: const Color(0xff8F8E8E),
           ),
         ),
       ],
@@ -134,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
@@ -147,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               hintText: 'Email',
               hintStyle: kHintTextStyle,
             ),
@@ -167,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildPasswordTF() {
     return Column(
       children: <Widget>[
-        SizedBox(height: 20.0),
+        const SizedBox(height: 20.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
@@ -181,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               hintText: 'Password',
               hintStyle: kHintTextStyle,
               suffixIcon: GestureDetector(
@@ -233,7 +235,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildRememberMeCheckbox() {
-    return Container(
+    return SizedBox(
       height: 20.0,
       child: Row(
         children: <Widget>[
@@ -249,7 +251,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
           ),
-          Text(
+          const Text(
             'Ingat Saya',
             style: TextStyle(
               color: Color(0xffA6A6A6),
@@ -264,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoginBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () async {
@@ -279,7 +281,7 @@ class _LoginPageState extends State<LoginPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return Home();
+                    return const Home();
                   },
                 ),
               );
@@ -287,7 +289,7 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           primary: lightGreen,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),
@@ -308,7 +310,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildDaftarBtn() {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: RaisedButton(
         onPressed: () => {
@@ -316,12 +318,12 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return addRegister();
+                return const AddRegister();
               },
             ),
           ),
         },
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             30.0,
@@ -350,7 +352,7 @@ class _LoginPageState extends State<LoginPage> {
           top: 40.0,
         ),
         child: RichText(
-          text: TextSpan(
+          text: const TextSpan(
             children: [
               TextSpan(
                 text: 'Belum punya akun? ',

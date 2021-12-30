@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/models/kategori_layanan_publik.dart';
-import 'package:rumah_sidoarjo/models/layanan_publik.dart';
 import 'package:rumah_sidoarjo/pages/LayananPublik/kategori_layanan_publik.dart';
 import 'package:rumah_sidoarjo/services/api_layanan_publik.dart';
 
@@ -84,7 +83,7 @@ class _LayananPublik extends State<LayananPublik> {
                     );
                   }
 
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }),
           ),
         ],
@@ -98,13 +97,13 @@ class _LayananPublik extends State<LayananPublik> {
       decoration: headerDecoration,
       child: Column(
         children: [
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             'Layanan Publik',
             style: headerTextStyle,
           ),
           Center(
-            child: Container(
+            child: SizedBox(
               width: 330,
               child: Text(
                 'Ayo cari tau syarat pembuatan dokumen kependudukan',
@@ -121,23 +120,23 @@ class _LayananPublik extends State<LayananPublik> {
   AppBar appBar() {
     return AppBar(
       elevation: 0,
-      leading: FlatButton(
+      leading: InkWell(
         child: Icon(
           Icons.arrow_back_ios,
           color: White,
         ),
-        onPressed: () => {
+        onTap: () => {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Home();
+                return const Home();
               },
             ),
           ),
         },
       ),
-      title: Text('Layanan Publik'),
+      title: const Text('Layanan Publik'),
       backgroundColor: darkGreen1,
     );
   }

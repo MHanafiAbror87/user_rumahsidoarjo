@@ -9,7 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DetailLowonganPekerjaan extends StatefulWidget {
   final LowonganPekerjaanData lowongan;
-  DetailLowonganPekerjaan({required this.lowongan});
+  const DetailLowonganPekerjaan({Key? key, required this.lowongan})
+      : super(key: key);
 
   @override
   _DetailLowonganPekerjaanState createState() =>

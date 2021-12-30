@@ -508,7 +508,7 @@ class _AkunState extends State<Akun> {
                 alamat = '-';
               }
               return Text(
-                alamat,
+                alamat.isNotEmpty ? alamat : '-',
                 style: TextStyle(
                   fontFamily: "DMSans",
                   color: lightGrey,

@@ -14,30 +14,25 @@ class Syarat extends StatefulWidget {
 class _SyaratState extends State<Syarat> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: appBar(),
-        body: Scaffold(
-          backgroundColor: White,
-          body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.light,
-            child: Stack(
-              children: <Widget>[
-                SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 120.0,
-                  ),
-                ),
-                _headerPage(),
-                Expanded(
-                  child: _sk(),
-                ),
-              ],
+    return Scaffold(
+      appBar: appBar(),
+      backgroundColor: White,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(
+                horizontal: 40.0,
+                vertical: 120.0,
+              ),
             ),
-          ),
+            _headerPage(),
+            Expanded(
+              child: _sk(),
+            ),
+          ],
         ),
       ),
     );
@@ -52,13 +47,8 @@ class _SyaratState extends State<Syarat> {
           color: White,
         ),
         onPressed: () => {
-          Navigator.pushReplacement(
+          Navigator.pop(
             context,
-            MaterialPageRoute(
-              builder: (context) {
-                return addRegister();
-              },
-            ),
           ),
         },
       ),

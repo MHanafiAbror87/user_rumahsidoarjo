@@ -9,7 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DetailKesehatanPkmu extends StatefulWidget {
   final KesehatanData kesehatan;
-  DetailKesehatanPkmu({required this.kesehatan});
+  const DetailKesehatanPkmu({Key? key, required this.kesehatan})
+      : super(key: key);
 
   @override
   _DetailKesehatanPkmuState createState() => _DetailKesehatanPkmuState();
@@ -64,7 +65,7 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Kesehatan();
+                return const Kesehatan();
               },
             ),
           ),
@@ -79,7 +80,7 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   height: 210,
                   child: Image.network(

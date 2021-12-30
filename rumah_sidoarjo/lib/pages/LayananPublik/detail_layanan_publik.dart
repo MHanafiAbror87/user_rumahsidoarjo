@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:rumah_sidoarjo/models/kategori_layanan_publik.dart';
 import 'package:rumah_sidoarjo/models/layanan_publik.dart';
-import 'package:rumah_sidoarjo/pages/LayananPublik/kategori_layanan_publik.dart';
 import 'package:rumah_sidoarjo/pages/LayananPublik/layananpublik.dart';
 import 'package:rumah_sidoarjo/services/api_layanan_publik.dart';
 
 class DetailLayananPublik extends StatefulWidget {
   final LayananPublikData layanan;
-  DetailLayananPublik({required this.layanan});
+  const DetailLayananPublik({Key? key, required this.layanan})
+      : super(key: key);
   static String routeName = "/layanan";
   @override
   _DetailLayananPublik createState() => _DetailLayananPublik();
@@ -72,7 +71,7 @@ class _DetailLayananPublik extends State<DetailLayananPublik> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return LayananPublik();
+              return const LayananPublik();
             },
           ),
         ),
@@ -81,7 +80,7 @@ class _DetailLayananPublik extends State<DetailLayananPublik> {
           color: White,
         ),
       ),
-      title: Text('Layanan Publik'),
+      title: const Text('Layanan Publik'),
       backgroundColor: darkGreen1,
     );
   }

@@ -1,8 +1,3 @@
-// To parse this JSON data, do
-//
-//     final detailPariwisata = detailPariwisataFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 DetailPariwisataModel detailPariwisataFromJson(String str) =>

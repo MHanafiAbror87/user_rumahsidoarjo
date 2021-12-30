@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
-import 'package:rumah_sidoarjo/home.dart';
 import 'package:rumah_sidoarjo/models/kategori_layanan_publik.dart';
 import 'package:rumah_sidoarjo/models/layanan_publik.dart';
 import 'package:rumah_sidoarjo/pages/LayananPublik/detail_layanan_publik.dart';
@@ -10,7 +9,8 @@ import 'package:rumah_sidoarjo/services/api_layanan_publik.dart';
 
 class KategoriLayananPublik extends StatefulWidget {
   final KategoriLayananData kategori;
-  KategoriLayananPublik({required this.kategori});
+  const KategoriLayananPublik({Key? key, required this.kategori})
+      : super(key: key);
   static String routeName = "/layanan";
   @override
   _KategoriLayananPublik createState() => _KategoriLayananPublik();
@@ -82,7 +82,7 @@ class _KategoriLayananPublik extends State<KategoriLayananPublik> {
                     );
                   }
 
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }),
           ),
         ],
@@ -96,13 +96,13 @@ class _KategoriLayananPublik extends State<KategoriLayananPublik> {
       decoration: headerDecoration,
       child: Column(
         children: [
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             'Layanan Publik',
             style: headerTextStyle,
           ),
           Center(
-            child: Container(
+            child: SizedBox(
               width: 330,
               child: Text(
                 'Ayo cari tau syarat pembuatan dokumen kependudukan',
@@ -119,12 +119,12 @@ class _KategoriLayananPublik extends State<KategoriLayananPublik> {
   AppBar appBar() {
     return AppBar(
       elevation: 0,
-      leading: FlatButton(
+      leading: InkWell(
         child: Icon(
           Icons.arrow_back_ios,
           color: White,
         ),
-        onPressed: () => {
+        onTap: () => {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -135,66 +135,8 @@ class _KategoriLayananPublik extends State<KategoriLayananPublik> {
           ),
         },
       ),
-      title: Text('Layanan Publik'),
+      title: const Text('Layanan Publik'),
       backgroundColor: darkGreen1,
     );
   }
 }
-
-// class listKategori extends StatelessWidget {
-//   const listKategori({
-//     Key? key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemCount: kategori.length,
-//       itemBuilder: (context, index) {
-//         return Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-//           child: Container(
-//             height: 65,
-//             child: GestureDetector(
-//               onTap: () {},
-//               child: Card(
-//                 elevation: 4,
-//                 shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(20)),
-//                 child: Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-//                   child: Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         kategori[index],
-//                         style: textKategori,
-//                       ),
-//                       Image.asset(
-//                         'assets/images/arrow_forward.png',
-//                         width: 20,
-//                         height: 20,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
-
-final List kategori = [
-  "Pelatihan Untuk Masyarakat",
-  "Beasiswa Pendidikan",
-  "KTP",
-  "SIM",
-  "SKCK",
-  "Kartu Keluarga",
-  "Akta Kelahiran",
-  "Akta Kematian",
-  "Kartu Pencari Kerja",
-];

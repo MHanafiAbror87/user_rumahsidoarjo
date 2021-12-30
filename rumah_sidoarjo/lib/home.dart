@@ -129,11 +129,12 @@ class HomeState extends State<Home> {
 
   Widget _menu() {
     return Container(
-      padding: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.symmetric(vertical: 15),
       width: double.infinity,
       height: 180,
       color: White,
-      child: ListView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             GestureDetector(
@@ -206,7 +207,7 @@ class HomeState extends State<Home> {
               ),
             ),
           ]),
-          const Padding(padding: EdgeInsets.only(top: 15)),
+          // const Padding(padding: EdgeInsets.only(top: 15)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -583,7 +584,8 @@ class HomeState extends State<Home> {
                                       height: 5,
                                     ),
                                     Text(
-                                      DateFormat('dd MMMM').format(berita.tgl),
+                                      DateFormat('dd MMMM yyyy')
+                                          .format(berita.tgl),
                                       style: const TextStyle(
                                         fontSize: 10,
                                       ),

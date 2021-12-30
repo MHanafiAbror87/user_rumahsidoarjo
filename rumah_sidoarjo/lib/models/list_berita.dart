@@ -34,7 +34,7 @@ class ListBeritaModel {
         id: json["id"],
         slug: json["slug"],
         thumb: json["thumb"],
-        tgl: DateTime.parse(json["tgl"]),
+        tgl: DateTime.fromMillisecondsSinceEpoch(int.parse(json['tgl']) * 1000),
         judul: json["judul"],
         isiberita: json["isiberita"],
       );

@@ -7,6 +7,8 @@ import 'package:rumah_sidoarjo/services/apiurl.dart';
 class Pkmp extends StatelessWidget {
   final ApiKesehatan api = ApiKesehatan();
 
+  Pkmp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +85,7 @@ class Pkmp extends StatelessWidget {
                       .toList(),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             }));
   }

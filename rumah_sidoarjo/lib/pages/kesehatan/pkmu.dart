@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sidoarjo/models/kesehatan.dart';
-import 'package:rumah_sidoarjo/models/list_umkm.dart';
 import 'package:rumah_sidoarjo/pages/kesehatan/detail_kesehatan.dart';
 import 'package:rumah_sidoarjo/services/api_kesehatan.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 
 class Pkmu extends StatelessWidget {
   final ApiKesehatan api = ApiKesehatan();
+
+  Pkmu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +85,7 @@ class Pkmu extends StatelessWidget {
                       .toList(),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             }));
   }

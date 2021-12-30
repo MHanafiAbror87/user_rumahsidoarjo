@@ -11,10 +11,10 @@ import 'pages/syarat.dart';
 
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
-  addRegister.routeName: (context) => addRegister(),
-  LoginPage.routeName: (context) => LoginPage(),
+  AddRegister.routeName: (context) => const AddRegister(),
+  LoginPage.routeName: (context) => const LoginPage(),
   LupaPassword.routeName: (context) => LupaPassword(),
-  Akun.routeName: (context) => Akun(),
+  Akun.routeName: (context) => const Akun(),
   Syarat.routeName: (context) => Syarat(),
   PanikMenu.routeName: (context) => PanikMenu(),
   Pengaduan.routeName: (context) => Pengaduan(),

@@ -7,6 +7,8 @@ import 'package:rumah_sidoarjo/services/apiurl.dart';
 class Rsu extends StatelessWidget {
   final ApiKesehatan api = ApiKesehatan();
 
+  Rsu({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +85,7 @@ class Rsu extends StatelessWidget {
                       .toList(),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             }));
   }

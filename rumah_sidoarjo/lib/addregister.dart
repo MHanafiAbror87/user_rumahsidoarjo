@@ -13,17 +13,18 @@ import 'package:rumah_sidoarjo/services/api_services.dart';
 
 enum Gender { male, female }
 
-class addRegister extends StatefulWidget {
+class AddRegister extends StatefulWidget {
   static String routeName = "/register";
-  addRegister();
+  const AddRegister({Key? key}) : super(key: key);
 
   @override
-  _addRegisterState createState() => _addRegisterState();
+  _AddRegisterState createState() => _AddRegisterState();
 }
 
-class _addRegisterState extends State<addRegister> {
+class _AddRegisterState extends State<AddRegister> {
   final ApiServices api = ApiServices();
   final _addFormKey = GlobalKey<FormState>();
+  // ignore: non_constant_identifier_names
   final _NIKController = TextEditingController();
   final _namaController = TextEditingController();
   final _emailController = TextEditingController();
@@ -115,7 +116,7 @@ class _addRegisterState extends State<addRegister> {
                       },
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildSKCheckbox(context),
                   _buildDaftarBtn(context),
                 ],
@@ -139,13 +140,13 @@ class _addRegisterState extends State<addRegister> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return LoginPage();
+                return const LoginPage();
               },
             ),
           ),
         },
       ),
-      title: Text('Form Pendaftaran'),
+      title: const Text('Form Pendaftaran'),
       backgroundColor: darkGreen1,
     );
   }
@@ -160,7 +161,7 @@ class _addRegisterState extends State<addRegister> {
           Center(
             child: Column(
               children: [
-                SizedBox(height: 39),
+                const SizedBox(height: 39),
                 Text(
                   'Daftar Akun Baru',
                   style: headerTextStyle,
@@ -178,7 +179,7 @@ class _addRegisterState extends State<addRegister> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return LoginPage();
+                              return const LoginPage();
                             },
                           ),
                         ),
@@ -206,7 +207,7 @@ class _addRegisterState extends State<addRegister> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 20.0),
+        const SizedBox(height: 20.0),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
@@ -225,7 +226,7 @@ class _addRegisterState extends State<addRegister> {
               decoration: InputDecoration(
                 counterText: '',
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 15),
+                contentPadding: const EdgeInsets.only(left: 15),
                 hintText: 'NIK',
                 hintStyle: kHintTextStyle,
               ),
@@ -247,7 +248,7 @@ class _addRegisterState extends State<addRegister> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 15.0),
+        const SizedBox(height: 15.0),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
@@ -264,7 +265,7 @@ class _addRegisterState extends State<addRegister> {
               ),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 15),
+                contentPadding: const EdgeInsets.only(left: 15),
                 hintText: 'Nama Lengkap',
                 hintStyle: kHintTextStyle,
               ),
@@ -303,7 +304,7 @@ class _addRegisterState extends State<addRegister> {
               ),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 15, top: 9),
+                contentPadding: const EdgeInsets.only(left: 15, top: 9),
                 hintText: 'Password',
                 hintStyle: kHintTextStyle,
                 suffixIcon: GestureDetector(
@@ -336,7 +337,7 @@ class _addRegisterState extends State<addRegister> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 15.0),
+        const SizedBox(height: 15.0),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
@@ -354,7 +355,7 @@ class _addRegisterState extends State<addRegister> {
               decoration: InputDecoration(
                 counterText: '',
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 15),
+                contentPadding: const EdgeInsets.only(left: 15),
                 hintText: 'No. Telp',
                 hintStyle: kHintTextStyle,
               ),
@@ -376,7 +377,7 @@ class _addRegisterState extends State<addRegister> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 15.0),
+        const SizedBox(height: 15.0),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
@@ -392,7 +393,7 @@ class _addRegisterState extends State<addRegister> {
               ),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 15),
+                contentPadding: const EdgeInsets.only(left: 15),
                 hintText: 'Email',
                 hintStyle: kHintTextStyle,
               ),
@@ -413,7 +414,7 @@ class _addRegisterState extends State<addRegister> {
   Widget _buildSKCheckbox(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 15.0),
-      child: Container(
+      child: SizedBox(
         height: 40.0,
         child: Row(
           children: <Widget>[
@@ -432,7 +433,7 @@ class _addRegisterState extends State<addRegister> {
             ),
             Row(
               children: [
-                Text(
+                const Text(
                   'Setujui',
                   style: TextStyle(
                     color: Color(0xffA6A6A6),
@@ -443,7 +444,7 @@ class _addRegisterState extends State<addRegister> {
                 ),
                 TextButton(
                   onPressed: () => {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
@@ -496,7 +497,7 @@ class _addRegisterState extends State<addRegister> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return LoginPage();
+                            return const LoginPage();
                           },
                         ),
                       );
@@ -513,7 +514,7 @@ class _addRegisterState extends State<addRegister> {
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Container(
           height: 50,
-          padding: EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12.0),
           width: double.infinity,
           child: Text(
             'Daftar',

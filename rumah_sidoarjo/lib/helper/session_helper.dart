@@ -24,7 +24,7 @@ class SessionHelper {
     prefs.setString(nama, user.nama);
     prefs.setString(alamat, user.alamat);
     prefs.setString(email, user.email);
-    prefs.setString(tanggalLahir, user.tanggalLahir!.toIso8601String());
+    prefs.setString(tanggalLahir, user.tanggalLahir);
     prefs.setString(jenisKelamin, user.jenisKelamin);
     prefs.setString(noTelepon, user.noTelepon);
     prefs.setString(password, user.password);
