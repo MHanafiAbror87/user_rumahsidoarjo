@@ -364,6 +364,7 @@ class _UlasanDialogUmkmState extends State<UlasanDialogUmkm> {
                   listFoto, widget.kerajinan.idUmkm, _ulasanController.text);
 
               if (status) {
+                widget.onAddUlasanSuccess();
                 Get.back();
               }
             }
@@ -374,6 +375,7 @@ class _UlasanDialogUmkmState extends State<UlasanDialogUmkm> {
                   listFoto, widget.kerajinan.idUmkm, _ulasanController.text);
 
               if (status) {
+                widget.onAddUlasanSuccess();
                 Get.back();
               }
             }

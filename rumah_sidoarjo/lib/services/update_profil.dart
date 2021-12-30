@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:rumah_sidoarjo/services/UpdateProfil.dart';
+import 'package:rumah_sidoarjo/services/update_profil.dart';
 import 'package:rumah_sidoarjo/models/update_profil.dart';
 import 'package:http/http.dart';
 

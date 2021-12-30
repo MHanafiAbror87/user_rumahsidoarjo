@@ -357,13 +357,38 @@ class _UlasanDialogState extends State<UlasanDialog> {
               Fluttertoast.showToast(msg: 'Ulasan tidak boleh kosong');
               return;
             }
-            final api = ApiPariwisata();
+            if (widget.pariwisata.kategori == 'Pemancingan') {
+              final api = ApiPariwisata();
 
-            final status = await api.postUlasan(
-                listFoto, widget.pariwisata.idWisata, _ulasanController.text);
+              final status = await api.postUlasan(
+                  listFoto, widget.pariwisata.idWisata, _ulasanController.text);
 
-            if (status) {
-              Get.back();
+              if (status) {
+                widget.onAddUlasanSucces();
+                Get.back();
+              }
+            }
+            if (widget.pariwisata.kategori == 'Sejarah') {
+              final api = ApiPariwisata();
+
+              final status = await api.postUlasan(
+                  listFoto, widget.pariwisata.idWisata, _ulasanController.text);
+
+              if (status) {
+                widget.onAddUlasanSucces();
+                Get.back();
+              }
+            }
+            if (widget.pariwisata.kategori == 'Kuliner') {
+              final api = ApiPariwisata();
+
+              final status = await api.postUlasan(
+                  listFoto, widget.pariwisata.idWisata, _ulasanController.text);
+
+              if (status) {
+                widget.onAddUlasanSucces();
+                Get.back();
+              }
             }
           },
           child: const Text('Kirim'),

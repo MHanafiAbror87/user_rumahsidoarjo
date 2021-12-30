@@ -18,8 +18,8 @@ import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailUmkm_Makanan extends StatefulWidget {
-  final UmkmData kerajinan;
-  DetailUmkm_Makanan({required this.kerajinan});
+  final UmkmData makanan;
+  DetailUmkm_Makanan({required this.makanan});
 
   @override
   _DetailUmkm_MakananState createState() => _DetailUmkm_MakananState();
@@ -70,7 +70,7 @@ class _DetailUmkm_MakananState extends State<DetailUmkm_Makanan> {
         key: _addFormKey,
         child: SingleChildScrollView(
           child: FutureBuilder<DetailUmkmModel>(
-            future: api.getUmkmByIdMakanan(widget.kerajinan.idUmkm),
+            future: api.getUmkmByIdMakanan(widget.makanan.idUmkm),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final detail = snapshot.data;

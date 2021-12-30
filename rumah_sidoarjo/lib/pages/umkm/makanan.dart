@@ -19,12 +19,11 @@ class Makanan extends StatelessWidget {
                 return ListView(
                   children: umkm
                       .map(
-                        (kerajinan) => GestureDetector(
+                        (makanan) => GestureDetector(
                           onTap: () => Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => DetailUmkm_Makanan(
-                                kerajinan: kerajinan,
-                              ),
+                              builder: (context) =>
+                                  DetailUmkm_Makanan(makanan: makanan),
                             ),
                           ),
                           child: Card(
@@ -39,7 +38,7 @@ class Makanan extends StatelessWidget {
                                     height: 70,
                                     width: 70,
                                     child: Image.network(
-                                      "$fotoUrl/assets/img/${kerajinan.foto1}",
+                                      "$fotoUrl/assets/img/${makanan.foto1}",
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -52,7 +51,7 @@ class Makanan extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            kerajinan.nama,
+                                            makanan.nama,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 2,
                                             style: const TextStyle(
@@ -63,7 +62,7 @@ class Makanan extends StatelessWidget {
                                             height: 5,
                                           ),
                                           Text(
-                                            kerajinan.alamat,
+                                            makanan.alamat,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 2,
                                             style:
