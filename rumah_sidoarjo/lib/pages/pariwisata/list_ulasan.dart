@@ -24,7 +24,7 @@ class _ListUlasanState extends State<ListUlasan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      // backgroundColor: Colors.transparent,
+      backgroundColor: bgColor,
       body: FutureBuilder<List<UlasanData>>(
         future: api.getUlasan(widget.pariwisata.idWisata),
         builder: (BuildContext context, AsyncSnapshot snapshot) {

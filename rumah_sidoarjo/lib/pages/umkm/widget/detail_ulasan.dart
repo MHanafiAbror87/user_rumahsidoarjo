@@ -51,20 +51,24 @@ class _Detail_Ulasan_UmkmState extends State<Detail_Ulasan_Umkm> {
                         fit: BoxFit.cover)),
               ),
               const Padding(padding: EdgeInsets.only(left: 20)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.kerajinan.nama,
-                    style: GoogleFonts.dmSans(
-                        fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    DateFormat('dd MMMM yyyy')
-                        .format(widget.kerajinan.tanggalUpload),
-                    style: GoogleFonts.dmSans(fontSize: 14, color: darkGrey),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.kerajinan.nama,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: GoogleFonts.dmSans(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      DateFormat('dd MMMM yyyy')
+                          .format(widget.kerajinan.tanggalUpload),
+                      style: GoogleFonts.dmSans(fontSize: 14, color: darkGrey),
+                    ),
+                  ],
+                ),
               )
             ],
           ),

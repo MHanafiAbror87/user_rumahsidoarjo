@@ -76,19 +76,24 @@ class _UlasanDialogState extends State<UlasanDialog> {
                 fit: BoxFit.fill,
               ),
               const Padding(padding: EdgeInsets.only(left: 20)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.pariwisata.namaWisata,
-                    style: GoogleFonts.dmSans(
-                        fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    widget.pariwisata.alamat,
-                    style: GoogleFonts.dmSans(fontSize: 12, color: darkGrey),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.pariwisata.namaWisata,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: GoogleFonts.dmSans(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      widget.pariwisata.alamat,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.dmSans(fontSize: 12, color: darkGrey),
+                    ),
+                  ],
+                ),
               )
             ],
           ),

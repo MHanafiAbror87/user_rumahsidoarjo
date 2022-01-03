@@ -50,54 +50,69 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: White,
-      body: Form(
-        key: _addFormKey,
-        child: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.light,
-          child: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Stack(
-              children: <Widget>[
-                const SizedBox(
-                  height: double.infinity,
-                  width: double.infinity,
-                ),
-                SizedBox(
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 40.0,
-                      vertical: 120.0,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        _icLogin(),
-                        const SizedBox(height: 33.0),
-                        _buildEmail(),
-                        _buildPasswordTF(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _buildRememberMeCheckbox(),
-                            _buildLupaPasswordBtn(),
-                          ],
-                        ),
-                        _buildLoginBtn(),
-                        const SizedBox(
-                          height: 50.0,
-                        ),
-                        _buildtextdaftar(),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _buildDaftarBtn(),
-                      ],
+      body: WillPopScope(
+        //tombol back manual
+        onWillPop: () async {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return Home();
+              },
+            ),
+          );
+
+          return false;
+        },
+        child: Form(
+          key: _addFormKey,
+          child: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.light,
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Stack(
+                children: <Widget>[
+                  const SizedBox(
+                    height: double.infinity,
+                    width: double.infinity,
+                  ),
+                  SizedBox(
+                    height: double.infinity,
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40.0,
+                        vertical: 120.0,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _icLogin(),
+                          const SizedBox(height: 33.0),
+                          _buildEmail(),
+                          _buildPasswordTF(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              _buildRememberMeCheckbox(),
+                              _buildLupaPasswordBtn(),
+                            ],
+                          ),
+                          _buildLoginBtn(),
+                          const SizedBox(
+                            height: 50.0,
+                          ),
+                          _buildtextdaftar(),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _buildDaftarBtn(),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -214,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLupaPasswordBtn() {
     return TextButton(
       onPressed: () => {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
@@ -314,7 +329,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: RaisedButton(
         onPressed: () => {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {

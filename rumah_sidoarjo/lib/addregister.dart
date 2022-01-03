@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/pages/syarat.dart';
 import 'custom_template.dart';
@@ -136,13 +137,8 @@ class _AddRegisterState extends State<AddRegister> {
           color: White,
         ),
         onPressed: () => {
-          Navigator.pushReplacement(
+          Navigator.pop(
             context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const LoginPage();
-              },
-            ),
           ),
         },
       ),
@@ -175,13 +171,8 @@ class _AddRegisterState extends State<AddRegister> {
                     ),
                     TextButton(
                       onPressed: () => {
-                        Navigator.pushReplacement(
+                        Navigator.pop(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const LoginPage();
-                            },
-                          ),
                         ),
                       },
                       // padding: EdgeInsets.only(left: 95, right: 0.0),
@@ -485,28 +476,25 @@ class _AddRegisterState extends State<AddRegister> {
           ));
 
           if (registStatus) {
-            showDialog<String>(
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                title: const Text('Sukses'),
-                content: const Text('Silahkan Log In'),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const LoginPage();
-                          },
-                        ),
-                      );
-                    },
-                    child: const Text('Log In'),
-                  ),
-                ],
-              ),
-            );
+            Fluttertoast.showToast(msg: "Registrasi berhasil silahkan login");
+            Navigator.pop(context);
+            // Get.dialog(
+            //   AlertDialog(
+            //     //mencegah nutup dialog
+            //     title: const Text('Sukses'),
+            //     content: const Text('Silahkan Log In'),
+            //     actions: <Widget>[
+            //       TextButton(
+            //         onPressed: () {
+            //           Get.back();
+            //           Get.back();
+            //         },
+            //         child: const Text('Log In'),
+            //       ),
+            //     ],
+            //   ),
+            //   barrierDismissible: false,
+            // );
           }
         }
       },

@@ -61,6 +61,7 @@ class _DetailUlasanWisataLimitState extends State<DetailUlasanWisataLimit> {
                   children: [
                     Text(
                       widget.pemancingan.nama,
+                      overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.dmSans(
                           fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -77,6 +78,8 @@ class _DetailUlasanWisataLimitState extends State<DetailUlasanWisataLimit> {
           const SizedBox(height: 20),
           Text(
             widget.pemancingan.ulasan,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: GoogleFonts.dmSans(fontSize: 14),
           ),
           Container(

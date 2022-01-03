@@ -257,7 +257,7 @@ class _DetailLowonganPekerjaanState extends State<DetailLowonganPekerjaan> {
                                           ),
                                         ),
                                         Text(
-                                          '-',
+                                          'Website Tidak Tersedia',
                                           style: TextStyle(
                                               fontFamily: 'DMSans',
                                               fontSize: 14,

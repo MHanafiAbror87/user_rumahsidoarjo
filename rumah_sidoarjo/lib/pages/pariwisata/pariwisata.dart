@@ -27,12 +27,12 @@ class _PariwisataState extends State<Pariwisata> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: GestureDetector(
-                onTap: () => {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) {
-                    return PusatInformasi();
-                  }))
-                },
+                // onTap: () => {
+                //   Navigator.pushReplacement(context,
+                //       MaterialPageRoute(builder: (context) {
+                //     return PusatInformasi();
+                //   }))
+                // },
                 child: Container(
                   width: double.infinity,
                   height: 110,

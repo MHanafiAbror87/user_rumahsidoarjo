@@ -340,7 +340,7 @@ class _Detail_SlbState extends State<Detail_Slb> {
                                                 ),
                                               ),
                                               Text(
-                                                '-',
+                                                'Website Tidak Tersedia',
                                                 style: TextStyle(
                                                     fontFamily: 'DMSans',
                                                     fontSize: 14,
@@ -406,21 +406,21 @@ class _Detail_SlbState extends State<Detail_Slb> {
                                       height: 25,
                                       thickness: 2,
                                     ),
+                                    const Text(
+                                      'Fasilitas',
+                                      style: TextStyle(
+                                        fontFamily: 'DMSans',
+                                        fontSize: 16,
+                                      ),
+                                    ),
                                     Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: fasilitas.length > 0
                                           ? fasilitas
                                               .map(
                                                 (fasilitas) => Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    const Text(
-                                                      'Fasilitas',
-                                                      style: TextStyle(
-                                                        fontFamily: 'DMSans',
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
                                                     Text(
                                                       fasilitas.nama,
                                                       textAlign: TextAlign.left,
@@ -429,16 +429,23 @@ class _Detail_SlbState extends State<Detail_Slb> {
                                                           fontSize: 14,
                                                           color: darkGreen),
                                                     ),
-                                                    const Divider(
-                                                      color: Colors.grey,
-                                                      height: 25,
-                                                      thickness: 2,
-                                                    ),
                                                   ],
                                                 ),
                                               )
                                               .toList()
-                                          : [],
+                                          : [
+                                              Text(
+                                                'Data Fasilitas Tidak Tersedia',
+                                                style: GoogleFonts.dmSans(
+                                                    fontSize: 14,
+                                                    color: darkGreen),
+                                              )
+                                            ],
+                                    ),
+                                    const Divider(
+                                      color: Colors.grey,
+                                      height: 25,
+                                      thickness: 2,
                                     ),
                                     Text(
                                       'Lokasi ${sekolah.namaSekolah}',

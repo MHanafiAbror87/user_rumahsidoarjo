@@ -23,9 +23,8 @@ class _ListUlasan_UmkmState extends State<ListUlasan_Umkm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       appBar: appBar(),
-      // backgroundColor: Colors.transparent,
+      backgroundColor: bgColor,
       body: FutureBuilder<List<UlasanDataUmkm>>(
         future: api.getUlasan(widget.kerajinan.idUmkm),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -42,10 +41,11 @@ class _ListUlasan_UmkmState extends State<ListUlasan_Umkm> {
                         child: GestureDetector(
                           onTap: () {
                             showDialog(
-                                context: context,
-                                builder: (context) => Detail_Ulasan_Umkm(
-                                      kerajinan: list,
-                                    ));
+                              context: context,
+                              builder: (context) => Detail_Ulasan_Umkm(
+                                kerajinan: list,
+                              ),
+                            );
                           },
                           child: Card(
                             shape: RoundedRectangleBorder(

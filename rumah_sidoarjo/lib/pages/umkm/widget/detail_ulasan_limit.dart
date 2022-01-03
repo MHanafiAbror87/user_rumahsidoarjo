@@ -59,6 +59,7 @@ class _DetailUlasanLimitState extends State<DetailUlasanLimit> {
                   children: [
                     Text(
                       widget.kerajinan.nama,
+                      overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.dmSans(
                           fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -75,6 +76,8 @@ class _DetailUlasanLimitState extends State<DetailUlasanLimit> {
           const SizedBox(height: 20),
           Text(
             widget.kerajinan.ulasan,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: GoogleFonts.dmSans(fontSize: 14),
           ),
           Container(

@@ -117,13 +117,14 @@ class _Detail_SejarahState extends State<Detail_Sejarah> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 10),
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
                               color: White),
                           padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 5),
+                              vertical: 10, horizontal: 5),
                           child: Column(
                             children: [
                               Text(

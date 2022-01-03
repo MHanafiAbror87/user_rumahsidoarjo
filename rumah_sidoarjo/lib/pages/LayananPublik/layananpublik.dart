@@ -20,7 +20,7 @@ class _LayananPublik extends State<LayananPublik> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: bgColor,
       appBar: appBar(),
       body: Column(
         children: [

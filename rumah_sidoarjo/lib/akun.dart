@@ -12,6 +12,7 @@ import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/pages/editakun.dart';
 import 'package:rumah_sidoarjo/services/api_services.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
+import 'package:rumah_sidoarjo/splash_screen.dart';
 import 'custom_template.dart';
 import 'package:path/path.dart' as pt;
 
@@ -584,7 +585,7 @@ class _AkunState extends State<Akun> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return LoginPage();
+                    return SplashScreen();
                   },
                 ),
               );

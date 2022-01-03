@@ -73,13 +73,8 @@ class _LupaPasswordState extends State<LupaPassword> {
           color: White,
         ),
         onPressed: () => {
-          Navigator.pushReplacement(
+          Navigator.pop(
             context,
-            MaterialPageRoute(
-              builder: (context) {
-                return LoginPage();
-              },
-            ),
           ),
         },
       ),
@@ -183,28 +178,25 @@ class _LupaPasswordState extends State<LupaPassword> {
           );
 
           if (registStatus) {
-            showDialog<String>(
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                title: const Text('Sukses'),
-                content: const Text('Silahkan Cek Email Anda'),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LoginPage();
-                          },
-                        ),
-                      );
-                    },
-                    child: const Text('Log In'),
-                  ),
-                ],
-              ),
-            );
+            Fluttertoast.showToast(msg: "Silahkan Cek Email Anda");
+            Navigator.pop(context);
+            // showDialog<String>(
+            //   context: context,
+            //   builder: (BuildContext context) => AlertDialog(
+            //     title: const Text('Sukses'),
+            //     content: const Text('Silahkan Cek Email Anda'),
+            //     actions: <Widget>[
+            //       TextButton(
+            //         onPressed: () {
+            //           Navigator.pop(
+            //             context,
+            //           );
+            //         },
+            //         child: const Text('Log In'),
+            //       ),
+            //     ],
+            //   ),
+            // );
           }
         }
       },

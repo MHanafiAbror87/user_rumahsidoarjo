@@ -76,19 +76,24 @@ class _UlasanDialogUmkmState extends State<UlasanDialogUmkm> {
                 fit: BoxFit.fill,
               ),
               const Padding(padding: EdgeInsets.only(left: 20)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.kerajinan.nama,
-                    style: GoogleFonts.dmSans(
-                        fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    widget.kerajinan.alamat,
-                    style: GoogleFonts.dmSans(fontSize: 12, color: darkGrey),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.kerajinan.nama,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: GoogleFonts.dmSans(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      widget.kerajinan.alamat,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.dmSans(fontSize: 12, color: darkGrey),
+                    ),
+                  ],
+                ),
               )
             ],
           ),

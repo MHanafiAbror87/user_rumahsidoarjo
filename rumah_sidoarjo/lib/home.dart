@@ -603,6 +603,21 @@ class HomeState extends State<Home> {
                 itemCount: 5,
               );
             }
+            // if (snapshot.hasError) {
+            //   return Column(
+            //     mainAxisSize: MainAxisSize.min,
+            //     children: [
+            //       Text(snapshot.error.toString()),
+            //       TextButton(
+            //         onPressed: () {
+            //           //  CircularProgressIndicator();
+            //           setState(() {});
+            //         },
+            //         child: const Text('Reload'),
+            //       )
+            //     ],
+            //   );
+            // }
 
             return const Center(child: CircularProgressIndicator());
           }),
@@ -760,7 +775,8 @@ class HomeState extends State<Home> {
 
               return TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
                     return LoginPage();
                   }));
                 },

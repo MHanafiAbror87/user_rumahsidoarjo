@@ -117,10 +117,11 @@ class _DetailUmkm_MakananState extends State<DetailUmkm_Makanan> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 10),
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 5),
+                              vertical: 10, horizontal: 5),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
                               color: White),
@@ -137,193 +138,108 @@ class _DetailUmkm_MakananState extends State<DetailUmkm_Makanan> {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'Alamat',
-                                      style: TextStyle(
-                                        fontFamily: 'DMSans',
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Text(
-                                      umkm.alamat,
-                                      style: TextStyle(
+                                child: Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Deskripsi',
+                                        style: TextStyle(
                                           fontFamily: 'DMSans',
-                                          fontSize: 14,
-                                          color: darkGreen),
-                                    ),
-                                    const Divider(
-                                      color: Colors.grey,
-                                      height: 20,
-                                      thickness: 2,
-                                    ),
-                                    const Text(
-                                      'Kategori',
-                                      style: TextStyle(
-                                        fontFamily: 'DMSans',
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Text(
-                                      umkm.kategori,
-                                      style: TextStyle(
-                                          fontFamily: 'DMSans',
-                                          fontSize: 14,
-                                          color: darkGreen),
-                                    ),
-                                    const Divider(
-                                      color: Colors.grey,
-                                      height: 25,
-                                      thickness: 2,
-                                    ),
-                                    const Text(
-                                      'Pengelola',
-                                      style: TextStyle(
-                                        fontFamily: 'DMSans',
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Text(
-                                      umkm.penanggungJawab,
-                                      style: TextStyle(
-                                          fontFamily: 'DMSans',
-                                          fontSize: 14,
-                                          color: darkGreen),
-                                    ),
-                                    const Divider(
-                                      color: Colors.grey,
-                                      height: 25,
-                                      thickness: 2,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 27),
-                                              child: Text(
-                                                'Telepon',
-                                                style: TextStyle(
-                                                  fontFamily: 'DMSans',
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                              umkm.noTelp,
-                                              style: TextStyle(
-                                                  fontFamily: 'DMSans',
-                                                  fontSize: 14,
-                                                  color: darkGreen),
-                                            ),
-                                          ],
+                                          fontSize: 16,
                                         ),
-                                        InkWell(
-                                          onTap: () =>
-                                              launch("tel://${umkm.noTelp}"),
-                                          child: Container(
-                                            width: 100,
-                                            height: 40,
-                                            decoration: BoxDecoration(
-                                              color: darkGreen1,
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'Panggil',
-                                                style: GoogleFonts.poppins(
-                                                    fontSize: 14, color: White),
-                                              ),
-                                            ),
-                                          ),
+                                      ),
+                                      Text(
+                                        umkm.deskripsi,
+                                        style: TextStyle(
+                                            fontFamily: 'DMSans',
+                                            fontSize: 14,
+                                            color: darkGreen),
+                                      ),
+                                      const Divider(
+                                        color: Colors.grey,
+                                        height: 20,
+                                        thickness: 2,
+                                      ),
+                                      const Text(
+                                        'Alamat',
+                                        style: TextStyle(
+                                          fontFamily: 'DMSans',
+                                          fontSize: 16,
                                         ),
-                                      ],
-                                    ),
-                                    const Divider(
-                                      color: Colors.grey,
-                                      height: 25,
-                                      thickness: 2,
-                                    ),
-                                    umkm.website.isNotEmpty
-                                        ? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 15),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        'Website',
-                                                        style: TextStyle(
-                                                          fontFamily: 'DMSans',
-                                                          fontSize: 16,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        umkm.website,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'DMSans',
-                                                            fontSize: 14,
-                                                            color: darkGreen),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                onTap: () => launch(
-                                                    "http://${umkm.website}"),
-                                                child: Container(
-                                                  width: 100,
-                                                  height: 40,
-                                                  decoration: BoxDecoration(
-                                                    color: darkGreen1,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      'Kunjungi',
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              fontSize: 14,
-                                                              color: White),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        : Column(
+                                      ),
+                                      Text(
+                                        umkm.alamat,
+                                        style: TextStyle(
+                                            fontFamily: 'DMSans',
+                                            fontSize: 14,
+                                            color: darkGreen),
+                                      ),
+                                      const Divider(
+                                        color: Colors.grey,
+                                        height: 20,
+                                        thickness: 2,
+                                      ),
+                                      const Text(
+                                        'Kategori',
+                                        style: TextStyle(
+                                          fontFamily: 'DMSans',
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Text(
+                                        umkm.kategori,
+                                        style: TextStyle(
+                                            fontFamily: 'DMSans',
+                                            fontSize: 14,
+                                            color: darkGreen),
+                                      ),
+                                      const Divider(
+                                        color: Colors.grey,
+                                        height: 25,
+                                        thickness: 2,
+                                      ),
+                                      const Text(
+                                        'Pengelola',
+                                        style: TextStyle(
+                                          fontFamily: 'DMSans',
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Text(
+                                        umkm.penanggungJawab,
+                                        style: TextStyle(
+                                            fontFamily: 'DMSans',
+                                            fontSize: 14,
+                                            color: darkGreen),
+                                      ),
+                                      const Divider(
+                                        color: Colors.grey,
+                                        height: 25,
+                                        thickness: 2,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              const Text(
-                                                'Website',
-                                                style: TextStyle(
-                                                  fontFamily: 'DMSans',
-                                                  fontSize: 16,
+                                              const Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 27),
+                                                child: Text(
+                                                  'Telepon',
+                                                  style: TextStyle(
+                                                    fontFamily: 'DMSans',
+                                                    fontSize: 16,
+                                                  ),
                                                 ),
                                               ),
                                               Text(
-                                                'Website Tidak Tersedia',
+                                                umkm.noTelp,
                                                 style: TextStyle(
                                                     fontFamily: 'DMSans',
                                                     fontSize: 14,
@@ -331,28 +247,137 @@ class _DetailUmkm_MakananState extends State<DetailUmkm_Makanan> {
                                               ),
                                             ],
                                           ),
-                                    const Divider(
-                                      color: Colors.grey,
-                                      height: 25,
-                                      thickness: 2,
-                                    ),
-                                    Text(
-                                      'Lokasi ${umkm.nama}',
-                                      style: GoogleFonts.dmSans(fontSize: 16),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    SizedBox(
-                                      height: 500,
-                                      child: GoogleMap(
-                                        onMapCreated: _onMapCreated,
-                                        initialCameraPosition: CameraPosition(
-                                          target: center,
-                                          zoom: 15.0,
-                                        ),
-                                        markers: _markers.values.toSet(),
+                                          InkWell(
+                                            onTap: () =>
+                                                launch("tel://${umkm.noTelp}"),
+                                            child: Container(
+                                              width: 100,
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                color: darkGreen1,
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  'Panggil',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 14,
+                                                      color: White),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ],
+                                      const Divider(
+                                        color: Colors.grey,
+                                        height: 25,
+                                        thickness: 2,
+                                      ),
+                                      umkm.website.isNotEmpty
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 15),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text(
+                                                          'Website',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'DMSans',
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          umkm.website,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'DMSans',
+                                                              fontSize: 14,
+                                                              color: darkGreen),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                  onTap: () => launch(
+                                                      "http://${umkm.website}"),
+                                                  child: Container(
+                                                    width: 100,
+                                                    height: 40,
+                                                    decoration: BoxDecoration(
+                                                      color: darkGreen1,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Kunjungi',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 14,
+                                                                color: White),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          : Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  'Website',
+                                                  style: TextStyle(
+                                                    fontFamily: 'DMSans',
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Website Tidak Tersedia',
+                                                  style: TextStyle(
+                                                      fontFamily: 'DMSans',
+                                                      fontSize: 14,
+                                                      color: darkGreen),
+                                                ),
+                                              ],
+                                            ),
+                                      const Divider(
+                                        color: Colors.grey,
+                                        height: 25,
+                                        thickness: 2,
+                                      ),
+                                      Text(
+                                        'Lokasi ${umkm.nama}',
+                                        style: GoogleFonts.dmSans(fontSize: 16),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      SizedBox(
+                                        height: 500,
+                                        child: GoogleMap(
+                                          onMapCreated: _onMapCreated,
+                                          initialCameraPosition: CameraPosition(
+                                            target: center,
+                                            zoom: 15.0,
+                                          ),
+                                          markers: _markers.values.toSet(),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
