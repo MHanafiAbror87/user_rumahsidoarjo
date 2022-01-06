@@ -4,6 +4,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rumah_sidoarjo/helper/session_helper.dart';
+import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/models/pariwisata.dart';
 import 'package:rumah_sidoarjo/models/list_pariwisata.dart';
 import 'package:rumah_sidoarjo/pages/pariwisata/list_ulasan.dart';
@@ -569,45 +571,113 @@ class _Detail_KulinerState extends State<Detail_Kuliner> {
                                 const Text("Ulasan Belum Tersedia"),
                               ],
                       ),
-                      TextButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => UlasanDialog(
-                              pariwisata: pariwisata,
-                              onAddUlasanSucces: () {
-                                setState(() {});
+                      FutureBuilder<bool>(
+                        future: SessionHelper.checkisLogin(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            if (snapshot.data!) {
+                              return TextButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => UlasanDialog(
+                                      pariwisata: pariwisata,
+                                      onAddUlasanSucces: () {
+                                        setState(() {});
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: Container(
+                                    height: 50,
+                                    padding: const EdgeInsets.all(12.0),
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Tambah Ulasan',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: White,
+                                        letterSpacing: 2,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'DMSans',
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          colors: [lightGreen, darkGreen1],
+                                          end: Alignment.centerRight,
+                                          begin: Alignment.centerLeft),
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+
+                            return TextButton(
+                              onPressed: () {
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text('Tidak Bisa Mengakses'),
+                                    content: const Text(
+                                        'Harap login terlebih dahulu'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'Cancel'),
+                                        child: const Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pushReplacement(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                          return LoginPage();
+                                        })),
+                                        child: const Text('Log in'),
+                                      ),
+                                    ],
+                                  ),
+                                );
                               },
-                            ),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          child: Container(
-                            height: 50,
-                            padding: const EdgeInsets.all(12.0),
-                            width: double.infinity,
-                            child: Text(
-                              'Tambah Ulasan',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: White,
-                                letterSpacing: 2,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'DMSans',
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                child: Container(
+                                  height: 50,
+                                  padding: const EdgeInsets.all(12.0),
+                                  width: double.infinity,
+                                  child: Text(
+                                    'Tambah Ulasan',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: White,
+                                      letterSpacing: 2,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'DMSans',
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        colors: [lightGreen, darkGreen1],
+                                        end: Alignment.centerRight,
+                                        begin: Alignment.centerLeft),
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                ),
                               ),
-                            ),
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [lightGreen, darkGreen1],
-                                  end: Alignment.centerRight,
-                                  begin: Alignment.centerLeft),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
+                            );
+                          }
+
+                          return const SizedBox();
+                        },
                       ),
                     ],
                   ),

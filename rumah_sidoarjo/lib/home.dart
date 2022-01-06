@@ -23,6 +23,7 @@ import 'package:rumah_sidoarjo/services/api_pariwisata.dart';
 import 'package:rumah_sidoarjo/services/api_umkm.dart';
 import 'package:rumah_sidoarjo/services/apiurl.dart';
 import 'package:rumah_sidoarjo/tagihan.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'pages/kesehatan/kesehatan.dart';
@@ -160,28 +161,76 @@ class HomeState extends State<Home> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Pengaduan();
+            FutureBuilder<bool>(
+              future: SessionHelper.checkisLogin(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data!) {
+                    return GestureDetector(
+                      onTap: () => {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Pengaduan();
+                            },
+                          ),
+                        ),
+                      },
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/Pengaduan.png',
+                            width: 45,
+                            height: 45,
+                          ),
+                          const SizedBox(height: 5),
+                          Text('PENGADUAN', style: iconText)
+                        ],
+                      ),
+                    );
+                  }
+
+                  return GestureDetector(
+                    onTap: () => {
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Tidak Bisa Mengakses'),
+                          content: const Text('Harap login terlebih dahulu'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) {
+                                return LoginPage();
+                              })),
+                              child: const Text('Log in'),
+                            ),
+                          ],
+                        ),
+                      )
                     },
-                  ),
-                ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/Pengaduan.png',
+                          width: 45,
+                          height: 45,
+                        ),
+                        const SizedBox(height: 5),
+                        Text('PENGADUAN', style: iconText)
+                      ],
+                    ),
+                  );
+                }
+
+                return const SizedBox();
               },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/Pengaduan.png',
-                    width: 45,
-                    height: 45,
-                  ),
-                  const SizedBox(height: 5),
-                  Text('PENGADUAN', style: iconText)
-                ],
-              ),
             ),
             GestureDetector(
               onTap: () => {
@@ -545,14 +594,8 @@ class HomeState extends State<Home> {
                   final berita = snapshot.data![index];
 
                   return GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return DetailBerita(berita: berita);
-                        },
-                      ),
-                    ),
+                    onTap: () =>
+                        launch("https://www.sidoarjokab.go.id/${berita.slug}"),
                     child: SizedBox(
                       width: 300,
                       child: Card(
@@ -562,11 +605,17 @@ class HomeState extends State<Home> {
                           padding: const EdgeInsets.all(10.0),
                           child: Row(
                             children: [
-                              Image.network(
-                                "https://www.sidoarjokab.go.id/${berita.thumb}",
-                                width: 100,
-                                fit: BoxFit.cover,
-                              ),
+                              berita.thumb.isNotEmpty
+                                  ? Image.network(
+                                      "https://www.sidoarjokab.go.id/${berita.thumb}",
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      "assets/images/no_image.png",
+                                      width: 80,
+                                      fit: BoxFit.cover,
+                                    ),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Column(

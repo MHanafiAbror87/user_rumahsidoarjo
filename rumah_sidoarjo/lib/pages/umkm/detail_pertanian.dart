@@ -4,6 +4,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:rumah_sidoarjo/custom_template.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rumah_sidoarjo/helper/session_helper.dart';
+import 'package:rumah_sidoarjo/login.dart';
 import 'package:rumah_sidoarjo/models/list_umkm.dart';
 import 'package:rumah_sidoarjo/models/umkm.dart';
 import 'package:rumah_sidoarjo/pages/umkm/list_ulasan_umkm.dart';
@@ -295,14 +297,14 @@ class _DetailUmkm_PertanianState extends State<DetailUmkm_Pertanian> {
                                                             fontSize: 16,
                                                           ),
                                                         ),
-                                                        Text(
-                                                          umkm.website,
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'DMSans',
-                                                              fontSize: 14,
-                                                              color: darkGreen),
-                                                        ),
+                                                        // Text(
+                                                        //   umkm.website,
+                                                        //   style: TextStyle(
+                                                        //       fontFamily:
+                                                        //           'DMSans',
+                                                        //       fontSize: 14,
+                                                        //       color: darkGreen),
+                                                        // ),
                                                       ],
                                                     ),
                                                   ),
@@ -345,6 +347,89 @@ class _DetailUmkm_PertanianState extends State<DetailUmkm_Pertanian> {
                                                 ),
                                                 Text(
                                                   'Website Tidak Tersedia',
+                                                  style: TextStyle(
+                                                      fontFamily: 'DMSans',
+                                                      fontSize: 14,
+                                                      color: darkGreen),
+                                                ),
+                                              ],
+                                            ),
+                                      const Divider(
+                                        color: Colors.grey,
+                                        height: 25,
+                                        thickness: 2,
+                                      ),
+                                      umkm.email.isNotEmpty
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 15),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text(
+                                                          'Email',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'DMSans',
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          umkm.email,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'DMSans',
+                                                              fontSize: 14,
+                                                              color: darkGreen),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                  onTap: () => launch(
+                                                      "mailto:${umkm.email}"),
+                                                  child: Container(
+                                                      width: 100,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        color: darkGreen1,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30),
+                                                      ),
+                                                      child: Center(
+                                                          child: Text(
+                                                        'Kirim Email',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 14,
+                                                                color: White),
+                                                      ))),
+                                                ),
+                                              ],
+                                            )
+                                          : Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  'Email',
+                                                  style: TextStyle(
+                                                    fontFamily: 'DMSans',
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Email Tidak Tersedia',
                                                   style: TextStyle(
                                                       fontFamily: 'DMSans',
                                                       fontSize: 14,
@@ -500,44 +585,113 @@ class _DetailUmkm_PertanianState extends State<DetailUmkm_Pertanian> {
                                 const Text("Ulasan Belum Tersedia"),
                               ],
                       ),
-                      TextButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) => UlasanDialogUmkm(
-                                    kerajinan: umkm,
-                                    onAddUlasanSuccess: () {
-                                      setState(() {});
-                                    },
-                                  ));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          child: Container(
-                            height: 50,
-                            padding: const EdgeInsets.all(12.0),
-                            width: double.infinity,
-                            child: Text(
-                              'Tambah Ulasan',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: White,
-                                letterSpacing: 2,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'DMSans',
+                      FutureBuilder<bool>(
+                        future: SessionHelper.checkisLogin(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            if (snapshot.data!) {
+                              return TextButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => UlasanDialogUmkm(
+                                      kerajinan: umkm,
+                                      onAddUlasanSuccess: () {
+                                        setState(() {});
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: Container(
+                                    height: 50,
+                                    padding: const EdgeInsets.all(12.0),
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Tambah Ulasan',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: White,
+                                        letterSpacing: 2,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'DMSans',
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          colors: [lightGreen, darkGreen1],
+                                          end: Alignment.centerRight,
+                                          begin: Alignment.centerLeft),
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+
+                            return TextButton(
+                              onPressed: () {
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text('Tidak Bisa Mengakses'),
+                                    content: const Text(
+                                        'Harap login terlebih dahulu'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'Cancel'),
+                                        child: const Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pushReplacement(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                          return LoginPage();
+                                        })),
+                                        child: const Text('Log in'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                child: Container(
+                                  height: 50,
+                                  padding: const EdgeInsets.all(12.0),
+                                  width: double.infinity,
+                                  child: Text(
+                                    'Tambah Ulasan',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: White,
+                                      letterSpacing: 2,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'DMSans',
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        colors: [lightGreen, darkGreen1],
+                                        end: Alignment.centerRight,
+                                        begin: Alignment.centerLeft),
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                ),
                               ),
-                            ),
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [lightGreen, darkGreen1],
-                                  end: Alignment.centerRight,
-                                  begin: Alignment.centerLeft),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
+                            );
+                          }
+
+                          return const SizedBox();
+                        },
                       ),
                     ],
                   ),

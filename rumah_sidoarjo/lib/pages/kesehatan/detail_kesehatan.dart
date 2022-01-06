@@ -257,13 +257,13 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                                                     fontSize: 16,
                                                   ),
                                                 ),
-                                                Text(
-                                                  widget.kesehatan.website,
-                                                  style: TextStyle(
-                                                      fontFamily: 'DMSans',
-                                                      fontSize: 14,
-                                                      color: darkGreen),
-                                                ),
+                                                // Text(
+                                                //   widget.kesehatan.website,
+                                                //   style: TextStyle(
+                                                //       fontFamily: 'DMSans',
+                                                //       fontSize: 14,
+                                                //       color: darkGreen),
+                                                // ),
                                               ],
                                             ),
                                           ),
@@ -313,20 +313,77 @@ class _DetailKesehatanPkmuState extends State<DetailKesehatanPkmu> {
                                 height: 25,
                                 thickness: 2,
                               ),
-                              const Text(
-                                'Email',
-                                style: TextStyle(
-                                  fontFamily: 'DMSans',
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                widget.kesehatan.email,
-                                style: TextStyle(
-                                    fontFamily: 'DMSans',
-                                    fontSize: 14,
-                                    color: darkGreen),
-                              ),
+                              widget.kesehatan.email.isNotEmpty
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 15),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  'Email',
+                                                  style: TextStyle(
+                                                    fontFamily: 'DMSans',
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  widget.kesehatan.email,
+                                                  style: TextStyle(
+                                                      fontFamily: 'DMSans',
+                                                      fontSize: 14,
+                                                      color: darkGreen),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () => launch(
+                                              "mailto:${widget.kesehatan.email}"),
+                                          child: Container(
+                                              width: 100,
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                color: darkGreen1,
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                              child: Center(
+                                                  child: Text(
+                                                'Kirim Email',
+                                                style: GoogleFonts.poppins(
+                                                    fontSize: 14, color: White),
+                                              ))),
+                                        ),
+                                      ],
+                                    )
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Email',
+                                          style: TextStyle(
+                                            fontFamily: 'DMSans',
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Email Tidak Tersedia',
+                                          style: TextStyle(
+                                              fontFamily: 'DMSans',
+                                              fontSize: 14,
+                                              color: darkGreen),
+                                        ),
+                                      ],
+                                    ),
                               const Divider(
                                 color: Colors.grey,
                                 height: 25,

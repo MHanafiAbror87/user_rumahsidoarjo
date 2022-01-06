@@ -146,6 +146,7 @@ class Umkm {
     required this.long,
     required this.noTelp,
     required this.website,
+    required this.email,
   });
 
   String idUmkm;
@@ -161,6 +162,7 @@ class Umkm {
   String long;
   String noTelp;
   String website;
+  String email;
 
   factory Umkm.fromJson(Map<String, dynamic> json) => Umkm(
         idUmkm: json["id_umkm"],
@@ -176,6 +178,7 @@ class Umkm {
         long: json["long"],
         noTelp: json["no_telp"],
         website: json["website"],
+        email: json["email"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -192,5 +195,6 @@ class Umkm {
         "long": long,
         "no_telp": noTelp,
         "website": website,
+        "email": email,
       };
 }

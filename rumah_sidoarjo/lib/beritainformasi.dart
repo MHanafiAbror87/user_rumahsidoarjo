@@ -4,6 +4,7 @@ import 'package:rumah_sidoarjo/models/list_berita.dart';
 import 'package:rumah_sidoarjo/pages/berita/detail_berita.dart';
 import 'package:rumah_sidoarjo/pages/cctv.dart';
 import 'package:rumah_sidoarjo/services/api_berita.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'custom_template.dart';
 
 class Beritainformasi extends StatefulWidget {
@@ -47,14 +48,8 @@ class BeritaInformasiState extends State<Beritainformasi> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     child: GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (contex) {
-                            return DetailBerita(berita: berita);
-                          },
-                        ),
-                      ),
+                      onTap: () => launch(
+                          "https://www.sidoarjokab.go.id/${berita.slug}"),
                       child: SizedBox(
                         height: 100,
                         child: Card(
@@ -64,11 +59,17 @@ class BeritaInformasiState extends State<Beritainformasi> {
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
                                 children: [
-                                  Image.network(
-                                    "https://www.sidoarjokab.go.id/${berita.thumb}",
-                                    width: 100,
-                                    fit: BoxFit.fill,
-                                  ),
+                                  berita.thumb.isNotEmpty
+                                      ? Image.network(
+                                          "https://www.sidoarjokab.go.id/${berita.thumb}",
+                                          width: 100,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          "assets/images/no_image.png",
+                                          width: 80,
+                                          fit: BoxFit.cover,
+                                        ),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:

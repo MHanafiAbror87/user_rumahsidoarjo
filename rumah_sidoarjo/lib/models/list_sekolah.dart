@@ -52,6 +52,7 @@ class SekolahData {
     required this.lat,
     required this.long,
     required this.website,
+    required this.email,
     required this.idKecamatan,
     required this.nama,
     required this.kecamatan,
@@ -70,6 +71,7 @@ class SekolahData {
   String lat;
   String long;
   String website;
+  String email;
   String idKecamatan;
   String nama;
   String kecamatan;
@@ -88,6 +90,7 @@ class SekolahData {
         lat: json["lat"],
         long: json["long"],
         website: json["website"],
+        email: json["email"],
         idKecamatan: json["id_kecamatan"],
         nama: json["nama"],
         kecamatan: json["kecamatan"],
@@ -107,6 +110,7 @@ class SekolahData {
         "lat": lat,
         "long": long,
         "website": website,
+        "email": email,
         "id_kecamatan": idKecamatan,
         "nama": nama,
         "kecamatan": kecamatan,
