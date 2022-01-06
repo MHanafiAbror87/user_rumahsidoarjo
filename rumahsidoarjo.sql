@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2022 at 05:38 AM
+-- Generation Time: Jan 06, 2022 at 09:05 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -1192,7 +1192,7 @@ INSERT INTO `user_admin` (`id_admin`, `nip`, `username`, `id_role`, `nama`, `ala
 --
 
 CREATE TABLE `user_mobile` (
-  `NIK` varchar(12) NOT NULL,
+  `NIK` varchar(16) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `alamat` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
@@ -1211,6 +1211,7 @@ CREATE TABLE `user_mobile` (
 --
 
 INSERT INTO `user_mobile` (`NIK`, `nama`, `alamat`, `email`, `tanggal_lahir`, `jenis_kelamin`, `no_telepon`, `password`, `foto_ktp`, `foto_profil`, `selfie_ktp`, `status`) VALUES
+('3333333333333333', 'l', 'l', 'l', '1999-10-27', 'Laki-Laki', '09', '827ccb0eea8a706c4c34a16891f84e7b', '', '', '', 0),
 ('351092890358', 'Haris bayu', 'jl. Ahmad yani Pesanggaran Ban', 'wahyudi@sidoarjokab.go.id', '2091-06-18', 'Laki-Laki', '082274933040', '202cb962ac59075b964b07152d234b70', 'admin.png', 'admin.png', '', 1),
 ('354898237819', 'Hendra basirun', 'Jl.Mastrip 4 no.39', 'hendra@gmail.com', '2098-03-17', 'Laki-Laki', '082487492739', '202cb962ac59075b964b07152d234b70', '', 'hendra.jpeg', '', 1),
 ('356798298401', 'Ayu P.ratiwi', 'jl.kembang no.45', 'ayu@gmail.com', '2001-12-22', 'Perempuan', '082487402838', '202cb962ac59075b964b07152d234b70', '', 'Admin.png', '', 1),
